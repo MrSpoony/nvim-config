@@ -9,7 +9,7 @@ return require("packer").startup(function(use)
     use { "nvim-lua/popup.nvim" }                           -- Popups
     use { "rcarriga/nvim-notify" }                          -- Notifcations
     use { "ray-x/guihua.lua", run = 'cd lua/fzy && make' }  -- UI for lua plugins
-    use { "tami5/sqlite.lua", rocks = { "sqlite", "luv" } } -- Store stuff in sqlite database for more speed
+    use { "tami5/sqlite.lua" } -- Store stuff in sqlite database for more speed
     use { "BurntSushi/ripgrep" }                            -- Line-oriented search tool
     use { "junegunn/fzf", run = "./install -- all" }        -- FZF
     use { "junegunn/fzf.vim" }                              -- FZF in vim
@@ -137,7 +137,7 @@ return require("packer").startup(function(use)
     use { "onsails/lspkind-nvim" }                      -- Nice Icons in lsp-comp
     use { "saadparwaiz1/cmp_luasnip" }                  -- luasnip support
     use { "rafamadriz/friendly-snippets" }              -- Helpful snippets for popular languages
-    use { "tzachar/cmp-tabnine", run = "./install.sh" } -- Nvim-cmp tabnine support
+    -- use { "tzachar/cmp-tabnine", run = "./install.sh" } -- Nvim-cmp tabnine support
 
     use { "python-rope/ropevim" }  -- For some Code-actions
     use { "sheerun/vim-polyglot" } -- Collection of language packs
@@ -175,7 +175,7 @@ return require("packer").startup(function(use)
     use { "L3MON4D3/LuaSnip" } -- Snippet engine with really nice functionalities
 
     -- Own plugin
-    use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
+    -- use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
 
     -- Some would say it"s useless...
     use { "alec-gibson/nvim-tetris" } -- Tetris

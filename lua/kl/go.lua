@@ -1,6 +1,11 @@
 local go = require("go")
 
 local lspconfigs = require("kl.lspconfigs")
+local opts = lspconfigs.options
+
+opts.highlight_hovered_item = nil
+opts.show_guides = nil
+
 go.setup({
     go = 'go', -- go command, can be go[default] or go1.18beta1
     goimport = 'gopls', -- goimport command, can be gopls[default] or goimport
@@ -13,7 +18,7 @@ go.setup({
     comment_placeholder = '', -- comment_placeholder your cool placeholder e.g. ﳑ       
     icons = { breakpoint = '🧘', currentpos = '🏃' }, -- setup to `false` to disable icons setup
     verbose = false, -- output loginf in messages
-    lsp_cfg = lspconfigs.options,
+    lsp_cfg = opts,
     lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
     lsp_on_attach = lspconfigs.on_attach,
     lsp_keymaps = false,

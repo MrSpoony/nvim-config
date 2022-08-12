@@ -2,7 +2,7 @@ local lsp_installer = require('nvim-lsp-installer')
 local clangd_extensions = require('clangd_extensions')
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local tabnine = require('cmp_tabnine')
+-- local tabnine = require('cmp_tabnine')
 local lspkind = require('lspkind')
 local lspconfigs = require("kl.lspconfigs");
 local lspsignature = require("lsp_signature");
@@ -15,16 +15,16 @@ local i = ls.insert_node
 local t = ls.text_node
 local c = ls.choice_node
 
-tabnine:setup({
-    max_lines = 1000,
-    max_num_results = 10,
-    sort = true,
-    run_on_every_keystroke = true,
-    snippet_placeholder = '..';
-    ignored_file_types = {
-    },
-    show_prediction_strength = true,
-})
+-- tabnine:setup({
+--     max_lines = 1000,
+--     max_num_results = 10,
+--     sort = true,
+--     run_on_every_keystroke = true,
+--     snippet_placeholder = '..';
+--     ignored_file_types = {
+--     },
+--     show_prediction_strength = true,
+-- })
 
 fidget.setup({})
 
@@ -259,7 +259,7 @@ cmp.setup({
             compare.exact,
             compare.recently_used,
             clangd_extensions.cmp_scores,
-            tabnine.compare,
+            -- tabnine.compare,
             compare.kind,
             compare.sort_text,
             compare.length,
