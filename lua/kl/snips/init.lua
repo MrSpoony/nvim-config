@@ -56,7 +56,6 @@ utils.inWord = function(line, trigger)
         end
         return true
     end
-    return false
 end
 
 utils.b = function(name, snippet, opts)
