@@ -3,8 +3,6 @@ local mat = require("material")
 local monokai = require("monokai")
 local gh = require("github-theme");
 
-local spotify_status = require("nvim-spotify").status
-
 local ll = require("lualine")
 local gps = require("nvim-gps")
 
@@ -45,8 +43,6 @@ gps.setup({
     separator = "  ",
 })
 
-spotify_status:start()
-
 ll.setup({
     sections = {
         lualine_c = {
@@ -56,9 +52,6 @@ ll.setup({
                 cond = gps.is_available
             },
         },
-        lualine_x = {
-            spotify_status.listen
-        }
     }
 })
 vim.cmd("colorscheme catppuccin")

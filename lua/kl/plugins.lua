@@ -13,9 +13,8 @@ return require("packer").startup(function(use)
     use { "BurntSushi/ripgrep" }                            -- Line-oriented search tool
     use { "junegunn/fzf", run = "./install -- all" }        -- FZF
     use { "junegunn/fzf.vim" }                              -- FZF in vim
-    use { "anuvyklack/nvim-keymap-amend" }                  -- Amend to existing keymaps
     use { "mbbill/undotree" }                               -- Undo representation
-    use { "kyazdani42/nvim-tree.lua" }                      -- File structure
+
 
     -- UI
     -- Themes:
@@ -32,14 +31,12 @@ return require("packer").startup(function(use)
     use { "rafamadriz/neon" }                             -- Neon
     use { "projekt0n/github-nvim-theme" }                 -- Github
     use { "catppuccin/nvim", as = "catppuccin" }          -- Catppuccin
+    use { "RRethy/nvim-base16" }                     -- Base16 themes
 
     use { "anuvyklack/pretty-fold.nvim" }  -- Prettier folds
-    use { "SmiteshP/nvim-gps" }            -- Location widget in lualine
     use { "nvim-lualine/lualine.nvim" }    -- Line at the bottom
-    use { "j-hui/fidget.nvim" }            -- Loading bar for lsp
-    use { "justinmk/vim-syntax-extra" }    -- Extra syntax
+    use { "SmiteshP/nvim-gps" }            -- Location widget in lualine
     use { "mhinz/vim-startify" }           -- Fancy startup screen
-    use { "tpope/vim-obsession" }          -- Session management
     use { "stevearc/dressing.nvim" }       -- Better standard vim ui's
     use { "karb94/neoscroll.nvim" }        -- Smooth scroll
     use { "kyazdani42/nvim-web-devicons" } -- Icons like the name implies
@@ -47,6 +44,7 @@ return require("packer").startup(function(use)
     use { "junegunn/goyo.vim" }            -- Distraction free writing
     use { "junegunn/limelight.vim" }       -- Beautify goyo
     use { "neovide/neovide" }              -- Neovide support
+    use { "kyazdani42/nvim-tree.lua" }     -- File structure
 
 
     -- Treesitter
@@ -55,22 +53,20 @@ return require("packer").startup(function(use)
     use { "nvim-treesitter/nvim-treesitter-refactor" }           -- Refactoring tools
     use { "nvim-treesitter/nvim-treesitter-textobjects" }        -- Treesitter textobjects f (functions), etc
     use { "p00f/nvim-ts-rainbow" }                               -- Rainbow brackets from treesitter
-    use { "simrat39/symbols-outline.nvim" }                      -- Symbols outline
     use { "windwp/nvim-ts-autotag" }                             -- Close tags
+
 
     -- Telescope
     use { "nvim-telescope/telescope.nvim" }                      -- Telescope search etc.
     use { "jvgrootveld/telescope-zoxide" }                       -- Like z command
-    use { "nvim-telescope/telescope-packer.nvim" }               -- Packer plugins
-    use { "nvim-telescope/telescope-symbols.nvim" }              -- Symbols
+    -- use { "nvim-telescope/telescope-symbols.nvim" }              -- Symbols
     use {
         "nvim-telescope/telescope-fzf-native.nvim", run = "make"
     }                                                            -- FZF Performance and syntax
     use { "nvim-telescope/telescope-file-browser.nvim" }         -- File browser
     use { "nvim-telescope/telescope-ui-select.nvim" }            -- Use floating ui for codeactions
     use { "nvim-telescope/telescope-smart-history.nvim" }        -- Store search history in sqlite database
-    use { "nvim-telescope/telescope-frecency.nvim" }             -- Frequently visited files
-    use { "nvim-telescope/telescope-cheat.nvim" }                -- Cheat.sh
+
 
     -- Other stuff
     use { "tpope/vim-repeat" }                              -- Repeat commands
@@ -80,7 +76,6 @@ return require("packer").startup(function(use)
     use { "andweeb/presence.nvim" }                         -- Discord precense
     use { "wakatime/vim-wakatime" }                         -- Time counting and stuff
     use { "ThePrimeagen/git-worktree.nvim" }                -- Worktrees with vim
-    -- use { "vimwiki/vimwiki" }                               -- Vimwiki notes
     use { "dhruvasagar/vim-table-mode" }                    -- Awesome automatic tables
     use { "voldikss/vim-floaterm" }                         -- Floating terminal
     use { "aserowy/tmux.nvim" }                             -- Tmux Integration
@@ -88,21 +83,15 @@ return require("packer").startup(function(use)
     use { "ckarnell/Antonys-macro-repeater" }               -- Repeat macros with `.`
     use { "chrisbra/NrrwRgn", cmd = "NR" }                  -- Open text in other window
     use { "AndrewRadev/splitjoin.vim" }                     -- Split up oneliners `gS` or oneline multiliners `gJ`
-    use { "vim-test/vim-test" }                             -- Testing inside vim
     use { "folke/todo-comments.nvim" }                      -- Highlight comments
-    use { "AckslD/nvim-neoclip.lua" }                       -- Clipboard management inside vim
     use {
         "danymat/neogen",
         config = function() require("neogen").setup({}) end
     }                                                       -- Generate Function/Class etc. annotations -> `:lua require("neogen").generate()`
-    use {
-        "michaelb/sniprun",
-        run = "bash ./install.sh"
-    }                                                       -- Run code snippets from within vim
     use { "tpope/vim-dadbod" }                              -- Database integration
     use { "kristijanhusak/vim-dadbod-ui" }                  -- Pretty database integration
     use { "NTBBloodbath/rest.nvim" }                        -- Make HTTP rest requests
-    use { "KadoBOT/nvim-spotify", run = 'make' }            -- Spotify controls in vim
+
 
     -- New "Verbs"
     use { "numToStr/Comment.nvim" }           -- Comments from treesitter `gc`
@@ -112,38 +101,30 @@ return require("packer").startup(function(use)
     use { "christoomey/vim-sort-motion" }     -- Sort with `gs`
 
 
-
     -- New "Nouns"
     use { "kana/vim-textobj-user" }           -- For own "Nouns"
-    use { "justinmk/vim-sneak" }              -- Sneak motion `s`
-    use { "phaazon/hop.nvim" }                -- Easymotion but in lua
-    -- use { "justinmk/vim-sneak" }              -- Try to get rid of s and use it for vim-sneak
     use { "michaeljsmith/vim-indent-object" } -- Indent object with ii, ai, aI, and iI etc.
     use { "kana/vim-textobj-entire" }         -- Whole document ae, ie
     use { "wellle/targets.vim" }              -- Many helpful targets
 
 
     -- LSP stuff
-    use { "neovim/nvim-lspconfig" }                     -- Nvim lsp support
-    use { "williamboman/nvim-lsp-installer" }           -- Easy installation for lsp`s
-    use { "ray-x/lsp_signature.nvim" }                  -- LSP signatures as overlay
-    use { "ThePrimeagen/refactoring.nvim" }             -- Some refactoring tools
-    use { "p00f/clangd_extensions.nvim" }               -- Clang extension for nvim-lsp
-    use { "hrsh7th/nvim-cmp" }                          -- Autocompletion engine
-    use { "hrsh7th/cmp-nvim-lsp" }                      -- Nvim-cmp source for neovim"s built-in ls client
-    use { "hrsh7th/cmp-buffer" }                        -- Nvim-cmp source for buffer words
-    use { "hrsh7th/cmp-path" }                          -- Nvim-cmp source for filesystem paths
-    use { "hrsh7th/cmp-cmdline" }                       -- Nvim-cmp source for vim`s commandline
-    use { "hrsh7th/cmp-nvim-lua" }                      -- Nvim lua completion
-    use { "onsails/lspkind-nvim" }                      -- Nice Icons in lsp-cmp
-    use { "saadparwaiz1/cmp_luasnip" }                  -- luasnip support
-    use { "rafamadriz/friendly-snippets" }              -- Helpful snippets for popular languages
-    use { "folke/trouble.nvim" }                        -- Pretty diagnostics etc.
-    use { "jose-elias-alvarez/null-ls.nvim" }           -- Easier access to nvim lsp api for other plugins
-    -- use { "tzachar/cmp-tabnine", run = "./install.sh" } -- Nvim-cmp tabnine support
-
-    use { "python-rope/ropevim" }  -- For some Code-actions
-    use { "sheerun/vim-polyglot" } -- Collection of language packs
+    use { "neovim/nvim-lspconfig" }           -- Nvim lsp support
+    use { "williamboman/nvim-lsp-installer" } -- Easy installation for lsp`s
+    use { "ray-x/lsp_signature.nvim" }        -- LSP signatures as overlay
+    use { "p00f/clangd_extensions.nvim" }     -- Clang extension for nvim-lsp
+    use { "hrsh7th/nvim-cmp" }                -- Autocompletion engine
+    use { "hrsh7th/cmp-nvim-lsp" }            -- Nvim-cmp source for neovim"s built-in ls client
+    use { "hrsh7th/cmp-buffer" }              -- Nvim-cmp source for buffer words
+    use { "hrsh7th/cmp-path" }                -- Nvim-cmp source for filesystem paths
+    use { "hrsh7th/cmp-cmdline" }             -- Nvim-cmp source for vim`s commandline
+    use { "hrsh7th/cmp-nvim-lua" }            -- Nvim lua completion
+    use { "onsails/lspkind-nvim" }            -- Nice Icons in lsp-cmp
+    use { "saadparwaiz1/cmp_luasnip" }        -- luasnip support
+    use { "rafamadriz/friendly-snippets" }    -- Helpful snippets for popular languages
+    use { "folke/trouble.nvim" }              -- Pretty diagnostics etc.
+    use { "jose-elias-alvarez/null-ls.nvim" } -- Easier access to nvim lsp api for other plugins
+    use { "sheerun/vim-polyglot" }            -- Collection of language packs
 
 
     -- Language specific stuff
@@ -159,8 +140,9 @@ return require("packer").startup(function(use)
     use {
         "iamcco/markdown-preview.nvim",
         run = function() vim.fn["mkdp#util#install"]() end,
-    }                                      -- Markdown
-    use { "OmniSharp/omnisharp-vim" }      -- C#
+    }                                                -- Markdown
+    use { "OmniSharp/omnisharp-vim" }                -- C#
+
 
     -- Debugging
     use { "mfussenegger/nvim-dap" }           -- Debugger Adapter Protocol
@@ -175,11 +157,14 @@ return require("packer").startup(function(use)
     use { "akinsho/git-conflict.nvim" } -- Resolve Git merge conflicts in vim
     use { "rhysd/committia.vim" }       -- Better commit buffers
 
+
     -- Snippets
     use { "L3MON4D3/LuaSnip" } -- Snippet engine with really nice functionalities
 
+
     -- Own plugin
     use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
+
 
     -- Some would say it"s useless...
     use { "alec-gibson/nvim-tetris" } -- Tetris

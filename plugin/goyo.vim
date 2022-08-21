@@ -14,6 +14,7 @@ function! s:goyo_enter()
     nnoremap  <Down>  j
     nnoremap  <Left>  h
     nnoremap  <Right> l
+    set laststatus=3
     Limelight
 endfunction
 

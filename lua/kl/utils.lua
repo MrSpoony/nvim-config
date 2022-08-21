@@ -15,7 +15,7 @@ local function createMap(mode)
         end
         options = options or {}
         options.noremap = false
-        vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+        vim.keymap.set(mode, lhs, rhs, options)
     end
 end
 

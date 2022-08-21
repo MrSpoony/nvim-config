@@ -5,7 +5,6 @@ local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 -- local tabnine = require('cmp_tabnine')
 local lspkind = require('lspkind')
 local lspconfigs = require("kl.lspconfigs");
-local fidget = require("fidget")
 local trouble = require("trouble");
 local nullls = require("null-ls")
 local ls = require("luasnip")
@@ -25,8 +24,6 @@ local c = ls.choice_node
 --     },
 --     show_prediction_strength = true,
 -- })
-
-fidget.setup({})
 
 local options = lspconfigs.options
 local on_attach = lspconfigs.on_attach
