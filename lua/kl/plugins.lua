@@ -179,7 +179,7 @@ return require("packer").startup(function(use)
     use { "L3MON4D3/LuaSnip" } -- Snippet engine with really nice functionalities
 
     -- Own plugin
-    -- use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
+    use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
 
     -- Some would say it"s useless...
     use { "alec-gibson/nvim-tetris" } -- Tetris

@@ -17,7 +17,7 @@ nvim_tree.setup({
 					unstaged = "",
 					staged = "S",
 					unmerged = "",
-					renamed = "➜",
+					renamed = "R",
 					deleted = "",
 					untracked = "U",
 					ignored = "◌",
@@ -71,7 +71,5 @@ nvim_tree.setup({
 		relativenumber = false,
 	},
 })
-
-vim.cmd([[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]])
 
 Nnoremap("<C-f>", "<cmd>NvimTreeToggle<cr>")
