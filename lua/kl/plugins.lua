@@ -80,7 +80,7 @@ return require("packer").startup(function(use)
     use { "andweeb/presence.nvim" }                         -- Discord precense
     use { "wakatime/vim-wakatime" }                         -- Time counting and stuff
     use { "ThePrimeagen/git-worktree.nvim" }                -- Worktrees with vim
-    use { "vimwiki/vimwiki" }                               -- Vimwiki notes
+    -- use { "vimwiki/vimwiki" }                               -- Vimwiki notes
     use { "dhruvasagar/vim-table-mode" }                    -- Awesome automatic tables
     use { "voldikss/vim-floaterm" }                         -- Floating terminal
     use { "aserowy/tmux.nvim" }                             -- Tmux Integration
@@ -108,7 +108,7 @@ return require("packer").startup(function(use)
     use { "numToStr/Comment.nvim" }           -- Comments from treesitter `gc`
     use { "junegunn/vim-easy-align" }         -- Algin `ga`
     use { "godlygeek/tabular" }               -- Tabularize
-    use { "vim-scripts/ReplaceWithRegister" } -- Replace without goin into visual mode `gr`
+    use { "vim-scripts/regreplop.vim" }       -- Replace without goin into visual mode `gr`
     use { "christoomey/vim-sort-motion" }     -- Sort with `gs`
 
 
