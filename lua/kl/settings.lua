@@ -71,8 +71,11 @@ syntax on
 
 vim.cmd([[
 function! TrimEndLines()
+    if &ft =~ 'go'
+        return
+    endif
     let save_cursor = getpos(".")
-    silent! %s#\($\n\s*\)\+\%$##
+    %s/\s\+$//e
     call setpos('.', save_cursor)
 endfunction
 autocmd BufWritePre * call TrimEndLines()

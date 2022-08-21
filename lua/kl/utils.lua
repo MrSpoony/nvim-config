@@ -28,7 +28,7 @@ M.snoremap = createNoremap("s")
 M.onoremap = createNoremap("o")
 M.lnoremap = createNoremap("l")
 M.cnoremap = createNoremap("c")
-
+M.noremap = createNoremap("")
 
 M.nmap = createMap("n")
 M.xmap = createMap("x")
@@ -39,6 +39,7 @@ M.smap = createMap("s")
 M.omap = createMap("o")
 M.lmap = createMap("l")
 M.cmap = createMap("c")
+M.map = createMap("")
 
 function M.fn(callback, ...)
     local args = {...}

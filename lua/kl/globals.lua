@@ -15,6 +15,7 @@ Smap = utils.smap
 Omap = utils.omap
 Lmap = utils.lmap
 Cmap = utils.cmap
+Map = utils.map
 
 Nnoremap = utils.nnoremap
 Xnoremap = utils.xnoremap
@@ -25,3 +26,4 @@ Snoremap = utils.snoremap
 Onoremap = utils.onoremap
 Lnoremap = utils.lnoremap
 Cnoremap = utils.cnoremap
+Noremap = utils.noremap

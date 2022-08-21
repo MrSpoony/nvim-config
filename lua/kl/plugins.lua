@@ -31,6 +31,7 @@ return require("packer").startup(function(use)
     use { "shaunsingh/nord.nvim" }                        -- Nord
     use { "rafamadriz/neon" }                             -- Neon
     use { "projekt0n/github-nvim-theme" }                 -- Github
+    use { "catppuccin/nvim", as = "catppuccin" }          -- Catppuccin
 
     use { "anuvyklack/pretty-fold.nvim" }  -- Prettier folds
     use { "SmiteshP/nvim-gps" }            -- Location widget in lualine
@@ -134,9 +135,11 @@ return require("packer").startup(function(use)
     use { "hrsh7th/cmp-path" }                          -- Nvim-cmp source for filesystem paths
     use { "hrsh7th/cmp-cmdline" }                       -- Nvim-cmp source for vim`s commandline
     use { "hrsh7th/cmp-nvim-lua" }                      -- Nvim lua completion
-    use { "onsails/lspkind-nvim" }                      -- Nice Icons in lsp-comp
+    use { "onsails/lspkind-nvim" }                      -- Nice Icons in lsp-cmp
     use { "saadparwaiz1/cmp_luasnip" }                  -- luasnip support
     use { "rafamadriz/friendly-snippets" }              -- Helpful snippets for popular languages
+    use { "folke/trouble.nvim" }                        -- Pretty diagnostics etc.
+    use { "jose-elias-alvarez/null-ls.nvim" }           -- Easier access to nvim lsp api for other plugins
     -- use { "tzachar/cmp-tabnine", run = "./install.sh" } -- Nvim-cmp tabnine support
 
     use { "python-rope/ropevim" }  -- For some Code-actions
@@ -149,6 +152,7 @@ return require("packer").startup(function(use)
     use { "ap/vim-css-color" }                       -- CSS
     use { "mattn/emmet-vim" }                        -- HTML
     use { "neoclide/vim-jsx-improve" }               -- JSX
+    use { "bdauria/angular-cli.vim" }                -- Angular
     use { "neoclide/npm.nvim", run = "npm install" } -- NPM JS
     use { "lervag/vimtex" }                          -- LaTeX
     use { "engeljh/vim-latexfmt" }                   -- LaTex Formatter
