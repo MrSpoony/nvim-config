@@ -4,71 +4,48 @@ nvim_tree.setup({
 	renderer = {
 		group_empty = true,
 		highlight_opened_files = "icon",
-		special_files = {
-			['README.md'] = 1,
-			['Makefile']  = 1,
-			['MAKEFILE']  = 1,
-		},
 		icons = {
 			glyphs = {
-				default = "",
+				default = "",
 				symlink = "",
 				git = {
 					unstaged = "",
-					staged = "S",
+					staged = "✓",
 					unmerged = "",
-					renamed = "R",
+					renamed = "➜",
 					deleted = "",
-					untracked = "U",
+					untracked = "★",
 					ignored = "◌",
-				},
-				folder = {
-					default = "",
-					open = "",
-					empty = "",
-					empty_open = "",
-					symlink = "",
 				},
 			}
 		}
 	},
 	disable_netrw = true,
-	hijack_netrw = true,
-	open_on_setup = false,
 	ignore_ft_on_setup = {
 		"startify",
 		"dashboard",
 		"alpha",
 	},
 	open_on_tab = false,
-	hijack_cursor = false,
 	update_cwd = true,
 	diagnostics = {
 		enable = true,
-		icons = {
-			hint = "",
-			info = "",
-			warning = "",
-			error = "",
-		},
+		show_on_dirs = false,
 	},
 	update_focused_file = {
 		enable = true,
 		update_cwd = true,
+		update_root = true,
 		ignore_list = {},
 	},
-	git = {
-		enable = true,
-		ignore = true,
-		timeout = 500,
-	},
 	view = {
-		width = 30,
+		width = 35,
 		height = 30,
-		hide_root_folder = false,
 		side = "left",
-		number = false,
-		relativenumber = false,
+	},
+	trash = {
+		cmd = "trash",
+		require_confirm = true,
 	},
 })
 
