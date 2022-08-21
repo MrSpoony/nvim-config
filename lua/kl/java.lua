@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
         dir = dir:gsub("/", ".")
         dir = "package " .. dir .. ";"
         local file = vim.fn.expand("%:t")
-        file = file:gsub(".java", "")
+        file = file:gsub("%.java$", "")
         vim.fn.append(0, dir)
         vim.fn.append(1, "")
         vim.fn.append(2, "class " .. file .. " {")
@@ -21,11 +21,13 @@ api.events.subscribe(Event.FileCreated, function(data)
     local dir = data.fname
     dir = dir:gsub("^.*/com/", "com/")
     dir = dir:gsub("^.*/ch/", "ch/")
+    dir = dir:gsub("%.java$", "")
+    dir = dir:gsub("/[^/]*$", "")
     dir = dir:gsub("/", ".")
     dir = "package " .. dir .. ";"
     local file = data.fname
     file = file:gsub("/.*/", "");
-    file = file:gsub(".java", "")
+    file = file:gsub("%.java$", "")
     local everything = dir .. "\n" .. "\nclass " .. file .. " {\n"
     everything = everything .. "\n}"
     vim.fn.system("echo \"" .. everything .. "\" > " .. data.fname)
