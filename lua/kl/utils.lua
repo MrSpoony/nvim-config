@@ -43,12 +43,11 @@ M.map = createMap("")
 
 function M.fn(callback, ...)
     local args = {...}
-    return function() callback(args) end
-end
-
-function M.command(name, command, options)
-    options = options or {}
-    vim.api.nvim_create_user_command(name, command, options)
+    if (table.unpack ~= nil) then
+        return function() callback(table.unpack(args)) end
+    end
+---@diagnostic disable-next-line: deprecated
+    return function() callback(unpack(args)) end
 end
 
 function M.set_contains(set, val)

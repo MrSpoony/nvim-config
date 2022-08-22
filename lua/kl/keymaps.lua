@@ -47,7 +47,6 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     callback = source
 })
 
-
 Nnoremap("<leader>q", "<cmd>bdelete!<CR>")
 Nnoremap("<leader>bq", "<cmd>quit!<CR>")
 Nnoremap("<leader>bd", "<cmd>bdelete<CR>")
@@ -57,6 +56,3 @@ Nnoremap(":", ";")
 Nnoremap(";", ":")
 Vnoremap(":", ";")
 Vnoremap(";", ":")
-
-Command("Pi", "PackerInstall")
-Command("Pu", "PackerUpdate")

@@ -1,0 +1,12 @@
+vim.g.neovide_refresh_rate=300
+-- vim.g.neovide_transparency=0.5
+vim.g.neovide_cursor_vfx_mode = "pixiedust"
+vim.g.neovide_cursor_animation_length=0.08
+vim.g.neovide_cursor_trail_length=29.8
+vim.g.neovide_cursor_vfx_particle_density=50.0
+vim.opt.guifont="JetBrainsMono_Nerd_Font_Mono:h10"
+-- vim.opt.guifont="Monoid_Nerd_Font_Mono:h7"
+-- vim.opt.guifont="VictorMono_Nerd_Font_Mono:h8"
+-- vim.opt.guifont="Inconsolata_Nerd_Font_Mono:h10"
+-- vim.opt.guifont="Hack:h7"
+-- vim.opt.guifont="Hack_Nerd_Font_Mono:h7.5"

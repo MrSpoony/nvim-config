@@ -30,19 +30,18 @@ ts.setup {
 }
 
 local le = ts.load_extension
-le('file_browser')
 le('fzf')
 le('zoxide')
 le('ui-select')
 le('smart_history')
 le('git_worktree')
+le('harpoon')
 
 local ex = ts.extensions
 Nnoremap("<leader>cd", ex.zoxide.list)
 Nnoremap("<leader>ff", builtin.find_files)
 Nnoremap("<leader>fd", ex.git_worktree.git_worktrees)
 Nnoremap("<leader>fw", ex.git_worktree.create_git_worktree)
-Nnoremap("<leader>fb", "<cmd>Telescope file_browser<cr>")
 Nnoremap("<C-p>", builtin.git_files)
 Nnoremap("<leader>fs", Fn(builtin.grep_string, { search = vim.fn.expand("<cword>") }))
 Nnoremap("<leader>fc", builtin.colorscheme)

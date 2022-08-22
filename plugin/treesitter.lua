@@ -1,42 +1,5 @@
-local toInstall = {
-    "bash",
-    "c",
-    "c_sharp",
-    "cmake",
-    "cpp",
-    "css",
-    "dart",
-    "dot",
-    "fish",
-    "go",
-    "gomod",
-    "haskell",
-    "html",
-    "http",
-    "java",
-    "javascript",
-    "json",
-    "latex",
-    "llvm",
-    "lua",
-    "make",
-    "markdown",
-    "nix",
-    -- "norg",
-    -- "norg_meta",
-    -- "norg_table",
-    "python",
-    "ruby",
-    "rust",
-    "toml",
-    "typescript",
-    "vim",
-    "vue",
-    "yaml",
-}
-
-require 'nvim-treesitter.configs'.setup {
-    ensure_installed = toInstall,
+require("nvim-treesitter.configs").setup {
+    ensure_installed = "all",
     sync_install = true,
     incremental_selection = {
         enable = true,
@@ -96,8 +59,6 @@ require 'nvim-treesitter.configs'.setup {
             ["iC"] = "@class.inner",
             ["ac"] = "@conditional.outer",
             ["ic"] = "@conditional.inner",
-            ["ae"] = "@block.outer",
-            ["ie"] = "@block.inner",
             ["al"] = "@loop.outer",
             ["il"] = "@loop.inner",
             ["is"] = "@statement.inner",
@@ -113,13 +74,6 @@ require 'nvim-treesitter.configs'.setup {
                 ["if"] = "@function.inner",
                 ["ac"] = "@class.outer",
                 ["ic"] = "@class.inner",
-                -- ["iF"] = {
-                --     python = "(function_definition) @function",
-                --     cpp = "(function_definition) @function",
-                --     c = "(function_definition) @function",
-                --     java = "(method_declaration) @function",
-                --     go = "(method_declaration) @function"
-                -- }
             }
         },
         swap = {

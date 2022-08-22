@@ -9,7 +9,7 @@ return require("packer").startup(function(use)
     use { "nvim-lua/popup.nvim" }                           -- Popups
     use { "rcarriga/nvim-notify" }                          -- Notifcations
     use { "ray-x/guihua.lua", run = 'cd lua/fzy && make' }  -- UI for lua plugins
-    use { "tami5/sqlite.lua" } -- Store stuff in sqlite database for more speed
+    use { "tami5/sqlite.lua" }                              -- Store stuff in sqlite database for more speed
     use { "BurntSushi/ripgrep" }                            -- Line-oriented search tool
     use { "junegunn/fzf", run = "./install -- all" }        -- FZF
     use { "junegunn/fzf.vim" }                              -- FZF in vim
@@ -31,7 +31,6 @@ return require("packer").startup(function(use)
     use { "rafamadriz/neon" }                             -- Neon
     use { "projekt0n/github-nvim-theme" }                 -- Github
     use { "catppuccin/nvim", as = "catppuccin" }          -- Catppuccin
-    use { "RRethy/nvim-base16" }                     -- Base16 themes
 
     use { "anuvyklack/pretty-fold.nvim" }  -- Prettier folds
     use { "nvim-lualine/lualine.nvim" }    -- Line at the bottom
@@ -63,7 +62,6 @@ return require("packer").startup(function(use)
     use {
         "nvim-telescope/telescope-fzf-native.nvim", run = "make"
     }                                                            -- FZF Performance and syntax
-    use { "nvim-telescope/telescope-file-browser.nvim" }         -- File browser
     use { "nvim-telescope/telescope-ui-select.nvim" }            -- Use floating ui for codeactions
     use { "nvim-telescope/telescope-smart-history.nvim" }        -- Store search history in sqlite database
 
@@ -75,7 +73,6 @@ return require("packer").startup(function(use)
     use { "tpope/vim-surround" }                            -- Surround your stuff easier with brackets or quotes
     use { "andweeb/presence.nvim" }                         -- Discord precense
     use { "wakatime/vim-wakatime" }                         -- Time counting and stuff
-    use { "ThePrimeagen/git-worktree.nvim" }                -- Worktrees with vim
     use { "dhruvasagar/vim-table-mode" }                    -- Awesome automatic tables
     use { "voldikss/vim-floaterm" }                         -- Floating terminal
     use { "aserowy/tmux.nvim" }                             -- Tmux Integration
@@ -84,19 +81,15 @@ return require("packer").startup(function(use)
     use { "chrisbra/NrrwRgn", cmd = "NR" }                  -- Open text in other window
     use { "AndrewRadev/splitjoin.vim" }                     -- Split up oneliners `gS` or oneline multiliners `gJ`
     use { "folke/todo-comments.nvim" }                      -- Highlight comments
-    use {
-        "danymat/neogen",
-        config = function() require("neogen").setup({}) end
-    }                                                       -- Generate Function/Class etc. annotations -> `:lua require("neogen").generate()`
     use { "tpope/vim-dadbod" }                              -- Database integration
     use { "kristijanhusak/vim-dadbod-ui" }                  -- Pretty database integration
-    use { "NTBBloodbath/rest.nvim" }                        -- Make HTTP rest requests
+    use { "ThePrimeagen/harpoon" }                          -- Move around
+    use { "sheerun/vim-polyglot" }                          -- Collection of language packs
 
 
     -- New "Verbs"
     use { "numToStr/Comment.nvim" }           -- Comments from treesitter `gc`
     use { "junegunn/vim-easy-align" }         -- Algin `ga`
-    use { "godlygeek/tabular" }               -- Tabularize
     use { "vim-scripts/regreplop.vim" }       -- Replace without goin into visual mode `gr`
     use { "christoomey/vim-sort-motion" }     -- Sort with `gs`
 
@@ -124,7 +117,6 @@ return require("packer").startup(function(use)
     use { "rafamadriz/friendly-snippets" }    -- Helpful snippets for popular languages
     use { "folke/trouble.nvim" }              -- Pretty diagnostics etc.
     use { "jose-elias-alvarez/null-ls.nvim" } -- Easier access to nvim lsp api for other plugins
-    use { "sheerun/vim-polyglot" }            -- Collection of language packs
 
 
     -- Language specific stuff
@@ -136,26 +128,25 @@ return require("packer").startup(function(use)
     use { "bdauria/angular-cli.vim" }                -- Angular
     use { "neoclide/npm.nvim", run = "npm install" } -- NPM JS
     use { "lervag/vimtex" }                          -- LaTeX
-    use { "engeljh/vim-latexfmt" }                   -- LaTex Formatter
     use {
         "iamcco/markdown-preview.nvim",
-        run = function() vim.fn["mkdp#util#install"]() end,
+        run = vim.fn["mkdp#util#install"],
     }                                                -- Markdown
-    use { "OmniSharp/omnisharp-vim" }                -- C#
 
 
     -- Debugging
     use { "mfussenegger/nvim-dap" }           -- Debugger Adapter Protocol
     use { "rcarriga/nvim-dap-ui" }            -- UI for DAP
     use { "theHamsta/nvim-dap-virtual-text" } -- Virtual Text support for DAP
-    use { "leoluz/nvim-dap-go" }              -- Go debugging
 
 
     -- Git
-    use { "tpope/vim-fugitive" }        -- Git integration
-    use { "lewis6991/gitsigns.nvim" }   -- Git signs (gitgutter, Line blame etc.)
-    use { "akinsho/git-conflict.nvim" } -- Resolve Git merge conflicts in vim
-    use { "rhysd/committia.vim" }       -- Better commit buffers
+    use { "sindrets/diffview.nvim" }         -- Diffview
+    use { "ThePrimeagen/git-worktree.nvim" } -- Worktrees with vim
+    use { "TimUntersberger/neogit" }         -- Git integration
+    use { "lewis6991/gitsigns.nvim" }        -- Git signs (gitgutter, Line blame etc.)
+    use { "akinsho/git-conflict.nvim" }      -- Resolve Git merge conflicts in vim
+    use { "rhysd/committia.vim" }            -- Better commit buffers
 
 
     -- Snippets
@@ -163,7 +154,7 @@ return require("packer").startup(function(use)
 
 
     -- Own plugin
-    use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
+    -- use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
 
 
     -- Some would say it"s useless...

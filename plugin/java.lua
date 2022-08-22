@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
 local api = require('nvim-tree.api')
 local Event = require('nvim-tree.api').events.Event
 api.events.subscribe(Event.FileCreated, function(data)
+    if not data.fname:find(".java") then return end
     local dir = data.fname
     dir = dir:gsub("^.*/com/", "com/")
     dir = dir:gsub("^.*/ch/", "ch/")

@@ -15,7 +15,6 @@ o.relativenumber = true
 o.signcolumn = 'yes'
 
 o.textwidth = 0
-o.colorcolumn = '80'
 o.wrap = true
 o.linebreak = true
 o.formatoptions:remove("cro")
@@ -44,7 +43,8 @@ o.backup = false
 o.history = 10000
 o.undofile = true
 
-o.scrolloff = 5
+o.scrolloff = 7
+o.cursorline = true
 o.mouse = "nvc"
 
 o.visualbell = true
@@ -57,12 +57,13 @@ o.modifiable = true
 o.background = "dark"
 o.termguicolors = true
 
-Command("WQ", "wq")
-Command("Wq", "wq")
-Command("W", "w")
-Command("Q", "q")
+vim.api.nvim_create_user_command("WQ", "wq", {})
+vim.api.nvim_create_user_command("Wq", "wq", {})
+vim.api.nvim_create_user_command("W", "w", {})
+vim.api.nvim_create_user_command("Q", "q", {})
 
--- vim.g.netrw_liststyle = 3
+vim.api.nvim_create_user_command("Pi", "PackerInstall", {})
+vim.api.nvim_create_user_command("Ps", "PackerSync", {})
 
 vim.cmd([[
 filetype plugin on
@@ -80,3 +81,13 @@ function! TrimEndLines()
 endfunction
 autocmd BufWritePre * call TrimEndLines()
 ]])
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+    callback = function()
+        if o.ft._value == "go" then
+            o.colorcolumn = '99'
+            return
+        end
+        o.colorcolumn = '80'
+    end
+})

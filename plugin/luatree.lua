@@ -39,7 +39,7 @@ nvim_tree.setup({
 		ignore_list = {},
 	},
 	view = {
-		width = 35,
+		width = 40,
 		height = 30,
 		side = "left",
 	},
