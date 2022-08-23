@@ -1,11 +1,11 @@
 local dap = require("dap")
--- local dapgo = require('dap-go')
+local dapgo = require('dap-go')
 local dui = require("dapui")
 local dapvtext = require("nvim-dap-virtual-text")
 
 dapvtext.setup()
 dui.setup()
--- dapgo.setup()
+dapgo.setup()
 
 Nnoremap("<leader>dc", function()
     dui.open()

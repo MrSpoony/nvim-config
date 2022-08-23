@@ -19,3 +19,4 @@ gs.setup({
     current_line_blame_formatter = ' ﳑ <author>, <author_time:%Y-%m-%d> - <summary>',
 })
 ng.setup({})
+vim.api.nvim_create_user_command("G", "Neogit", {})

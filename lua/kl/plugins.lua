@@ -138,6 +138,7 @@ return require("packer").startup(function(use)
     use { "mfussenegger/nvim-dap" }           -- Debugger Adapter Protocol
     use { "rcarriga/nvim-dap-ui" }            -- UI for DAP
     use { "theHamsta/nvim-dap-virtual-text" } -- Virtual Text support for DAP
+    use { "leoluz/nvim-dap-go" }              -- Go debugging
 
 
     -- Git
