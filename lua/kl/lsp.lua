@@ -355,7 +355,10 @@ Nnoremap("gR", "<cmd>Trouble lsp_references<cr>")
 
 
 nullls.setup({
-    nullls.builtins.formatting.stylua,
-    nullls.builtins.diagnostics.eslint,
-    nullls.builtins.completion.spell,
+    sources = {
+        nullls.builtins.formatting.stylua,
+        nullls.builtins.diagnostics.eslint,
+        nullls.builtins.completion.spell,
+        nullls.builtins.formatting.prettier
+    }
 })

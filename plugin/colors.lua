@@ -1,6 +1,5 @@
 local od = require("onedark")
 local mat = require("material")
-local monokai = require("monokai")
 local gh = require("github-theme");
 
 local ll = require("lualine")
@@ -13,9 +12,6 @@ od.setup({
 
 -- Gruvbor
 vim.g.gruvbox_material_background = "hard"
-
--- Monokai
-monokai.setup()
 
 -- Tokyo Nicht
 vim.g.tokyonight_style = "night"

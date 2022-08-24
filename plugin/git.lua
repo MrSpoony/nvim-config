@@ -20,3 +20,4 @@ gs.setup({
 })
 ng.setup({})
 vim.api.nvim_create_user_command("G", "Neogit", {})
+-- Nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>")

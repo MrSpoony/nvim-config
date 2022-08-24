@@ -56,3 +56,10 @@ Nnoremap(":", ";")
 Nnoremap(";", ":")
 Vnoremap(":", ";")
 Vnoremap(";", ":")
+
+-- For mac
+for i = 25,36 do
+    vim.cmd("nnoremap " .. "<F" .. i .. "> <F" .. (i-24) .. ">")
+    vim.cmd("inoremap " .. "<F" .. i .. "> <F" .. (i-24) .. ">")
+    vim.cmd("xnoremap " .. "<F" .. i .. "> <F" .. (i-24) .. ">")
+end
