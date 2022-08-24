@@ -1,4 +1,8 @@
+vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
+vim.fn.setenv("OPENSSL_DIR", "/usr/local/opt/openssl")
 vim.cmd([[packadd packer.nvim]])
+
+local packer = require("packer")
 
 local has = function(x)
   return vim.fn.has(x) == 1
@@ -10,14 +14,13 @@ local is_wsl = (function()
 end)()
 
 local is_mac = has "macunix"
-local is_linux = not is_wsl and not is_mac
 
 local max_jobs = nil
 if is_mac then
   max_jobs = 32
 end
 
-return require("packer").startup({
+return packer.startup({
     function(use)
         use { "wbthomason/packer.nvim" } -- Let packer manage itself
 
@@ -78,7 +81,6 @@ return require("packer").startup({
         use { "nvim-telescope/telescope-ui-select.nvim" }            -- Use floating ui for codeactions
         use { "nvim-telescope/telescope-smart-history.nvim" }        -- Store search history in sqlite database
 
-
         -- Other stuff
         use { "tpope/vim-repeat" }                              -- Repeat commands
         use { "windwp/nvim-autopairs" }                         -- Auto pairing brackets
@@ -97,6 +99,7 @@ return require("packer").startup({
         use { "kristijanhusak/vim-dadbod-ui" }                  -- Pretty database integration
         use { "ThePrimeagen/harpoon" }                          -- Move around
         use { "sheerun/vim-polyglot" }                          -- Collection of language packs
+        use { "norcalli/nvim-colorizer.lua" }                   -- Color highlighting
 
 
 
@@ -115,31 +118,27 @@ return require("packer").startup({
 
 
         -- LSP stuff
-        use { "neovim/nvim-lspconfig" }           -- Nvim lsp support
-        use { "williamboman/nvim-lsp-installer" } -- Easy installation for lsp`s
-        use { "ray-x/lsp_signature.nvim" }        -- LSP signatures as overlay
-        use { "p00f/clangd_extensions.nvim" }     -- Clang extension for nvim-lsp
-        use { "hrsh7th/nvim-cmp" }                -- Autocompletion engine
-        use { "hrsh7th/cmp-nvim-lsp" }            -- Nvim-cmp source for neovim"s built-in ls client
-        use { "hrsh7th/cmp-buffer" }              -- Nvim-cmp source for buffer words
-        use { "hrsh7th/cmp-path" }                -- Nvim-cmp source for filesystem paths
-        use { "hrsh7th/cmp-cmdline" }             -- Nvim-cmp source for vim`s commandline
-        use { "hrsh7th/cmp-nvim-lua" }            -- Nvim lua completion
-        use { "onsails/lspkind-nvim" }            -- Nice Icons in lsp-cmp
-        use { "saadparwaiz1/cmp_luasnip" }        -- luasnip support
-        use { "rafamadriz/friendly-snippets" }    -- Helpful snippets for popular languages
-        use { "folke/trouble.nvim" }              -- Pretty diagnostics etc.
-        use { "jose-elias-alvarez/null-ls.nvim" } -- Easier access to nvim lsp api for other plugins
-
+        use { "neovim/nvim-lspconfig" }                -- Nvim lsp support
+        use { "williamboman/nvim-lsp-installer" }      -- Easy installation for lsp`s
+        use { "ray-x/lsp_signature.nvim" }             -- LSP signatures as overlay
+        use { "p00f/clangd_extensions.nvim" }          -- Clang extension for nvim-lsp
+        use { "hrsh7th/nvim-cmp" }                     -- Autocompletion engine
+        use { "hrsh7th/cmp-nvim-lsp" }                 -- Nvim-cmp source for neovim"s built-in ls client
+        use { "hrsh7th/cmp-buffer" }                   -- Nvim-cmp source for buffer words
+        use { "hrsh7th/cmp-path" }                     -- Nvim-cmp source for filesystem paths
+        use { "hrsh7th/cmp-cmdline" }                  -- Nvim-cmp source for vim`s commandline
+        use { "hrsh7th/cmp-nvim-lua" }                 -- Nvim lua completion
+        use { "kristijanhusak/vim-dadbod-completion" } -- Nvim-cmp soursce for database query language
+        use { "saadparwaiz1/cmp_luasnip" }             -- luasnip support
+        use { "rafamadriz/friendly-snippets" }         -- Helpful snippets for popular languages
+        use { "folke/trouble.nvim" }                   -- Pretty diagnostics etc.
+        use { "jose-elias-alvarez/null-ls.nvim" }      -- Easier access to nvim lsp api for other plugins
 
         -- Language specific stuff
         use { "ray-x/go.nvim" }                          -- Go
         use { "hdiniz/vim-gradle" }                      -- Java Gradle
-        use { "ap/vim-css-color" }                       -- CSS
-        use { "mattn/emmet-vim" }                        -- HTML
         use { "neoclide/vim-jsx-improve" }               -- JSX
         use { "bdauria/angular-cli.vim" }                -- Angular
-        use { "neoclide/npm.nvim", run = "npm install" } -- NPM JS
         use { "lervag/vimtex" }                          -- LaTeX
         use {
             "iamcco/markdown-preview.nvim",
@@ -170,11 +169,6 @@ return require("packer").startup({
         -- Own plugin
         -- use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
 
-
-        -- Some would say it"s useless...
-        use { "alec-gibson/nvim-tetris" } -- Tetris
-        use { "seandewar/nvimesweeper" }  -- Minesweeper
-
     end,
     config = {
         max_jobs = max_jobs,
@@ -182,6 +176,7 @@ return require("packer").startup({
             python_cmd = "python3",
         },
         display = {
+            open_cmd = 'leftabove 75vnew \\[packer\\]',
         },
     },
 })

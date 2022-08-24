@@ -3,7 +3,6 @@ local clangd_extensions = require('clangd_extensions')
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 -- local tabnine = require('cmp_tabnine')
-local lspkind = require('lspkind')
 local lspconfigs = require("kl.lspconfigs");
 local trouble = require("trouble");
 local nullls = require("null-ls")
@@ -221,31 +220,12 @@ cmp.setup({
             end
         }),
     },
-    formatting = {
-        format = lspkind.cmp_format({
-            mode = 'symbol',
-            maxwidth = 50,
-            menu = source_mapping,
-            before = function(entry, vim_item)
-                vim_item.kind = lspkind.presets.default[vim_item.kind]
-                local menu = source_mapping[entry.source.name]
-                if entry.source.name == "cmp_tabnine" then
-                    if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-                        menu = entry.completion_item.data.detail .. " " .. menu
-                    end
-                    vim_item.kind = ""
-                end
-                vim_item.menu = menu
-                return vim_item
-            end
-        })
-    },
     sources = {
         { name = "luasnip" },
         { name = "nvim_lsp" },
+        { name = "vim-dadbod-completion" },
         { name = "nvim_lua" },
         { name = "cmp_tabnine" },
-        -- { name = "ultisnips" },
         { name = "buffer" },
     },
     sorting = {

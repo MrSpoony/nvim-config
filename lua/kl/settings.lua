@@ -64,6 +64,14 @@ vim.api.nvim_create_user_command("Q", "q", {})
 
 vim.api.nvim_create_user_command("Pi", "PackerInstall", {})
 vim.api.nvim_create_user_command("Ps", "PackerSync", {})
+vim.api.nvim_create_user_command("G", function(data)
+    local args = data.args
+    if args ~= nil then
+        vim.cmd("!git " .. args)
+    end
+end, {
+    nargs = "*",
+})
 
 vim.cmd([[
 filetype plugin on
