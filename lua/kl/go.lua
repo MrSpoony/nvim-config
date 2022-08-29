@@ -22,6 +22,7 @@ go.setup({
     lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
     lsp_on_attach = lspconfigs.on_attach,
     lsp_keymaps = false,
+    lsp_codelens = false, -- set to false to disable codelens, true by default, you can use a function
     gopls_cmd = nil, -- Add own golps command
     dap_debug_keymap = false,
     dap_debug_gui = true, -- set to true to enable dap gui, highly recommand

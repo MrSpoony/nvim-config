@@ -1,6 +1,5 @@
 local gs = require('gitsigns');
 local gc = require('git-conflict');
-local ng = require("neogit");
 
 gc.setup({});
 
@@ -18,6 +17,4 @@ gs.setup({
     },
     current_line_blame_formatter = ' ﳑ <author>, <author_time:%Y-%m-%d> - <summary>',
 })
-ng.setup({})
-vim.api.nvim_create_user_command("G", "Neogit", {})
--- Nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>")
+Nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>")

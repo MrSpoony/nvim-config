@@ -21,10 +21,6 @@ ts.setup {
             fuzzy = true,
             override_generic_sorter = true,
             override_file_sorter = true,
-            case_mode = "smart_case",
-        },
-        ["ui-select"] = {
-            themes.get_dropdown({})
         },
         arecibo = {
             ["selected_engine"]   = 'google',
@@ -38,7 +34,6 @@ ts.setup {
 local le = ts.load_extension
 le('fzf')
 le('zoxide')
-le('ui-select')
 le('smart_history')
 le('git_worktree')
 le('harpoon')
@@ -49,7 +44,7 @@ Nnoremap("<leader>ff", builtin.find_files)
 Nnoremap("<leader>fd", ex.git_worktree.git_worktrees)
 Nnoremap("<leader>fw", ex.git_worktree.create_git_worktree)
 Nnoremap("<C-p>", builtin.git_files)
-Nnoremap("<leader>fs", Fn(builtin.grep_string, { search = vim.fn.expand("<cword>") }))
+Nnoremap("<leader>fs", "<cmd>Telescope symbols<CR>")
 Nnoremap("<leader>fc", builtin.colorscheme)
 Nnoremap("<leader>fm", builtin.keymaps)
 Nnoremap("<leader>fg", builtin.live_grep)

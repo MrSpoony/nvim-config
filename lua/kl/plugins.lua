@@ -8,11 +8,6 @@ local has = function(x)
   return vim.fn.has(x) == 1
 end
 
-local is_wsl = (function()
-  local output = vim.fn.systemlist "uname -r"
-  return not not string.find(output[1] or "", "WSL")
-end)()
-
 local is_mac = has "macunix"
 
 local max_jobs = nil
@@ -27,14 +22,13 @@ return packer.startup({
         use { "lewis6991/impatient.nvim" } -- Speed up startup times
 
         -- Dependencies for others
-        use { "nvim-lua/plenary.nvim" }                         -- Some helpful lua functions other plugins (telecope) need
-        use { "nvim-lua/popup.nvim" }                           -- Popups
-        use { "rcarriga/nvim-notify" }                          -- Notifcations
-        use { "ray-x/guihua.lua", run = 'cd lua/fzy && make' }  -- UI for lua plugins
-        use { "tami5/sqlite.lua" }                              -- Store stuff in sqlite database for more speed
-        use { "junegunn/fzf", run = "./install -- all" }        -- FZF
-        use { "junegunn/fzf.vim" }                              -- FZF in vim
-        use { "mbbill/undotree" }                               -- Undo representation
+        use { "nvim-lua/plenary.nvim" }                  -- Some helpful lua functions other plugins (telecope) need
+        use { "nvim-lua/popup.nvim" }                    -- Popups
+        use { "rcarriga/nvim-notify" }                   -- Notifcations
+        use { "tami5/sqlite.lua" }                       -- Store stuff in sqlite database for more speed
+        use { "junegunn/fzf", run = "./install -- all" } -- FZF
+        use { "junegunn/fzf.vim" }                       -- FZF in vim
+        use { "mbbill/undotree" }                        -- Undo representation
 
 
         -- UI
@@ -50,15 +44,16 @@ return packer.startup({
         use { "projekt0n/github-nvim-theme" }                 -- Github
         use { "catppuccin/nvim", as = "catppuccin" }          -- Catppuccin
 
-        use { "nvim-lualine/lualine.nvim" }    -- Line at the bottom
-        use { "SmiteshP/nvim-gps" }            -- Location widget in lualine
-        use { "mhinz/vim-startify" }           -- Fancy startup screen
-        use { "stevearc/dressing.nvim" }       -- Better standard vim ui's
-        use { "karb94/neoscroll.nvim" }        -- Smooth scroll
-        use { "kyazdani42/nvim-web-devicons" } -- Icons like the name implies
-        -- use { "akinsho/bufferline.nvim" }      -- Tab display
-        use { "neovide/neovide" }              -- Neovide support
-        use { "kyazdani42/nvim-tree.lua" }     -- File structure
+        use { "nvim-lualine/lualine.nvim" }                    -- Line at the bottom
+        use { "SmiteshP/nvim-gps" }                            -- Location widget in lualine
+        use { "mhinz/vim-startify" }                           -- Fancy startup screen
+        use { "stevearc/dressing.nvim" }                       -- Better standard vim ui's
+        use { "ray-x/guihua.lua", run = 'cd lua/fzy && make' } -- UI for lua plugins
+        use { "voldikss/vim-floaterm" }                         -- Floating terminal
+        use { "karb94/neoscroll.nvim" }                        -- Smooth scroll
+        use { "kyazdani42/nvim-web-devicons" }                 -- Icons like the name implies
+        use { "neovide/neovide" }                              -- Neovide support
+        use { "kyazdani42/nvim-tree.lua" }                     -- File structure
 
 
         -- Treesitter
@@ -73,12 +68,10 @@ return packer.startup({
         -- Telescope
         use { "nvim-telescope/telescope.nvim" }                      -- Telescope search etc.
         use { "jvgrootveld/telescope-zoxide" }                       -- Like z command
-        -- use { "nvim-telescope/telescope-symbols.nvim" }              -- Symbols
+        use { "nvim-telescope/telescope-symbols.nvim" }              -- Symbols
         use {
             "nvim-telescope/telescope-fzf-native.nvim", run = "make"
         }                                                            -- FZF Performance and syntax
-        use { "nvim-telescope/telescope-cheat.nvim" }                -- cht.sh in Telescope
-        use { "nvim-telescope/telescope-ui-select.nvim" }            -- Use floating ui for codeactions
         use { "nvim-telescope/telescope-smart-history.nvim" }        -- Store search history in sqlite database
 
         -- Other stuff
@@ -88,11 +81,9 @@ return packer.startup({
         use { "andweeb/presence.nvim" }                         -- Discord precense
         use { "wakatime/vim-wakatime" }                         -- Time counting and stuff
         use { "dhruvasagar/vim-table-mode" }                    -- Awesome automatic tables
-        use { "voldikss/vim-floaterm" }                         -- Floating terminal
         use { "aserowy/tmux.nvim" }                             -- Tmux Integration
         use { "mizlan/iswap.nvim" }                             -- Swap function arguments etc.
         use { "ckarnell/Antonys-macro-repeater" }               -- Repeat macros with `.`
-        use { "chrisbra/NrrwRgn", cmd = "NR" }                  -- Open text in other window
         use { "AndrewRadev/splitjoin.vim" }                     -- Split up oneliners `gS` or oneline multiliners `gJ`
         use { "folke/todo-comments.nvim" }                      -- Highlight comments
         use { "tpope/vim-dadbod" }                              -- Database integration
@@ -100,6 +91,7 @@ return packer.startup({
         use { "ThePrimeagen/harpoon" }                          -- Move around
         use { "sheerun/vim-polyglot" }                          -- Collection of language packs
         use { "norcalli/nvim-colorizer.lua" }                   -- Color highlighting
+        use { "shift-d/scratch.nvim" }                          -- Scratch buffer
 
 
 
@@ -154,9 +146,7 @@ return packer.startup({
 
 
         -- Git
-        use { "sindrets/diffview.nvim" }         -- Diffview
         use { "ThePrimeagen/git-worktree.nvim" } -- Worktrees with vim
-        use { "TimUntersberger/neogit" }         -- Git integration
         use { "lewis6991/gitsigns.nvim" }        -- Git signs (gitgutter, Line blame etc.)
         use { "akinsho/git-conflict.nvim" }      -- Resolve Git merge conflicts in vim
         use { "rhysd/committia.vim" }            -- Better commit buffers
