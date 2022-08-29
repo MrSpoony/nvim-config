@@ -1,5 +1,5 @@
-local ls = require("luasnip")
-local utils = require("kl.snips")
+local ls = require "luasnip"
+local utils = require("snips")
 local s = utils.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node
@@ -18,11 +18,10 @@ local b = utils.b
 local rep = utils.rep
 
 
-ls.add_snippets("javascript", {
-    b("cl", {
-        "console.log(", c(1, {
-            { t"\"", i(1, "variable"), t":\", ", rep(1) },
-            { t"\"", i(1, "text"), t"\"" },
-        }), t");"
+ls.add_snippets("javascriptreact", {
+    b("edf", {
+        "export default function ", i(1, "f"), "(", i(2), t{") {", ""},
+        t{"    return (", "        "}, i(3), t{"", "    );", "}"}
+
     }),
-})
+}, { type = "autosnippets" })

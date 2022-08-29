@@ -1,5 +1,5 @@
 local ls = require("luasnip")
-local utils = require("kl.snips")
+local utils = require("snips")
 local s = utils.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node

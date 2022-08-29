@@ -20,6 +20,7 @@ utils.snippet = function(name, snippet, opts)
         return s(name, t(snippet), opts)
     end
     local realSnip = {}
+    if snippet == nil then return end
     for _, v in ipairs(snippet) do
         local currSnip = v
         if type(v) == type("stringtype") then

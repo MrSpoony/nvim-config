@@ -1,6 +1,8 @@
 local ls = require("luasnip")
 local types = require("luasnip.util.types")
 
+require("snips")
+
 ls.config.set_config {
     history = true,
     updateevents = "TextChanged,TextChangedI",
@@ -18,7 +20,7 @@ ls.config.set_config {
 require("luasnip.loaders.from_vscode").load({ paths = vim.fn.stdpath("data") .. "/site/pack/packer/start/friendly-snippets/"})
 
 
-for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/kl/snips/ft/*.lua", true)) do
+for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/snips/ft/*.lua", true)) do
     loadfile(ft_path)()
 end
 
