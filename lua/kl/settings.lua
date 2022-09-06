@@ -2,8 +2,6 @@ local o = vim.opt
 
 o.clipboard = { 'unnamed', 'unnamedplus' }
 
-o.spelllang = "en_US"
-o.spell = false
 o.encoding = 'utf-8'
 
 o.shiftwidth = 4
