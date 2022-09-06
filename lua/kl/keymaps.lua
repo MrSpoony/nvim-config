@@ -23,6 +23,9 @@ Nnoremap("n", "nzzzv")
 Nnoremap("N", "Nzzzv")
 Nnoremap("<C-d>", "<C-d>zz")
 Nnoremap("<C-u>", "<C-u>zz")
+Nnoremap("<C-o>", "<C-o>zz")
+Nnoremap("<C-i>", "<C-i>zz")
+Nnoremap("''", "''zz")
 
 Nnoremap("J", "mzJ`z")
 

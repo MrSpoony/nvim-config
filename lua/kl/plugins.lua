@@ -38,7 +38,6 @@ return packer.startup({
         use { "marko-cerovac/material.nvim" }                 -- Material
         use { "navarasu/onedark.nvim" }                       -- Onedark
         use { "sainnhe/gruvbox-material" }                    -- Gruvbox
-        use { "luisiacc/gruvbox-baby" }                       -- Gruvbox
         use { "shaunsingh/nord.nvim" }                        -- Nord
         use { "rafamadriz/neon" }                             -- Neon
         use { "projekt0n/github-nvim-theme" }                 -- Github
@@ -46,11 +45,10 @@ return packer.startup({
 
         use { "nvim-lualine/lualine.nvim" }                    -- Line at the bottom
         use { "SmiteshP/nvim-gps" }                            -- Location widget in lualine
-        use { "sunjon/Shade.nvim" }                            -- Shade inactive windows
         use { "mhinz/vim-startify" }                           -- Fancy startup screen
         use { "stevearc/dressing.nvim" }                       -- Better standard vim ui's
         use { "ray-x/guihua.lua", run = 'cd lua/fzy && make' } -- UI for lua plugins
-        use { "voldikss/vim-floaterm" }                         -- Floating terminal
+        use { "voldikss/vim-floaterm" }                        -- Floating terminal
         use { "kyazdani42/nvim-web-devicons" }                 -- Icons like the name implies
         use { "neovide/neovide" }                              -- Neovide support
         use { "kyazdani42/nvim-tree.lua" }                     -- File structure
@@ -80,7 +78,6 @@ return packer.startup({
         use { "windwp/nvim-autopairs" }                         -- Auto pairing brackets
         use { "tpope/vim-surround" }                            -- Surround your stuff easier with brackets or quotes
         use { "andweeb/presence.nvim" }                         -- Discord precense
-        use { "wakatime/vim-wakatime" }                         -- Time counting and stuff
         use { "dhruvasagar/vim-table-mode" }                    -- Awesome automatic tables
         use { "aserowy/tmux.nvim" }                             -- Tmux Integration
         use { "mizlan/iswap.nvim" }                             -- Swap function arguments etc.
@@ -99,7 +96,7 @@ return packer.startup({
         -- New "Verbs"
         use { "numToStr/Comment.nvim" }           -- Comments from treesitter `gc`
         use { "junegunn/vim-easy-align" }         -- Algin `ga`
-        use { "vim-scripts/regreplop.vim" }       -- Replace without goin into visual mode `gr`
+        use { "vim-scripts/regreplop.vim" }       -- Replace without going into visual mode `gr`
         use { "christoomey/vim-sort-motion" }     -- Sort with `gs`
 
 

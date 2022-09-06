@@ -17,4 +17,6 @@ gs.setup({
     },
     current_line_blame_formatter = ' ﳑ <author>, <author_time:%Y-%m-%d> - <summary>',
 })
+
 Nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>")
+Noremap("<leader>gt", "<cmd>FloatermNew lazygit<CR>")

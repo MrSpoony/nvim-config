@@ -1,4 +1,6 @@
-require('Comment').setup({
+local tc = require("todo-comments")
+local comment = require("Comment")
+comment.setup({
     toggler = {
         line = 'gcc',
         block = 'gbc',
@@ -18,3 +20,5 @@ require('Comment').setup({
         extended = false,
     },
 })
+
+tc.setup({})
