@@ -2,27 +2,10 @@ local lsp_installer = require('nvim-lsp-installer')
 local clangd_extensions = require('clangd_extensions')
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
--- local tabnine = require('cmp_tabnine')
 local lspconfigs = require("kl.lspconfigs");
 local trouble = require("trouble");
 local nullls = require("null-ls")
 local ls = require("luasnip")
-local s = ls.snippet
-local r = ls.restore_node
-local i = ls.insert_node
-local t = ls.text_node
-local c = ls.choice_node
-
--- tabnine:setup({
---     max_lines = 1000,
---     max_num_results = 10,
---     sort = true,
---     run_on_every_keystroke = true,
---     snippet_placeholder = '..';
---     ignored_file_types = {
---     },
---     show_prediction_strength = true,
--- })
 
 local options = lspconfigs.options
 local on_attach = lspconfigs.on_attach
@@ -43,6 +26,11 @@ clang_options.on_attach = function(client, bufnr)
                     for _, item in ipairs(items) do
                         if item.kind == vim.lsp.protocol.CompletionItemKind.Field and
                             item.textEdit.newText:match("^[%w_]+%(${%d+:[%w_]+}%)$") then
+                            local s = ls.snippet
+                            local r = ls.restore_node
+                            local i = ls.insert_node
+                            local t = ls.text_node
+                            local c = ls.choice_node
                             local snip_text = item.textEdit.newText
                             local name = snip_text:match("^[%w_]+")
                             local type = snip_text:match("%{%d+:([%w_]+)%}")
@@ -118,11 +106,12 @@ end
 cmp.setup({
     snippet = {
         expand = function(args)
-            if lspsnips[args.body] then
-                ls.snip_expand(lspsnips[args.body])
-            else
-                ls.lsp_expand(args.body)
-            end
+            P(lspsnips[args.body])
+            -- if lspsnips[args.body] then
+            --     ls.snip_expand(lspsnips[args.body])
+            -- else
+            --     ls.lsp_expand(args.body)
+            -- end
         end,
     },
     window = {
