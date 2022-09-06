@@ -46,11 +46,11 @@ return packer.startup({
 
         use { "nvim-lualine/lualine.nvim" }                    -- Line at the bottom
         use { "SmiteshP/nvim-gps" }                            -- Location widget in lualine
+        use { "sunjon/Shade.nvim" }                            -- Shade inactive windows
         use { "mhinz/vim-startify" }                           -- Fancy startup screen
         use { "stevearc/dressing.nvim" }                       -- Better standard vim ui's
         use { "ray-x/guihua.lua", run = 'cd lua/fzy && make' } -- UI for lua plugins
         use { "voldikss/vim-floaterm" }                         -- Floating terminal
-        use { "karb94/neoscroll.nvim" }                        -- Smooth scroll
         use { "kyazdani42/nvim-web-devicons" }                 -- Icons like the name implies
         use { "neovide/neovide" }                              -- Neovide support
         use { "kyazdani42/nvim-tree.lua" }                     -- File structure
@@ -58,6 +58,7 @@ return packer.startup({
 
         -- Treesitter
         use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" } -- TreeSitter for syntax highlighting and code `understanding`
+        use { "nvim-treesitter/nvim-treesitter-context" }            -- TreeSitter context for funcitons etc.
         use { "nvim-treesitter/playground" }                         -- TreeSitter playground :TSPlaygroundToggle
         use { "nvim-treesitter/nvim-treesitter-refactor" }           -- Refactoring tools
         use { "nvim-treesitter/nvim-treesitter-textobjects" }        -- Treesitter textobjects f (functions), etc
