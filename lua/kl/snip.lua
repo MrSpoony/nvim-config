@@ -39,8 +39,8 @@ vim.keymap.set({ "i", "s" }, "<c-t>", function()
     end
 end, { silent = true })
 
--- <c-o> is selecting within a list of options.
-vim.keymap.set({"i", "s", "n"}, "<c-o>", function()
+-- <c-s-e> is selecting within a list of options.
+vim.keymap.set({"i", "s", "n"}, "<c-s-e>", function()
     if ls.choice_active() then
         ls.change_choice(1)
     end
