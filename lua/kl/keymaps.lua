@@ -8,6 +8,10 @@ Vnoremap("k", "gk")
 Vnoremap("gj", "j")
 Vnoremap("gk", "k")
 
+
+Nnoremap("}", '<cmd>execute "keepjumps norm! " . v:count1 . "}"<CR>', { silent = true })
+Nnoremap("{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent = true })
+
 -- Nnoremap("<Up>", "<cmd>resize +2<cr>")
 -- Nnoremap("<Down>", "<cmd>resize -2<cr>")
 -- Nnoremap("<Left>", "<cmd>vertical resize +2<cr>")
@@ -31,6 +35,8 @@ Nnoremap("J", "mzJ`z")
 
 Nnoremap("<Esc>", "<cmd>noh<CR>")
 
+Inoremap(";w<CR>", "<cmd>w<CR>")
+
 Vnoremap("<leader><Up>",   "<cmd>'<,'>m '>+1<CR>gv=gv")
 Vnoremap("<leader><Down>", "<cmd>'<,'>m '<-2<CR>gv=gv")
 Nnoremap("<leader><Up>",   "<cmd>m .+1<CR>==")
@@ -46,7 +52,7 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     callback = function() Nnoremap("<leader>so", "<cmd>w<CR><cmd>so %<CR>") end
 })
 
-Nnoremap("<C-V>", "<cmd>vsplit<CR>")
+Nnoremap("<C-C>", "<cmd>vsplit<CR>")
 Nnoremap("<C-B>", "<cmd>split<CR>")
 
 Nnoremap("<leader>q", "<cmd>bdelete!<CR>")
