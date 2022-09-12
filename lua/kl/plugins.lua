@@ -8,7 +8,7 @@ local has = function(x)
   return vim.fn.has(x) == 1
 end
 
-local is_mac = has "macunix"
+local is_mac = has("macunix")
 
 local max_jobs = nil
 if is_mac then
@@ -38,10 +38,12 @@ return packer.startup({
         use { "marko-cerovac/material.nvim" }                 -- Material
         use { "navarasu/onedark.nvim" }                       -- Onedark
         use { "sainnhe/gruvbox-material" }                    -- Gruvbox
+        use { "ellisonleao/gruvbox.nvim" }                    -- another Gruvbox
         use { "shaunsingh/nord.nvim" }                        -- Nord
         use { "rafamadriz/neon" }                             -- Neon
         use { "projekt0n/github-nvim-theme" }                 -- Github
         use { "catppuccin/nvim", as = "catppuccin" }          -- Catppuccin
+        use { "EdenEast/nightfox.nvim" }                      -- Nightfox
 
         use { "nvim-lualine/lualine.nvim" }                    -- Line at the bottom
         use { "SmiteshP/nvim-gps" }                            -- Location widget in lualine
@@ -52,6 +54,7 @@ return packer.startup({
         use { "kyazdani42/nvim-web-devicons" }                 -- Icons like the name implies
         use { "neovide/neovide" }                              -- Neovide support
         use { "kyazdani42/nvim-tree.lua" }                     -- File structure
+        use { "xiyaowong/virtcolumn.nvim" }                    -- Virtcolumn as colorcolumn
 
 
         -- Treesitter
@@ -92,11 +95,10 @@ return packer.startup({
         use { "shift-d/scratch.nvim" }                          -- Scratch buffer
 
 
-
         -- New "Verbs"
         use { "numToStr/Comment.nvim" }           -- Comments from treesitter `gc`
         use { "junegunn/vim-easy-align" }         -- Algin `ga`
-        use { "vim-scripts/regreplop.vim" }       -- Replace without going into visual mode `gr`
+        use { "gbprod/substitute.nvim" }          -- Replace without going into visual mode
         use { "christoomey/vim-sort-motion" }     -- Sort with `gs`
 
 
@@ -141,6 +143,7 @@ return packer.startup({
         use { "rcarriga/nvim-dap-ui" }            -- UI for DAP
         use { "theHamsta/nvim-dap-virtual-text" } -- Virtual Text support for DAP
         use { "leoluz/nvim-dap-go" }              -- Go debugging
+        use { "andrewferrier/debugprint.nvim" }   -- Debug printing
 
 
         -- Git
