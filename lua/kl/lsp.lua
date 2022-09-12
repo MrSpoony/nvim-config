@@ -106,12 +106,11 @@ end
 cmp.setup({
     snippet = {
         expand = function(args)
-            P(lspsnips[args.body])
-            -- if lspsnips[args.body] then
-            --     ls.snip_expand(lspsnips[args.body])
-            -- else
-            --     ls.lsp_expand(args.body)
-            -- end
+            if lspsnips[args.body] then
+                ls.snip_expand(lspsnips[args.body])
+            else
+                ls.lsp_expand(args.body)
+            end
         end,
     },
     window = {
