@@ -2,6 +2,7 @@ local dap = require("dap")
 local dapgo = require('dap-go')
 local dui = require("dapui")
 local dapvtext = require("nvim-dap-virtual-text")
+local debugprint = require("debugprint")
 
 dapvtext.setup()
 dui.setup()
@@ -29,3 +30,7 @@ end)
 Nnoremap("<leader>dd", dap.toggle_breakpoint)
 Nnoremap("<leader>dt", function() vim.ui.input("Breakpoint condition: ", dap.toggle_breakpoint) end)
 Nnoremap("<leader>da", dap.clear_breakpoints)
+
+debugprint.setup({
+
+})
