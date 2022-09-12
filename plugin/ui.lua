@@ -21,6 +21,16 @@ vim.opt.guifont="JetBrainsMono_Nerd_Font_Mono:h12"
 -- vim.opt.guifont="Hack:h7"
 -- vim.opt.guifont="Hack_Nerd_Font_Mono:h7.5"
 
+vim.api.nvim_create_autocmd('TextYankPost', {
+    pattern = '*',
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = 'IncSearch',
+            timeout = 40,
+        })
+    end,
+})
+
 vim.notify = require("notify")
 
 dressing.setup({
