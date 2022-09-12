@@ -8,3 +8,6 @@ Nnoremap("<leader>i", Fn(ui.nav_file, 3));
 Nnoremap("<leader>o", Fn(ui.nav_file, 4));
 Nnoremap("<leader>k", Fn(ui.nav_file, 5));
 Nnoremap("<leader>m", Fn(ui.nav_file, 6));
+Nnoremap("<leader>,", Fn(ui.nav_file, 7));
+Nnoremap("<leader>.", Fn(ui.nav_file, 8));
+Nnoremap("<leader>/", Fn(ui.nav_file, 9));
