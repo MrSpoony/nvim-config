@@ -1,3 +1,5 @@
+local colorscheme = "catppuccin"
+
 local dressing = require("dressing")
 local od = require("onedark")
 local mat = require("material")
@@ -61,8 +63,6 @@ gh.setup({})
 -- Catppuccin
 vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 
-require("catppuccin").setup()
-
 -- Lualine
 gps.setup({
     separator = "  ",
@@ -79,4 +79,4 @@ ll.setup({
         },
     }
 })
-vim.cmd("colorscheme gruvbox-material")
+vim.cmd("colorscheme " .. colorscheme)
