@@ -1,7 +1,14 @@
 local gs = require('gitsigns');
 local gc = require('git-conflict');
 
-gc.setup({});
+gc.setup({
+    default_mappings = true,
+    disable_diagnostics = false,
+    highlights = {
+        incoming = 'DiffText',
+        current = 'DiffAdd',
+    }
+});
 
 gs.setup({
     watch_gitdir = {
@@ -20,3 +27,6 @@ gs.setup({
 
 Nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>")
 Noremap("<leader>gt", "<cmd>FloatermNew lazygit<CR>")
+
+Nnoremap("]g", gs.next_hunk)
+Nnoremap("[g", gs.prev_hunk)
