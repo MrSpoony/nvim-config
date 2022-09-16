@@ -3,6 +3,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function(details)
 		if vim.fn.filereadable(details.file) == 1 then return end
 		if details.file == "" then return end
+		if vim.fn.isdirectory(details.file) then return end
 		local possibles = {}
 		for _, v in ipairs(vim.split(vim.fn.glob(details.file .. "*"), "\n")) do
 			if v ~= "" then

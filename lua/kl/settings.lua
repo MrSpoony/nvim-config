@@ -55,6 +55,9 @@ o.modifiable = true
 o.background = "dark"
 o.termguicolors = true
 
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.api.nvim_create_user_command("WQ", "wq", {})
 vim.api.nvim_create_user_command("Wq", "wq", {})
 vim.api.nvim_create_user_command("W", "w", {})

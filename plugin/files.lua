@@ -20,7 +20,6 @@ nvim_tree.setup({
 			}
 		}
 	},
-	disable_netrw = true,
 	ignore_ft_on_setup = {
 		"startify",
 		"dashboard",
@@ -39,6 +38,7 @@ nvim_tree.setup({
 		ignore_list = {},
 	},
 	view = {
+        adaptive_size = true,
 		width = 40,
 		height = 30,
 		side = "left",
