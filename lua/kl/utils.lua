@@ -57,5 +57,7 @@ function M.set_contains(set, val)
     return false
 end
 
+M.is_mac = vim.fn.has("macunix")
+
 
 return M

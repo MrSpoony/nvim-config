@@ -27,3 +27,5 @@ Onoremap = utils.onoremap
 Lnoremap = utils.lnoremap
 Cnoremap = utils.cnoremap
 Noremap = utils.noremap
+
+IsMac = utils.is_mac

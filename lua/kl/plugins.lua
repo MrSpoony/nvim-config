@@ -1,16 +1,10 @@
-local has = function(x)
-  return vim.fn.has(x) == 1
-end
-
-local is_mac = has("macunix")
-
-if is_mac then
+if IsMac then
     vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
     vim.fn.setenv("OPENSSL_DIR", "/usr/local/opt/openssl")
 end
 
 local max_jobs = nil
-if is_mac then
+if IsMac then
   max_jobs = 32
 end
 
