@@ -41,7 +41,7 @@ o.backup = false
 o.history = 10000
 o.undofile = true
 
-o.scrolloff = 7
+o.scrolloff = 8
 o.cursorline = true
 o.mouse = "nvc"
 

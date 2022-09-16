@@ -7,14 +7,12 @@ ts.setup {
         layout_config = {
             prompt_position = "top",
         },
-        mappings = {
-        },
         history = {
             path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
             limit = 1000,
-        }
-    },
-    pickers = {
+        },
+        prompt_prefix = "  ",
+        file_ignore_patterns = { "node_modules" },
     },
     extensions = {
         fzf = {
@@ -22,13 +20,7 @@ ts.setup {
             override_generic_sorter = true,
             override_file_sorter = true,
         },
-        arecibo = {
-            ["selected_engine"]   = 'google',
-            ["url_open_command"]  = 'xdg-open',
-            ["show_http_headers"] = false,
-            ["show_domain_icons"] = false,
-        },
-    }
+    },
 }
 
 local le = ts.load_extension

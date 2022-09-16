@@ -1,21 +1,22 @@
-vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
-vim.fn.setenv("OPENSSL_DIR", "/usr/local/opt/openssl")
-vim.cmd([[packadd packer.nvim]])
-
-local packer = require("packer")
-
 local has = function(x)
   return vim.fn.has(x) == 1
 end
 
 local is_mac = has("macunix")
 
+if is_mac then
+    vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
+    vim.fn.setenv("OPENSSL_DIR", "/usr/local/opt/openssl")
+end
+
 local max_jobs = nil
 if is_mac then
   max_jobs = 32
 end
 
-return packer.startup({
+vim.cmd([[packadd packer.nvim]])
+local packer = require("packer")
+packer.startup({
     function(use)
         use { "wbthomason/packer.nvim" } -- Let packer manage itself
 
@@ -149,7 +150,10 @@ return packer.startup({
         -- Git
         use { "ThePrimeagen/git-worktree.nvim" } -- Worktrees with vim
         use { "lewis6991/gitsigns.nvim" }        -- Git signs (gitgutter, Line blame etc.)
-        use { "akinsho/git-conflict.nvim" }      -- Resolve Git merge conflicts in vim
+        use {
+            "akinsho/git-conflict.nvim",
+            tag = "*"
+        }                                        -- Resolve Git merge conflicts in vim
         use { "rhysd/committia.vim" }            -- Better commit buffers
 
 
