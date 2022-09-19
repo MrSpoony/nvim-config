@@ -19,6 +19,7 @@ local ts_utils = require "nvim-treesitter.ts_utils"
 local get_node_text = vim.treesitter.get_node_text
 
 local b = utils.b
+local w = utils.w
 local rep = utils.rep
 
 local transforms = {
@@ -35,16 +36,7 @@ local transforms = {
     end,
 
     error = function(_, info)
-        if info then
-            info.index = info.index + 1
-
-            return c(info.index, {
-                t(info.err_name),
-                t(string.format('errors.Wrap(%s, "%s")', info.err_name, info.func_name)),
-            })
-        else
-            return t "err"
-        end
+        return info.err_name
     end,
 
     -- Types with a "*" mean they are pointers, so return nil
@@ -149,9 +141,8 @@ end
 
 ls.add_snippets("go", {
     b("ife", {
-        i(1, "val"), ", ", i(2, "err"), " := ", i(3, "f"), "(", i(4), t { ")", "" },
         "if ", rep(2), t { " != nil {", "" },
-        "\treturn ", d(5, go_ret_vals, { 2, 3 }),
+        "\treturn ", d(5, go_ret_vals, { "err", "f" }),
         t { "", "}" },
         i(0)
     }),
@@ -164,28 +155,3 @@ ls.add_snippets("go", {
         t { "", "}" },
     }),
 })
-
--- ls.add_snippets("go", {
---     s(
---         "efi",
---         fmta(
---             [[
--- <val>, <err> := <f>(<args>)
--- if <err_same> != nil {
--- 	return <result>
--- }
--- <finish>
--- ]]           ,
---             {
---                 val = i(1),
---                 err = i(2, "err"),
---                 f = i(3),
---                 args = i(4),
---                 err_same = rep(2),
---                 result = d(5, go_ret_vals, { 2, 3 }),
---                 finish = i(0),
---             }
---         )
---     ),
--- })
---
