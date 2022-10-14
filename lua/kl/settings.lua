@@ -28,7 +28,6 @@ o.laststatus = 3
 
 o.cmdheight = 1
 o.incsearch = true
-o.hlsearch = true
 o.ignorecase = false
 o.path:append("**")
 
@@ -65,30 +64,10 @@ vim.api.nvim_create_user_command("Q", "q", {})
 
 vim.api.nvim_create_user_command("Pi", "PackerInstall", {})
 vim.api.nvim_create_user_command("Ps", "PackerSync", {})
-vim.api.nvim_create_user_command("G", function(data)
-    local args = data.args
-    if args ~= nil then
-        vim.cmd("!git " .. args)
-    end
-end, {
-    nargs = "*",
-})
 
 vim.cmd([[
 filetype plugin on
 syntax on
-]])
-
-vim.cmd([[
-function! TrimEndLines()
-    if &ft =~ 'go'
-        return
-    endif
-    let save_cursor = getpos(".")
-    %s/\s\+$//e
-    call setpos('.', save_cursor)
-endfunction
-autocmd BufWritePre * call TrimEndLines()
 ]])
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
@@ -100,3 +79,75 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
         o.colorcolumn = '80'
     end
 })
+
+local function toTabstop(str)
+    return string.gsub(str, "\t", string.rep(" ", o.tabstop._value))
+end
+
+local function isOneLineReturnStatement(lines)
+    if #lines ~= 3 then return false end
+    return string.find(lines[1], "%s*.*{$") ~= nil and
+            string.find(lines[2], "%s*return%s*.*$") and
+            string.find(lines[3], "%s*}$")
+end
+
+local function foldTextDefault(first, last, lines)
+        if string.find(first, "{%s*$") ~= nil and
+            string.find(last, "}%s*$") then
+            local linesText = "line"
+            if lines-2 ~= 1 then linesText = linesText .. "s" end
+            return first .. " " .. lines-2 .. " lines hidden }"
+        end
+        return first .. " " .. lines-1 .. " more lines"
+end
+
+function _G.foldText()
+    local v = vim.v
+    local lines = v.foldend - v.foldstart + 1
+    local first = toTabstop(vim.fn.getline(v.foldstart))
+    local last = toTabstop(vim.fn.getline(v.foldend))
+    if lines ~= 3 then
+        return foldTextDefault(first, last, lines)
+    end
+	local second = toTabstop(vim.fn.getline(v.foldstart+1))
+    if not isOneLineReturnStatement({first, second, last}) then
+        return foldTextDefault(first, last, lines)
+    end
+	local statement = string.match(first, "(%s*.*){$")
+	local value = string.match(second, "%s*return%s*(.*)%s*$")
+	return statement .. ": " .. value .. " ⤴"
+end
+
+
+local function findOneLineReturnOccurences()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
+    local occurences = {}
+    for k, v in ipairs(lines) do
+        if lines[k + 1] ~= nil and lines[k + 2] ~= nil and
+            string.find(v, "%s*.*{$") ~= nil and
+            string.find(lines[k + 1], "%s*return%s*.*$") and
+            string.find(lines[k + 2], "%s*}$") then
+
+            local occurence = string.match(lines[k + 1], "%s*return%s*(.*)$")
+            table.insert(occurences, { k, occurence })
+        end
+    end
+    return occurences
+end
+
+local function foldOneLineReturnOccurences()
+    local occurences = findOneLineReturnOccurences()
+    for _, v in ipairs(occurences) do
+        local line = v[1]
+        vim.cmd(line .. "," .. line + 2 .. "fold")
+    end
+end
+
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = {"*.go", "*.java", "*.rs", "*.cpp", "*.c"},
+    callback = foldOneLineReturnOccurences,
+})
+
+o.foldmethod = "manual"
+o.fillchars="fold: "
+o.foldtext="v:lua.foldText()"

@@ -18,7 +18,7 @@ go.setup({
     comment_placeholder = 'ﳑ', -- comment_placeholder your cool placeholder e.g. ﳑ       
     verbose = false, -- output loginf in messages
     lsp_cfg = opts,
-    lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
+    lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
     lsp_on_attach = lspconfigs.on_attach,
     lsp_keymaps = false,
     lsp_codelens = false, -- set to false to disable codelens, true by default, you can use a function
@@ -39,9 +39,9 @@ vim.api.nvim_create_autocmd({
     callback = function()
         local fmt = require("go.format")
         fmt.goimport()
+        -- vim.cmd[[GoFmt]]
     end
 })
-
 
 vim.api.nvim_create_autocmd({ "BufNewFile" }, {
     pattern = "*.go",

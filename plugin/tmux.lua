@@ -8,7 +8,7 @@ tmux.setup({
         sync_unnamed = true,
     },
     navigation = {
-        cycle_navigation = false,
+        cycle_navigation = true,
         enable_default_keybindings = true,
     },
     resize = {

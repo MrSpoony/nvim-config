@@ -88,27 +88,27 @@ require("nvim-treesitter.configs").setup {
             enable = true,
             set_jumps = true,
             goto_next_start = {
-                ["]m"] = "@function.outer",
+                ["]f"] = "@function.outer",
                 ["]]"] = "@class.outer",
             },
             goto_next_end = {
-                ["]M"] = "@function.outer",
+                ["]F"] = "@function.outer",
                 ["]["] = "@class.outer",
             },
             goto_previous_start = {
-                ["[m"] = "@function.outer",
+                ["[f"] = "@function.outer",
                 ["[["] = "@class.outer",
             },
             goto_previous_end = {
-                ["[M"] = "@function.outer",
+                ["[F"] = "@function.outer",
                 ["[]"] = "@class.outer",
             },
         },
         lsp_interop = {
             enable = true,
             peek_definition_code = {
-                ["<leader>Df"] = "@function.outer",
-                ["<leader>DF"] = "@class.outer",
+                ["<leader>df"] = "@function.outer",
+                ["<leader>dF"] = "@class.outer",
             },
         },
     },

@@ -89,4 +89,7 @@ ll.setup({
         },
     }
 })
+
 vim.cmd("colorscheme " .. colorscheme)
+
+vim.cmd("highlight Folded guibg=#212231")

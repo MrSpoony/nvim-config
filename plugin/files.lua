@@ -40,7 +40,6 @@ nvim_tree.setup({
 	view = {
         adaptive_size = true,
 		width = 40,
-		height = 30,
 		side = "left",
 	},
 	trash = {
