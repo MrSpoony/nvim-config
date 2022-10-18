@@ -1,3 +1,4 @@
+vim.cmd[[
 " C#
 autocmd FileType cs  map <F2>      w<CR><cmd>!csc %<CR><cmd>term mono %:r.exe<CR>
 autocmd FileType cs imap <F2> <Esc><cmd>w<CR><cmd>!csc %<CR><cmd>term mono %:r.exe<CR>
@@ -16,3 +17,4 @@ autocmd FileType tex imap <F2> <Esc><cmd>w<CR><cmd>!pdflatex %<CR>
 " Assembly
 autocmd FileType nasm  map <F2>      <cmd>w<CR><cmd>!nasm -felf64 -o %:r.o %<CR><cmd>!ld %:r.o -o %:r<CR><cmd>term ./%:r<CR>
 autocmd FileType nasm  map <F2> <Esc><cmd>w<CR><cmd>!nasm -felf64 -o %:r.o %<CR><cmd>!ld %:r.o -o %:r<CR><cmd>term ./%:r<CR>
+]]
