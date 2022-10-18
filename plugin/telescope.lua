@@ -30,7 +30,6 @@ local le = ts.load_extension
 le('fzf')
 le('zoxide')
 le('smart_history')
-le('git_worktree')
 le('harpoon')
 le('file_browser')
 
@@ -38,8 +37,6 @@ local ex = ts.extensions
 Nnoremap("<leader>cd", ex.zoxide.list)
 Nnoremap("<leader>tt", builtin.find_files)
 Nnoremap("<leader>tb", ex.file_browser.file_browser)
-Nnoremap("<leader>td", ex.git_worktree.git_worktrees)
-Nnoremap("<leader>tw", ex.git_worktree.create_git_worktree)
 Nnoremap("<C-p>", builtin.git_files)
 Nnoremap("<leader>ts", "<cmd>Telescope symbols<CR>")
 Nnoremap("<leader>tc", builtin.colorscheme)

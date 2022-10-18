@@ -4,21 +4,7 @@ nvim_tree.setup({
 	renderer = {
 		group_empty = true,
 		highlight_opened_files = "icon",
-		icons = {
-			glyphs = {
-				default = "",
-				symlink = "",
-				git = {
-					unstaged = "",
-					staged = "✓",
-					unmerged = "",
-					renamed = "➜",
-					deleted = "",
-					untracked = "★",
-					ignored = "◌",
-				},
-			}
-		}
+		icons = {},
 	},
 	ignore_ft_on_setup = {
 		"startify",
