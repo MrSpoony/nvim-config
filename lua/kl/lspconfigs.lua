@@ -25,14 +25,16 @@ local function set_default_formatter_for_filetypes(language_server_name, filetyp
     end)
 end
 
-M.on_attach = function(client, bufnr)
+M.on_attach = function(_--[[client]], bufnr)
     lspsignature.on_attach({
         bind = true,
         handler_opts = {
             border = "rounded"
         }
     }, bufnr);
+
     set_default_formatter_for_filetypes("gopls", { "go" })
+
     -- set_default_formatter_for_filetypes("eslint", { "javascript", "javascriptreact" })
 
     -- Enable completion triggered by <c-x><c-o>
@@ -60,7 +62,7 @@ M.on_attach = function(client, bufnr)
     Nnoremap('<leader>fo', function() vim.lsp.buf.format({}) end, opts)
 end
 
-local capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 M.options = {
     on_attach = M.on_attach,

@@ -46,7 +46,8 @@ packer.startup({
         use { "stevearc/dressing.nvim" }                       -- Better standard vim ui's
         use { "ray-x/guihua.lua", run = 'cd lua/fzy && make' } -- UI for lua plugins
         use { "voldikss/vim-floaterm" }                        -- Floating terminal
-        use { "kyazdani42/nvim-web-devicons" }                 -- Icons like the name implies
+        use { "kyazdani42/nvim-web-devicons" }                 -- Icons
+        use { "yamatsum/nvim-web-nonicons" }                   -- Nonicons
         use { "neovide/neovide" }                              -- Neovide support
         use { "kyazdani42/nvim-tree.lua" }                     -- File structure
         use { "xiyaowong/virtcolumn.nvim" }                    -- Virtcolumn as colorcolumn
@@ -66,6 +67,7 @@ packer.startup({
         use { "nvim-telescope/telescope.nvim" }                      -- Telescope search etc.
         use { "jvgrootveld/telescope-zoxide" }                       -- Like z command
         use { "nvim-telescope/telescope-symbols.nvim" }              -- Symbols
+        use { "nvim-telescope/telescope-file-browser.nvim" }         -- File Browser
         use {
             "nvim-telescope/telescope-fzf-native.nvim", run = "make"
         }                                                            -- FZF Performance and syntax
@@ -75,19 +77,15 @@ packer.startup({
         use { "tpope/vim-repeat" }                              -- Repeat commands
         use { "windwp/nvim-autopairs" }                         -- Auto pairing brackets
         use { "tpope/vim-surround" }                            -- Surround your stuff easier with brackets or quotes
-        use { "andweeb/presence.nvim" }                         -- Discord precense
         use { "dhruvasagar/vim-table-mode" }                    -- Awesome automatic tables
         use { "aserowy/tmux.nvim" }                             -- Tmux Integration
         use { "mizlan/iswap.nvim" }                             -- Swap function arguments etc.
         use { "ckarnell/Antonys-macro-repeater" }               -- Repeat macros with `.`
         use { "AndrewRadev/splitjoin.vim" }                     -- Split up oneliners `gS` or oneline multiliners `gJ`
         use { "folke/todo-comments.nvim" }                      -- Highlight comments
-        use { "tpope/vim-dadbod" }                              -- Database integration
-        use { "kristijanhusak/vim-dadbod-ui" }                  -- Pretty database integration
         use { "ThePrimeagen/harpoon" }                          -- Move around
         use { "sheerun/vim-polyglot" }                          -- Collection of language packs
         use { "norcalli/nvim-colorizer.lua" }                   -- Color highlighting
-        use { "shift-d/scratch.nvim" }                          -- Scratch buffer
 
 
         -- New "Verbs"
@@ -115,7 +113,6 @@ packer.startup({
         use { "hrsh7th/cmp-path" }                     -- Nvim-cmp source for filesystem paths
         use { "hrsh7th/cmp-cmdline" }                  -- Nvim-cmp source for vim`s commandline
         use { "hrsh7th/cmp-nvim-lua" }                 -- Nvim lua completion
-        use { "kristijanhusak/vim-dadbod-completion" } -- Nvim-cmp soursce for database query language
         use { "saadparwaiz1/cmp_luasnip" }             -- luasnip support
         use { "rafamadriz/friendly-snippets" }         -- Helpful snippets for popular languages
         use { "folke/trouble.nvim" }                   -- Pretty diagnostics etc.
@@ -125,7 +122,6 @@ packer.startup({
         use { "ray-x/go.nvim" }                          -- Go
         use { "hdiniz/vim-gradle" }                      -- Java Gradle
         use { "neoclide/vim-jsx-improve" }               -- JSX
-        use { "bdauria/angular-cli.vim" }                -- Angular
         use { "lervag/vimtex" }                          -- LaTeX
         use {
             "iamcco/markdown-preview.nvim",
@@ -142,12 +138,7 @@ packer.startup({
 
 
         -- Git
-        use { "ThePrimeagen/git-worktree.nvim" } -- Worktrees with vim
         use { "lewis6991/gitsigns.nvim" }        -- Git signs (gitgutter, Line blame etc.)
-        use {
-            "akinsho/git-conflict.nvim",
-            tag = "*"
-        }                                        -- Resolve Git merge conflicts in vim
         use { "rhysd/committia.vim" }            -- Better commit buffers
 
 
@@ -156,7 +147,7 @@ packer.startup({
 
 
         -- Own plugin
-        -- use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
+        use { "MrSpoony/soicode.vim" } -- For soi stuff with the .stoml support
 
     end,
     config = {

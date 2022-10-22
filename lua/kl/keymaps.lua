@@ -35,7 +35,7 @@ Nnoremap("J", "mzJ`z")
 
 Nnoremap("<Esc>", "<cmd>noh<CR>")
 
-Inoremap(";w<CR>", "<cmd>w<CR>")
+Inoremap(";w<CR>", "<cmd>w<CR><Esc>")
 
 Vnoremap("<leader><Up>",   "<cmd>'<,'>m '>+1<CR>gv=gv")
 Vnoremap("<leader><Down>", "<cmd>'<,'>m '<-2<CR>gv=gv")

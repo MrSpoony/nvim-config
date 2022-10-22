@@ -55,6 +55,7 @@ end
 clang_options.cmd = {
     "clangd",
     "-j=4",
+    "--std=c++11",
     "--query-driver=/usr/bin/g*",
     "--background-index",
     "--clang-tidy",
@@ -66,9 +67,9 @@ clang_options.cmd = {
     "--pch-storage=memory",
 }
 
-clangd_extensions.setup({
-    server = clang_options
-})
+-- clangd_extensions.setup({
+--     server = clang_options
+-- })
 
 lsp_installer.on_server_ready(function(server)
     local opts = options
@@ -88,16 +89,6 @@ lsp_installer.on_server_ready(function(server)
 end)
 
 local compare = cmp.config.compare
-
-local source_mapping = {
-    buffer = "[Buffer]",
-    luasnip = "[snip]",
-    ultisnips = "[snip]",
-    nvim_lsp = "[LSP]",
-    nvim_lua = "[Lua]",
-    cmp_tabnine = "[TN]",
-    path = "[Path]",
-}
 
 local tcode = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -211,9 +202,7 @@ cmp.setup({
     sources = {
         { name = "luasnip" },
         { name = "nvim_lsp" },
-        { name = "vim-dadbod-completion" },
         { name = "nvim_lua" },
-        { name = "cmp_tabnine" },
         { name = "buffer" },
     },
     sorting = {
@@ -222,7 +211,6 @@ cmp.setup({
             compare.exact,
             compare.recently_used,
             clangd_extensions.cmp_scores,
-            -- tabnine.compare,
             compare.kind,
             compare.sort_text,
             compare.length,
@@ -235,11 +223,6 @@ cmp.setup({
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({
     map_char = { tex = '' }
 }))
-
-
--- add a lisp filetype (wrap my-function), FYI: Hardcoded = { "clojure", "clojurescript", "fennel", "janet" }
--- cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
-
 
 
 cmp.setup.filetype("gitcommit", {

@@ -46,4 +46,4 @@ vim.keymap.set({"i", "s", "n"}, "<c-s-e>", function()
     end
 end)
 
-vim.keymap.set("i", "<c-m>", require "luasnip.extras.select_choice")
+-- vim.keymap.set("i", "<c-m>", require "luasnip.extras.select_choice")

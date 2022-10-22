@@ -1,14 +1,4 @@
 local gs = require('gitsigns');
-local gc = require('git-conflict');
-
-gc.setup({
-    default_mappings = true,
-    disable_diagnostics = false,
-    highlights = {
-        incoming = 'DiffText',
-        current = 'DiffAdd',
-    }
-});
 
 gs.setup({
     watch_gitdir = {
