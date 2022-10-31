@@ -1,4 +1,4 @@
 # Packer
-nvim/.config/nvim/plugin/packer_compiled.lua
+plugin/packer_compiled.lua
 
 .luarc.json
