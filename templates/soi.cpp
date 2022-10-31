@@ -18,15 +18,15 @@ using namespace std;
 #define MOD 1000000007
 #define dl "\n"
 
-typedef long long int lint;
-typedef pair<lint, lint> PII;
-typedef priority_queue<lint> PQI;
-typedef priority_queue<lint, vector<lint>, greater<lint>> RPQI;
+typedef long long int ll;
+typedef pair<ll, ll> PII;
+typedef priority_queue<ll> PQI;
+typedef priority_queue<ll, vector<ll>, greater<ll>> RPQI;
 typedef priority_queue<PII> PQII;
-typedef queue<lint> QI;
+typedef queue<ll> QI;
 typedef vector<bool> VB;
 typedef vector<string> VS;
-typedef vector<lint> VI;
+typedef vector<ll> VI;
 typedef vector<PII> VII;
 typedef vector<VI> VVI;
 typedef vector<VII> VVII;
@@ -52,8 +52,8 @@ ostream& operator<<(ostream &ostream, vector<T> &v) {
 
 
 int main() {
-    ios_base::sync_with_stdio(false); // Desync c++ and c input/output
-    cin.tie(0); // Disable automatic input flush respectively making output then when it's couted
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
 
     
 

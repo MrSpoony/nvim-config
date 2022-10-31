@@ -93,10 +93,10 @@ local getVectorLongLongTypeDef = function()
 end
 
 ls.add_snippets("cpp", {
-    b("icin", {
+    b("lcin", {
         f(getLongLongTypeDef), " ", i(1, "name"), " = 0; cin >> ", rep(1), t { ";", "" },
     }),
-    b("vicin", {
+    b("vlcin", {
         f(getVectorLongLongTypeDef), " ", i(1, "name"), "(", i(2, "n"),
         "); cin >> ", rep(1), t { ";", "" }
     }),
