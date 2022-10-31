@@ -105,7 +105,6 @@ packer.startup({
         use { "neovim/nvim-lspconfig" }                -- Nvim lsp support
         use { "williamboman/nvim-lsp-installer" }      -- Easy installation for lsp`s
         use { "ray-x/lsp_signature.nvim" }             -- LSP signatures as overlay
-        use { "p00f/clangd_extensions.nvim" }          -- Clang extension for nvim-lsp
         use { "hrsh7th/nvim-cmp" }                     -- Autocompletion engine
         use { "hrsh7th/cmp-nvim-lsp" }                 -- Nvim-cmp source for neovim"s built-in ls client
         use { "hrsh7th/cmp-buffer" }                   -- Nvim-cmp source for buffer words

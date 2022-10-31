@@ -1,5 +1,4 @@
 local lsp_installer = require("nvim-lsp-installer")
-local clangd_extensions = require("clangd_extensions")
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local copilot_cmp = require("copilot_cmp")
@@ -11,68 +10,6 @@ local ls = require("luasnip")
 
 local options = lspconfigs.options
 local on_attach = lspconfigs.on_attach
-
-local lspsnips = {}
-
-local clang_options = vim.deepcopy(options)
-clang_options.on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
-    local orig_rpc_request = client.rpc.request
-    function client.rpc.request(method, params, handler, ...)
-        local orig_handler = handler
-        if method == "textDocument/completion" then
-            handler = function(...)
-                local err, result = ...
-                if not err and result then
-                    local items = result.items or result
-                    for _, item in ipairs(items) do
-                        if item.kind == vim.lsp.protocol.CompletionItemKind.Field
-                            and item.textEdit.newText:match("^[%w_]+%(${%d+:[%w_]+}%)$")
-                        then
-                            local s = ls.snippet
-                            local r = ls.restore_node
-                            local i = ls.insert_node
-                            local t = ls.text_node
-                            local c = ls.choice_node
-                            local snip_text = item.textEdit.newText
-                            local name = snip_text:match("^[%w_]+")
-                            local type = snip_text:match("%{%d+:([%w_]+)%}")
-                            lspsnips[snip_text] = s("", {
-                                t(name),
-                                c(1, {
-                                    -- use a restoreNode to remember the text typed here.
-                                    { t("("), r(1, "type", i(1, type)), t(")") },
-                                    { t("{"), r(1, "type"), t("}") },
-                                }, { restore_cursor = true }),
-                            })
-                        end
-                    end
-                end
-                return orig_handler(...)
-            end
-        end
-        return orig_rpc_request(method, params, handler, ...)
-    end
-end
-
-clang_options.cmd = {
-    "clangd",
-    "-j=4",
-    "--std=c++11",
-    "--query-driver=/usr/bin/g*",
-    "--background-index",
-    "--clang-tidy",
-    "--fallback-style=llvm",
-    "--all-scopes-completion",
-    "--completion-style=detailed",
-    "--header-insertion=iwyu",
-    "--header-insertion-decorators",
-    "--pch-storage=memory",
-}
-
--- clangd_extensions.setup({
---     server = clang_options
--- })
 
 lsp_installer.on_server_ready(function(server)
     local opts = options
@@ -88,14 +25,12 @@ lsp_installer.on_server_ready(function(server)
             format = { enable = true },
         }
     end
+    if server.name == "clangd" then
+        opts.capabilities.offsetEncoding = { "utf-16" }
+    end
     server:setup(opts)
 end)
 
--- local compare = cmp.config.compare
-
--- local tcode = function(str)
---     return vim.api.nvim_replace_termcodes(str, true, true, true)
--- end
 
 local has_words_before = function()
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -108,14 +43,11 @@ end
 
 copilot_cmp.setup()
 
+local compare = cmp.config.compare
 cmp.setup({
     snippet = {
         expand = function(args)
-            if lspsnips[args.body] then
-                ls.snip_expand(lspsnips[args.body])
-            else
-                ls.lsp_expand(args.body)
-            end
+            ls.lsp_expand(args.body)
         end,
     },
     window = {
@@ -132,10 +64,8 @@ cmp.setup({
     mapping = {
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<C-q>"] = cmp.mapping.close(),
-        ["<C-i>"] = cmp.mapping(function()
-            ls.expand_or_jump()
-        end),
+        ["<C-q>"] = cmp.mapping.close();
+        ["<C-i>"] = cmp.mapping(ls.expand_or_jump),
         ["<c-y>"] = cmp.mapping(
             cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Insert,
@@ -216,20 +146,15 @@ cmp.setup({
     sorting = {
         priority_weight = 2,
         comparators = {
-            require("copilot_cmp.comparators").prioritize,
-            require("copilot_cmp.comparators").score,
-
-            -- Below is the default comparitor list and order for nvim-cmp
-            cmp.config.compare.offset,
-            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-            cmp.config.compare.exact,
-            cmp.config.compare.score,
-            cmp.config.compare.recently_used,
-            cmp.config.compare.locality,
-            cmp.config.compare.kind,
-            cmp.config.compare.sort_text,
-            cmp.config.compare.length,
-            cmp.config.compare.order,
+            compare.offset,
+            compare.exact,
+            compare.score,
+            compare.recently_used,
+            compare.locality,
+            compare.kind,
+            compare.sort_text,
+            compare.length,
+            compare.order,
         },
     },
 })
