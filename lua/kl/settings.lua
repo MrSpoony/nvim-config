@@ -1,6 +1,6 @@
 local o = vim.opt
 
-o.clipboard = { 'unnamed', 'unnamedplus' }
+o.clipboard = {} -- { 'unnamed', 'unnamedplus' }
 
 o.encoding = 'utf-8'
 
@@ -96,7 +96,7 @@ local function foldTextDefault(first, last, lines)
             string.find(last, "}%s*$") then
             local linesText = "line"
             if lines-2 ~= 1 then linesText = linesText .. "s" end
-            return first .. " " .. lines-2 .. " lines hidden }"
+            return first .. " " .. lines-2 .. " " .. linesText .." hidden }"
         end
         return first .. " " .. lines-1 .. " more lines"
 end
@@ -143,7 +143,7 @@ local function foldOneLineReturnOccurences()
     end
 end
 
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+vim.api.nvim_create_autocmd({"BufWinEnter"}, {
     pattern = {"*.go", "*.java", "*.rs", "*.cpp", "*.c"},
     callback = foldOneLineReturnOccurences,
 })
