@@ -43,9 +43,6 @@ M.map = createMap("")
 
 function M.fn(callback, ...)
     local args = {...}
-    if (table.unpack ~= nil) then
-        return function() callback(table.unpack(args)) end
-    end
 ---@diagnostic disable-next-line: deprecated
     return function() callback(unpack(args)) end
 end

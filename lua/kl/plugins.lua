@@ -50,7 +50,6 @@ packer.startup({
         use { "yamatsum/nvim-web-nonicons" }                   -- Nonicons
         use { "neovide/neovide" }                              -- Neovide support
         use { "kyazdani42/nvim-tree.lua" }                     -- File structure
-        use { "xiyaowong/virtcolumn.nvim" }                    -- Virtcolumn as colorcolumn
 
 
         -- Treesitter
@@ -114,6 +113,8 @@ packer.startup({
         use { "hrsh7th/cmp-cmdline" }                  -- Nvim-cmp source for vim`s commandline
         use { "hrsh7th/cmp-nvim-lua" }                 -- Nvim lua completion
         use { "saadparwaiz1/cmp_luasnip" }             -- luasnip support
+        use { "zbirenbaum/copilot.lua" }               -- gitub copilot
+        use { "zbirenbaum/copilot-cmp" }               -- github copilot completion
         use { "rafamadriz/friendly-snippets" }         -- Helpful snippets for popular languages
         use { "folke/trouble.nvim" }                   -- Pretty diagnostics etc.
         use { "jose-elias-alvarez/null-ls.nvim" }      -- Easier access to nvim lsp api for other plugins

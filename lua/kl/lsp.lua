@@ -1,9 +1,11 @@
-local lsp_installer = require('nvim-lsp-installer')
-local clangd_extensions = require('clangd_extensions')
+local lsp_installer = require("nvim-lsp-installer")
+local clangd_extensions = require("clangd_extensions")
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local lspconfigs = require("kl.lspconfigs");
-local trouble = require("trouble");
+local copilot_cmp = require("copilot_cmp")
+local copilot_suggestion = require("copilot.suggestion")
+local lspconfigs = require("kl.lspconfigs")
+local trouble = require("trouble")
 local nullls = require("null-ls")
 local ls = require("luasnip")
 
@@ -18,14 +20,15 @@ clang_options.on_attach = function(client, bufnr)
     local orig_rpc_request = client.rpc.request
     function client.rpc.request(method, params, handler, ...)
         local orig_handler = handler
-        if method == 'textDocument/completion' then
+        if method == "textDocument/completion" then
             handler = function(...)
                 local err, result = ...
                 if not err and result then
                     local items = result.items or result
                     for _, item in ipairs(items) do
-                        if item.kind == vim.lsp.protocol.CompletionItemKind.Field and
-                            item.textEdit.newText:match("^[%w_]+%(${%d+:[%w_]+}%)$") then
+                        if item.kind == vim.lsp.protocol.CompletionItemKind.Field
+                            and item.textEdit.newText:match("^[%w_]+%(${%d+:[%w_]+}%)$")
+                        then
                             local s = ls.snippet
                             local r = ls.restore_node
                             local i = ls.insert_node
@@ -38,9 +41,9 @@ clang_options.on_attach = function(client, bufnr)
                                 t(name),
                                 c(1, {
                                     -- use a restoreNode to remember the text typed here.
-                                    { t "(", r(1, "type", i(1, type)), t ")" },
-                                    { t "{", r(1, "type"), t "}" },
-                                }, { restore_cursor = true })
+                                    { t("("), r(1, "type", i(1, type)), t(")") },
+                                    { t("{"), r(1, "type"), t("}") },
+                                }, { restore_cursor = true }),
                             })
                         end
                     end
@@ -88,11 +91,22 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
-local compare = cmp.config.compare
+-- local compare = cmp.config.compare
 
-local tcode = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+-- local tcode = function(str)
+--     return vim.api.nvim_replace_termcodes(str, true, true, true)
+-- end
+
+local has_words_before = function()
+    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+        return false
+    end
+---@diagnostic disable-next-line: deprecated
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 end
+
+copilot_cmp.setup()
 
 cmp.setup({
     snippet = {
@@ -111,145 +125,145 @@ cmp.setup({
     completion = {
         get_trigger_characters = function(trigger_characters)
             return vim.tbl_filter(function(char)
-                return char ~= ' '
+                return char ~= " "
             end, trigger_characters)
-        end
+        end,
     },
     mapping = {
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<C-q>"] = cmp.mapping.close();
-        ["<C-i>"] = cmp.mapping(
-            function()
-                ls.expand_or_jump()
-            end
-        ),
+        ["<C-q>"] = cmp.mapping.close(),
+        ["<C-i>"] = cmp.mapping(function()
+            ls.expand_or_jump()
+        end),
         ["<c-y>"] = cmp.mapping(
-            cmp.mapping.confirm {
+            cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Insert,
                 select = true,
-            }, { "i", "c" }
+            }),
+            { "i", "c" }
         ),
-        ["<c-f>"] = cmp.mapping.confirm {
+        ["<c-f>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
-        },
-        ['<CR>'] = cmp.mapping({
+        }),
+        ["<CR>"] = cmp.mapping({
             i = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Replace, select = true
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = false,
             }),
             c = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Replace, select = false
-            })
+                behavior = cmp.ConfirmBehavior.Replace,
+                select = false,
+            }),
         }),
-        ["<c-space>"] = cmp.mapping {
+        ["<c-space>"] = cmp.mapping({
             i = cmp.mapping.complete(),
-            c = function(
-            )
+            c = function()
                 if cmp.visible() then
-                    if not cmp.confirm { select = true } then
+                    if not cmp.confirm({ select = true }) then
                         return
                     end
                 else
                     cmp.complete()
                 end
             end,
-        },
+        }),
         -- Yes no tab completion here...
-        ["<Tab>"] = cmp.config.disable,
-        ["<S-Tab>"] = cmp.config.disable,
-        ['<C-n>'] = cmp.mapping({
-            c = function()
-                if cmp.visible() then
-                    cmp.select_next_item({
-                        behavior = cmp.SelectBehavior.Select
-                    })
-                else
-                    vim.api.nvim_feedkeys(tcode('<Down>'), 'n', true)
-                end
-            end,
-            i = function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item({
-                        behavior = cmp.SelectBehavior.Select
-                    })
-                else
-                    fallback()
-                end
+        -- ["<Tab>"] = cmp.mapping(function(fallback)
+            -- fallback()
+            -- if cmp.visible() and has_words_before() then
+            --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            -- else
+            --     fallback()
+            -- end
+        -- end),
+        -- ["<S-Tab>"] = vim.schedule_wrap(function(fallback)
+            -- fallback()
+            -- if cmp.visible() and has_words_before() then
+            --     cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+            -- else
+            --     fallback()
+            -- end
+        -- end),
+        ["<C-n>"] = vim.schedule_wrap(function(fallback)
+            if cmp.visible() and has_words_before() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            elseif copilot_suggestion.is_visible() then
+                copilot_suggestion.next()
+            else
+                fallback()
             end
-        }),
-        ['<C-p>'] = cmp.mapping({
-            c = function()
-                if cmp.visible() then
-                    cmp.select_prev_item({
-                        behavior = cmp.SelectBehavior.Select
-                    })
-                else
-                    vim.api.nvim_feedkeys(tcode('<Up>'), 'n', true)
-                end
-            end,
-            i = function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item({
-                        behavior = cmp.SelectBehavior.Select
-                    })
-                else
-                    fallback()
-                end
+        end),
+        ["<C-p>"] = vim.schedule_wrap(function(fallback)
+            if cmp.visible() and has_words_before() then
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+            elseif copilot_suggestion.is_visible() then
+                copilot_suggestion.prev()
+            else
+                fallback()
             end
-        }),
+        end),
     },
     sources = {
         { name = "luasnip" },
+        { name = "copilot" },
         { name = "nvim_lsp" },
+        { name = "path" },
         { name = "nvim_lua" },
         { name = "buffer" },
     },
     sorting = {
+        priority_weight = 2,
         comparators = {
-            compare.offset,
-            compare.exact,
-            compare.recently_used,
-            clangd_extensions.cmp_scores,
-            compare.kind,
-            compare.sort_text,
-            compare.length,
-            compare.order,
+            require("copilot_cmp.comparators").prioritize,
+            require("copilot_cmp.comparators").score,
+
+            -- Below is the default comparitor list and order for nvim-cmp
+            cmp.config.compare.offset,
+            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
         },
-    }
+    },
 })
 
-
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({
-    map_char = { tex = '' }
-}))
-
+cmp.event:on(
+    "confirm_done",
+    cmp_autopairs.on_confirm_done({
+        map_char = { tex = "" },
+    })
+)
 
 cmp.setup.filetype("gitcommit", {
     source = cmp.config.sources({
         { name = "cmp_git" },
     }, {
         { name = "buffer" },
-    }
-    )
+    }),
 })
-
 
 cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = "buffer" }
-    }
+        { name = "buffer" },
+    },
 })
 
 -- Use cmdline & path source for ":" (if you enabled `native_menu`, this won"t work anymore).
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = "path" }
+        { name = "path" },
     }, {
-        { name = "cmdline", keyword_pattern = [=[[^[:blank:]\!]*]=], keyword_length = 3 }
-    })
+        { name = "cmdline", keyword_pattern = [=[[^[:blank:]\!]*]=], keyword_length = 3 },
+    }),
 })
 
 trouble.setup({
@@ -279,7 +293,7 @@ trouble.setup({
         open_folds = { "zR", "zr" }, -- open all folds
         toggle_fold = { "zA", "za" }, -- toggle fold of current file
         previous = "k", -- preview item
-        next = "j" -- next item
+        next = "j", -- next item
     },
     indent_lines = true, -- add an indent guide below the fold icons
     auto_open = false, -- automatically open the list when you have diagnostics
@@ -293,17 +307,17 @@ trouble.setup({
         warning = "",
         hint = "",
         information = "",
-        other = "﫠"
+        other = "﫠",
     },
-    use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+    use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 })
+
 Nnoremap("<leader>xx", "<cmd>Trouble<cr>")
 Nnoremap("<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>")
 Nnoremap("<leader>xd", "<cmd>Trouble document_diagnostics<cr>")
 Nnoremap("<leader>xl", "<cmd>Trouble loclist<cr>")
 Nnoremap("<leader>xq", "<cmd>Trouble quickfix<cr>")
 Nnoremap("gR", "<cmd>Trouble lsp_references<cr>")
-
 
 nullls.setup({
     sources = {
@@ -312,5 +326,5 @@ nullls.setup({
         nullls.builtins.diagnostics.eslint,
         nullls.builtins.completion.spell,
         nullls.builtins.code_actions.gitsigns,
-    }
+    },
 })

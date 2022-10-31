@@ -17,10 +17,10 @@ Nnoremap("{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent =
 -- Nnoremap("<Left>", "<cmd>vertical resize +2<cr>")
 -- Nnoremap("<Right>", "<cmd>vertical resize -2<cr>")
 
-Vnoremap("<Up>", "<Nop>")
-Vnoremap("<Down>", "<Nop>")
-Vnoremap("<Right>", "<Nop>")
-Vnoremap("<Left>", "<Nop>")
+-- Vnoremap("<Up>", "<Nop>")
+-- Vnoremap("<Down>", "<Nop>")
+-- Vnoremap("<Right>", "<Nop>")
+-- Vnoremap("<Left>", "<Nop>")
 
 -- Center cursor on search or scroll
 Nnoremap("n", "nzzzv")
@@ -42,7 +42,10 @@ Vnoremap("<leader><Down>", "<cmd>'<,'>m '<-2<CR>gv=gv")
 Nnoremap("<leader><Up>",   "<cmd>m .+1<CR>==")
 Nnoremap("<leader><Down>", "<cmd>m .-2<CR>==")
 
-Nnoremap("<leader>sp", function() vim.wo.spell = not vim.wo.spell end)
+Nnoremap("<leader>p", "\"+p")
+Nnoremap("<leader>P", "\"+P")
+Nnoremap("<leader>y", "\"+y")
+Nnoremap("<leader>Y", "\"+y$")
 
 Nnoremap("<leader>+", "<cmd>vertical resize +5<CR>")
 Nnoremap("<leader>-", "<cmd>vertical resize -5<CR>")
@@ -65,7 +68,7 @@ Nnoremap(";", ":")
 Vnoremap(":", ";")
 Vnoremap(";", ":")
 
--- For mac
+-- For mac remap F25-36 to F1-12
 for i = 25,36 do
     vim.cmd("nmap " .. "<F" .. i .. "> <F" .. (i-24) .. ">")
     vim.cmd("imap " .. "<F" .. i .. "> <F" .. (i-24) .. ">")
