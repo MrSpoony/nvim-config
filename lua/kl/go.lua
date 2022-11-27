@@ -30,6 +30,7 @@ go.setup({
     textobjects = true,
     -- verbose_tests = false, -- set to add verbose flag to tests
     run_in_floaterm = true,
+    -- luasnip = true,
 })
 
 vim.api.nvim_create_autocmd({

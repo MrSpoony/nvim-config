@@ -34,4 +34,4 @@ nvim_tree.setup({
 	},
 })
 
-Nnoremap("<C-f>", "<cmd>NvimTreeToggle<cr>")
+Nnoremap("<C-f>", "<cmd>Telescope file_browser<cr>")

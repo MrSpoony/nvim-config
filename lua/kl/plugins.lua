@@ -85,6 +85,7 @@ packer.startup({
         use { "ThePrimeagen/harpoon" }                          -- Move around
         use { "sheerun/vim-polyglot" }                          -- Collection of language packs
         use { "norcalli/nvim-colorizer.lua" }                   -- Color highlighting
+        use { "gpanders/editorconfig.nvim" }                    -- Editorconfig
 
 
         -- New "Verbs"

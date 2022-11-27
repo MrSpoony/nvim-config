@@ -22,6 +22,10 @@ Nnoremap("{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent =
 -- Vnoremap("<Right>", "<Nop>")
 -- Vnoremap("<Left>", "<Nop>")
 
+Inoremap("<Tab>", function()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
+end)
+
 -- Center cursor on search or scroll
 Nnoremap("n", "nzzzv")
 Nnoremap("N", "Nzzzv")

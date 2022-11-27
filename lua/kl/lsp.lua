@@ -99,23 +99,6 @@ cmp.setup({
                 end
             end,
         }),
-        -- Yes no tab completion here...
-        -- ["<Tab>"] = cmp.mapping(function(fallback)
-            -- fallback()
-            -- if cmp.visible() and has_words_before() then
-            --     cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            -- else
-            --     fallback()
-            -- end
-        -- end),
-        -- ["<S-Tab>"] = vim.schedule_wrap(function(fallback)
-            -- fallback()
-            -- if cmp.visible() and has_words_before() then
-            --     cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-            -- else
-            --     fallback()
-            -- end
-        -- end),
         ["<C-n>"] = vim.schedule_wrap(function(fallback)
             if cmp.visible() and has_words_before() then
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })

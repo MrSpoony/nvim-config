@@ -12,6 +12,9 @@ vim.defer_fn(function()
             auto_trigger = true,
             debounce = 75,
         },
+        filetypes = {
+            go = true
+        },
     })
 end, 100)
 

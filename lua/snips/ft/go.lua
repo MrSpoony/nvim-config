@@ -139,19 +139,19 @@ local go_ret_vals = function(args)
     )
 end
 
-ls.add_snippets("go", {
-    b("ife", {
-        "if ", rep(2), t { " != nil {", "" },
-        "\treturn ", d(5, go_ret_vals, { "err", "f" }),
-        t { "", "}" },
-        i(0)
-    }),
-}, { type = "autosnippets" })
-
-ls.add_snippets("go", {
-    b("fm", {
-        t { "func main() {", "\t" },
-        i(0),
-        t { "", "}" },
-    }),
-})
+-- ls.add_snippets("go", {
+--     b("ife", {
+--         "if ", rep(2), t { " != nil {", "" },
+--         "\treturn ", d(5, go_ret_vals, { "err", "f" }),
+--         t { "", "}" },
+--         i(0)
+--     }),
+-- }, { type = "autosnippets" })
+--
+-- ls.add_snippets("go", {
+--     b("fm", {
+--         t { "func main() {", "\t" },
+--         i(0),
+--         t { "", "}" },
+--     }),
+-- })
