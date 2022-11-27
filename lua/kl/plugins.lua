@@ -120,7 +120,7 @@ packer.startup({
 
         -- Language specific stuff
         use { "ray-x/go.nvim" }                          -- Go
-        use { "hdiniz/vim-gradle" }                      -- Java Gradle
+        -- use { "hdiniz/vim-gradle" }                      -- Java Gradle
         use { "neoclide/vim-jsx-improve" }               -- JSX
         use { "lervag/vimtex" }                          -- LaTeX
         use {
