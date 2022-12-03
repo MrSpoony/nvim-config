@@ -3,11 +3,8 @@
 using namespace std;
 
 #define FOR(i, j, k, in) for (long long int i=j ; i<k ; i+=in)
-#define RFOR(i, j, k, in) for (long long int i=j ; i>=k ; i-=in)
 #define REP(i, j) FOR(i, 0, j, 1)
-#define RREP(i, j) RFOR(i, j, 0, 1)
-#define FOREACH(i, j) for (auto i : j) 
-#define DPG(x) x;
+#define print(x) cout << x << endl;
 #define MP make_pair
 #define PB push_back
 #define F first
@@ -18,18 +15,19 @@ using namespace std;
 #define MOD 1000000007
 #define dl "\n"
 
-typedef long long int ll;
-typedef pair<ll, ll> PII;
-typedef priority_queue<ll> PQI;
-typedef priority_queue<ll, vector<ll>, greater<ll>> RPQI;
-typedef priority_queue<PII> PQII;
-typedef queue<ll> QI;
-typedef vector<bool> VB;
-typedef vector<string> VS;
-typedef vector<ll> VI;
-typedef vector<PII> VII;
-typedef vector<VI> VVI;
-typedef vector<VII> VVII;
+using ll = long long int;
+using PII = pair<ll, ll>;
+using PQI = priority_queue<ll>;
+using RPQI = priority_queue<ll, vector<ll>, greater<ll>>;
+using PQII = priority_queue<PII>;
+using QI = queue<ll>;
+template <typename T> using Vec = vector<T>;
+using VB = vector<bool>;
+using VS = vector<string>;
+using VI = vector<ll>;
+using VII = vector<PII>;
+using VVI = vector<VI>;
+using VVII = vector<VII>;
 
 template<typename T1, typename T2>
 istream& operator>>(istream &istream, pair<T1, T2> &p) {
