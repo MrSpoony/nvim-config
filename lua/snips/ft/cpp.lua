@@ -88,13 +88,18 @@ local getLongLongTypeDef = function()
 end
 
 local getVectorLongLongTypeDef = function()
-    -- TODO: Set this up with treesitter or lsp
-    return "VI"
+    return "VI";
+end
+
+local splitVariables = function(index)
+    return f(function(arg)
+        return string.gsub(arg[1][1], ",%s*", " >> ")
+    end, { index })
 end
 
 ls.add_snippets("cpp", {
     b("lcin", {
-        f(getLongLongTypeDef), " ", i(1, "name"), " = 0; cin >> ", rep(1), t { ";", "" },
+        f(getLongLongTypeDef), " ", i(1, "name"), "; cin >> ", splitVariables(1), t { ";", "" },
     }),
     b("vlcin", {
         f(getVectorLongLongTypeDef), " ", i(1, "name"), "(", i(2, "n"),
