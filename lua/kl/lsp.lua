@@ -13,9 +13,7 @@ local on_attach = lspconfigs.on_attach
 
 lsp_installer.on_server_ready(function(server)
     local opts = options
-    if server.name == "gopls" then
-        return
-    end
+    if server.name == "gopls" then return end
     if server.name == "eslint" then
         opts.on_attach = function(client, bufnr)
             on_attach(client, bufnr)
@@ -31,15 +29,6 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
-
-local has_words_before = function()
-    if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-        return false
-    end
----@diagnostic disable-next-line: deprecated
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-end
 
 copilot_cmp.setup()
 
@@ -100,7 +89,7 @@ cmp.setup({
             end,
         }),
         ["<C-n>"] = vim.schedule_wrap(function(fallback)
-            if cmp.visible() and has_words_before() then
+            if cmp.visible() then
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             elseif copilot_suggestion.is_visible() then
                 copilot_suggestion.next()
@@ -109,7 +98,7 @@ cmp.setup({
             end
         end),
         ["<C-p>"] = vim.schedule_wrap(function(fallback)
-            if cmp.visible() and has_words_before() then
+            if cmp.visible() then
                 cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
             elseif copilot_suggestion.is_visible() then
                 copilot_suggestion.prev()
@@ -220,12 +209,7 @@ trouble.setup({
     use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
 })
 
-Nnoremap("<leader>xx", "<cmd>Trouble<cr>")
-Nnoremap("<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>")
-Nnoremap("<leader>xd", "<cmd>Trouble document_diagnostics<cr>")
-Nnoremap("<leader>xl", "<cmd>Trouble loclist<cr>")
-Nnoremap("<leader>xq", "<cmd>Trouble quickfix<cr>")
-Nnoremap("gR", "<cmd>Trouble lsp_references<cr>")
+Nnoremap("<leader>xx", vim.cmd.Trouble)
 
 nullls.setup({
     sources = {

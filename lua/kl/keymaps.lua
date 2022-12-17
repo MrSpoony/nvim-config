@@ -37,7 +37,7 @@ Nnoremap("''", "''zz")
 
 Nnoremap("J", "mzJ`z")
 
-Nnoremap("<Esc>", "<cmd>noh<CR>")
+Nnoremap("<Esc>", vim.cmd.noh)
 
 Vnoremap("<leader><Up>",   "<cmd>'<,'>m '>+1<CR>gv=gv")
 Vnoremap("<leader><Down>", "<cmd>'<,'>m '<-2<CR>gv=gv")
@@ -57,12 +57,12 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     callback = function() Nnoremap("<leader>so", "<cmd>w<CR><cmd>so %<CR>") end
 })
 
-Nnoremap("<C-C>", "<cmd>vsplit<CR>")
-Nnoremap("<C-B>", "<cmd>split<CR>")
+Nnoremap("<C-C>", vim.cmd.vsplit)
+Nnoremap("<C-B>", vim.cmd.split)
 
 Nnoremap("<leader>q", "<cmd>bdelete!<CR>")
 Nnoremap("<leader>bq", "<cmd>quit!<CR>")
-Nnoremap("<leader>bd", "<cmd>bdelete<CR>")
+Nnoremap("<leader>bd", vim.cmd.bdelete)
 Nnoremap("<leader>ba", "<cmd>quitall!<CR>")
 
 Nnoremap(":", ";")
