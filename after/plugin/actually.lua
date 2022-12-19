@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 			}, function(choice)
 				if choice then
 					local empty_bufnr = vim.api.nvim_win_get_buf(0)
-					vim.cmd("edit " .. vim.fn.fnameescape(choice))
+					vim.cmd.edit(vim.fn.fnameescape(choice))
 					vim.api.nvim_buf_delete(empty_bufnr, {})
 				end
 			end)

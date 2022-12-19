@@ -72,7 +72,7 @@ Vnoremap(";", ":")
 
 -- For mac remap F25-36 to F1-12
 for i = 25,36 do
-    vim.cmd("nmap " .. "<F" .. i .. "> <F" .. (i-24) .. ">")
-    vim.cmd("imap " .. "<F" .. i .. "> <F" .. (i-24) .. ">")
-    vim.cmd("xmap " .. "<F" .. i .. "> <F" .. (i-24) .. ">")
+    Nmap("<F" .. i .. ">", "<F" .. (i-24) .. ">")
+    Imap("<F" .. i .. ">", "<F" .. (i-24) .. ">")
+    Xmap("<F" .. i .. ">", "<F" .. (i-24) .. ">")
 end

@@ -40,7 +40,6 @@ vim.api.nvim_create_autocmd({
     callback = function()
         local fmt = require("go.format")
         fmt.goimport()
-        -- vim.cmd[[GoFmt]]
     end
 })
 
