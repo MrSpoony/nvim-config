@@ -4,14 +4,10 @@ using namespace std;
 
 #define FOR(i, j, k, in) for (long long int i=j ; i<k ; i+=in)
 #define REP(i, j) FOR(i, 0, j, 1)
-#define print(x) cout << x << endl;
 #define MP make_pair
 #define PB push_back
-#define F first
-#define S second
 #define INF 2147483647
 #define INFINITE 9223372036854775807
-#define PI 3.1415926535897932384626433832795
 #define MOD 1000000007
 #define dl "\n"
 #define DBG(x) cout << #x << " = " << x << endl;
@@ -22,7 +18,8 @@ using PQI = priority_queue<ll>;
 using RPQI = priority_queue<ll, vector<ll>, greater<ll>>;
 using PQII = priority_queue<PII>;
 using QI = queue<ll>;
-template <typename T> using Vec = vector<T>;
+template <typename T>
+using V = vector<T>;
 using VB = vector<bool>;
 using VS = vector<string>;
 using VI = vector<ll>;
