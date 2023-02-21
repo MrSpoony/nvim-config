@@ -43,3 +43,7 @@ Nnoremap("<leader>tc", builtin.colorscheme)
 Nnoremap("<leader>tm", builtin.keymaps)
 Nnoremap("<leader>tg", builtin.live_grep)
 Nnoremap("<leader>th", builtin.help_tags)
+
+Nnoremap("gr", builtin.lsp_references)
+Nnoremap("gi", builtin.lsp_implementations)
+Nnoremap("gd", builtin.lsp_definitions)

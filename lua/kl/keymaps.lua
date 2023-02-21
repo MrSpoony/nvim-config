@@ -1,14 +1,14 @@
-Nnoremap("j", "gj")
-Nnoremap("k", "gk")
-Nnoremap("gj", "j")
-Nnoremap("gk", "k")
+-- Nnoremap("j", "gj")
+-- Nnoremap("k", "gk")
+-- Nnoremap("gj", "j")
+-- Nnoremap("gk", "k")
 
-Vnoremap("j", "gj")
-Vnoremap("k", "gk")
-Vnoremap("gj", "j")
-Vnoremap("gk", "k")
+-- Vnoremap("j", "gj")
+-- Vnoremap("k", "gk")
+-- Vnoremap("gj", "j")
+-- Vnoremap("gk", "k")
 
-
+-- don't add curly brace jumps to my jump list
 Nnoremap("}", '<cmd>execute "keepjumps norm! " . v:count1 . "}"<CR>', { silent = true })
 Nnoremap("{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent = true })
 
@@ -17,11 +17,7 @@ Nnoremap("{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent =
 -- Nnoremap("<Left>", "<cmd>vertical resize +2<cr>")
 -- Nnoremap("<Right>", "<cmd>vertical resize -2<cr>")
 
--- Vnoremap("<Up>", "<Nop>")
--- Vnoremap("<Down>", "<Nop>")
--- Vnoremap("<Right>", "<Nop>")
--- Vnoremap("<Left>", "<Nop>")
-
+-- I just want tab, nothing else
 Inoremap("<Tab>", function()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
 end)
@@ -39,22 +35,28 @@ Nnoremap("J", "mzJ`z")
 
 Nnoremap("<Esc>", vim.cmd.noh)
 
-Vnoremap("<leader><Up>",   "<cmd>'<,'>m '>+1<CR>gv=gv")
-Vnoremap("<leader><Down>", "<cmd>'<,'>m '<-2<CR>gv=gv")
-Nnoremap("<leader><Up>",   "<cmd>m .+1<CR>==")
-Nnoremap("<leader><Down>", "<cmd>m .-2<CR>==")
+Vnoremap("<M-Up>", "<cmd>'<,'>m '<-2<CR>gv=gv")
+Vnoremap("<M-Down>", "<cmd>'<,'>m '>+1<CR>gv=gv")
+Nnoremap("<M-Up>", "<cmd>m .-2<CR>==")
+Nnoremap("<M-Down>", "<cmd>m .+1<CR>==")
 
-Nnoremap("<leader>p", "\"+p")
-Nnoremap("<leader>P", "\"+P")
-Nnoremap("<leader>y", "\"+y")
-Nnoremap("<leader>Y", "\"+y$")
+-- copy and paste from their own registers
+Nnoremap("<leader>p", '"+p')
+Nnoremap("<leader>P", '"+P')
+Vnoremap("<leader>p", '"+p')
+
+Nnoremap("<leader>y", '"+y')
+Nnoremap("<leader>Y", '"+y$')
+Vnoremap("<leader>y", '"+y')
 
 Nnoremap("<leader>+", "<cmd>vertical resize +5<CR>")
 Nnoremap("<leader>-", "<cmd>vertical resize -5<CR>")
 
-vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-    pattern = {"*.lua", "*.vim"},
-    callback = function() Nnoremap("<leader>so", "<cmd>w<CR><cmd>so %<CR>") end
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    pattern = { "*.lua", "*.vim" },
+    callback = function()
+        Nnoremap("<leader>so", "<cmd>w<CR><cmd>so %<CR>")
+    end,
 })
 
 Nnoremap("<C-C>", vim.cmd.vsplit)
@@ -71,8 +73,8 @@ Vnoremap(":", ";")
 Vnoremap(";", ":")
 
 -- For mac remap F25-36 to F1-12
-for i = 25,36 do
-    Nmap("<F" .. i .. ">", "<F" .. (i-24) .. ">")
-    Imap("<F" .. i .. ">", "<F" .. (i-24) .. ">")
-    Xmap("<F" .. i .. ">", "<F" .. (i-24) .. ">")
+for i = 25, 36 do
+    Nmap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
+    Imap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
+    Xmap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
 end

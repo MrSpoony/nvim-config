@@ -16,5 +16,3 @@
   (#contains? @_id "Query")
   (#offset! @sql 0 1 0 -1)
 )
-
-

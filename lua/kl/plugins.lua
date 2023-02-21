@@ -74,8 +74,9 @@ packer.startup({
 
         -- Other stuff
         use { "tpope/vim-repeat" }                              -- Repeat commands
-        use { "windwp/nvim-autopairs" }                         -- Auto pairing brackets
+        use { "tpope/vim-abolish" }                             -- search for, substitute, and abbreviate multiple variants of a word
         use { "tpope/vim-surround" }                            -- Surround your stuff easier with brackets or quotes
+        use { "windwp/nvim-autopairs" }                         -- Auto pairing brackets
         use { "dhruvasagar/vim-table-mode" }                    -- Awesome automatic tables
         use { "aserowy/tmux.nvim" }                             -- Tmux Integration
         use { "mizlan/iswap.nvim" }                             -- Swap function arguments etc.
