@@ -87,6 +87,40 @@ local getLongLongTypeDef = function()
     return "long long int"
 end
 
+local getLongLongAlias = function()
+    local rootNodes = getRootNodes()
+    for _, v in pairs(rootNodes) do
+        if v.node:type() ~= "alias_declaration" then goto continueLL end
+        local nodes = getAllNodes(v.node)
+        P(nodes)
+        if nodes[1].type ~= "using" then goto continueLL end
+        local identifierText = getIdentifierText(nodes)
+        P(identifierText)
+        if nodes[4].type == "type_descriptor" and
+            nodes[4].children[1].type == "long" and
+            nodes[4].children[2].type == "long" and
+            nodes[4].children[3].type == "primitive_type"
+        or
+            nodes[4].type == "type_descriptor" and
+            nodes[4].children[1].type == "long" and
+            nodes[4].children[2].type == "long" then
+            goto continueLL
+        else
+            return identifierText[1]
+        end
+        ::continueLL::
+    end
+    return "long long int"
+end
+
+local getLongLong = function()
+    local typedef = getLongLongTypeDef()
+    if typedef ~= "long long int" then return typedef end
+    local alias = getLongLongAlias()
+    if alias ~= "long long int" then return alias end
+    return "long long int"
+end
+
 local getVectorLongLongTypeDef = function()
     return "VI";
 end
@@ -99,13 +133,13 @@ end
 
 ls.add_snippets("cpp", {
     b("lcin", {
-        f(getLongLongTypeDef), " ", i(1, "name"), "; cin >> ", splitVariables(1), t { ";", "" },
+        f(getLongLong), " ", i(1, "name"), "; cin >> ", splitVariables(1), t { ";", "" },
     }),
     b("vlcin", {
         f(getVectorLongLongTypeDef), " ", i(1, "name"), "(", i(2, "n"),
         "); cin >> ", rep(1), t { ";", "" }
     }),
     b("scin", {
-        "string ", i(1, "name"), " = \"\"; cin >> ", rep(1), t { ";", "" },
+        "string ", i(1, "name"), "; cin >> ", rep(1), t { ";", "" },
     }),
 }, { type = "autosnippets" })

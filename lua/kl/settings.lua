@@ -42,6 +42,9 @@ o.undofile = true
 
 o.scrolloff = 8
 o.cursorline = true
+if vim.env.IS_ONLINE == "1" then
+    o.cursorcolumn = true
+end
 o.mouse = "nvc"
 
 o.visualbell = true
