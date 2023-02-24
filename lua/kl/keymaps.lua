@@ -19,7 +19,7 @@ Nnoremap("{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent =
 
 -- I just want tab, nothing else
 Inoremap("<Tab>", function()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
 end)
 
 -- Center cursor on search or scroll
@@ -53,10 +53,10 @@ Nnoremap("<leader>+", "<cmd>vertical resize +5<CR>")
 Nnoremap("<leader>-", "<cmd>vertical resize -5<CR>")
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-    pattern = { "*.lua", "*.vim" },
-    callback = function()
-        Nnoremap("<leader>so", "<cmd>w<CR><cmd>so %<CR>")
-    end,
+	pattern = { "*.lua", "*.vim" },
+	callback = function()
+		Nnoremap("<leader>so", "<cmd>w<CR><cmd>so %<CR>")
+	end,
 })
 
 Nnoremap("<C-C>", vim.cmd.vsplit)
@@ -74,7 +74,7 @@ Vnoremap(";", ":")
 
 -- For mac remap F25-36 to F1-12
 for i = 25, 36 do
-    Nmap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
-    Imap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
-    Xmap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
+	Nmap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
+	Imap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
+	Xmap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
 end

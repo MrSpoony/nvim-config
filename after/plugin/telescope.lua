@@ -1,37 +1,37 @@
-local ts = require('telescope')
-local builtin = require('telescope.builtin')
+local ts = require("telescope")
+local builtin = require("telescope.builtin")
 
-ts.setup {
-    defaults = {
-        sorting_strategy = "ascending",
-        layout_config = {
-            prompt_position = "top",
-        },
-        history = {
-            path = '~/.local/share/nvim/databases/telescope_history.sqlite3',
-            limit = 1000,
-        },
-        prompt_prefix = "  ",
-        file_ignore_patterns = { "node_modules" },
-    },
-    extensions = {
-        fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-        },
-        file_browser = {
-            hijack_netrw = true,
-        },
-    },
-}
+ts.setup({
+	defaults = {
+		sorting_strategy = "ascending",
+		layout_config = {
+			prompt_position = "top",
+		},
+		history = {
+			path = "~/.local/share/nvim/databases/telescope_history.sqlite3",
+			limit = 1000,
+		},
+		prompt_prefix = "  ",
+		file_ignore_patterns = { "node_modules" },
+	},
+	extensions = {
+		fzf = {
+			fuzzy = true,
+			override_generic_sorter = true,
+			override_file_sorter = true,
+		},
+		file_browser = {
+			hijack_netrw = true,
+		},
+	},
+})
 
 local le = ts.load_extension
-le('fzf')
-le('zoxide')
-le('smart_history')
-le('harpoon')
-le('file_browser')
+le("fzf")
+le("zoxide")
+le("smart_history")
+le("harpoon")
+le("file_browser")
 
 local ex = ts.extensions
 Nnoremap("<leader>cd", ex.zoxide.list)

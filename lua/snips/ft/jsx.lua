@@ -1,4 +1,4 @@
-local ls = require "luasnip"
+local ls = require("luasnip")
 local utils = require("snips")
 local s = utils.snippet
 local sn = ls.snippet_node
@@ -17,11 +17,15 @@ local lambda = require("luasnip.extras").l
 local b = utils.b
 local rep = utils.rep
 
-
 ls.add_snippets("javascriptreact", {
-    b("edf", {
-        "export default function ", i(1, "f"), "(", i(2), t{") {", ""},
-        t{"    return (", "        "}, i(3), t{"", "    );", "}"}
-
-    }),
+	b("edf", {
+		"export default function ",
+		i(1, "f"),
+		"(",
+		i(2),
+		t({ ") {", "" }),
+		t({ "    return (", "        " }),
+		i(3),
+		t({ "", "    );", "}" }),
+	}),
 }, { type = "autosnippets" })

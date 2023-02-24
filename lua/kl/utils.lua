@@ -1,22 +1,22 @@
 local M = {}
 
 local function createNoremap(mode)
-    return function(lhs, rhs, options)
-        options = options or {}
-        options.noremap = true
-        vim.keymap.set(mode, lhs, rhs, options)
-    end
+	return function(lhs, rhs, options)
+		options = options or {}
+		options.noremap = true
+		vim.keymap.set(mode, lhs, rhs, options)
+	end
 end
 
 local function createMap(mode)
-    return function(lhs, rhs, options)
-        if type(lhs) == type(function() end) then
-            lhs = M.luaFn(lhs)
-        end
-        options = options or {}
-        options.noremap = false
-        vim.keymap.set(mode, lhs, rhs, options)
-    end
+	return function(lhs, rhs, options)
+		if type(lhs) == type(function() end) then
+			lhs = M.luaFn(lhs)
+		end
+		options = options or {}
+		options.noremap = false
+		vim.keymap.set(mode, lhs, rhs, options)
+	end
 end
 
 M.nnoremap = createNoremap("n")
@@ -42,19 +42,22 @@ M.cmap = createMap("c")
 M.map = createMap("")
 
 function M.fn(callback, ...)
-    local args = {...}
----@diagnostic disable-next-line: deprecated
-    return function() callback(unpack(args)) end
+	local args = { ... }
+	---@diagnostic disable-next-line: deprecated
+	return function()
+		callback(unpack(args))
+	end
 end
 
 function M.set_contains(set, val)
-    for _, value in pairs(set) do
-        if value == val then return true end
-    end
-    return false
+	for _, value in pairs(set) do
+		if value == val then
+			return true
+		end
+	end
+	return false
 end
 
 M.is_mac = vim.fn.has("macunix")
-
 
 return M

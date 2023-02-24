@@ -3,7 +3,7 @@ local colorscheme = "catppuccin"
 local dressing = require("dressing")
 local od = require("onedark")
 local mat = require("material")
-local gh = require("github-theme");
+local gh = require("github-theme")
 
 local ll = require("lualine")
 local gps = require("nvim-gps")
@@ -21,34 +21,33 @@ vim.opt.guifont = "JetBrainsMono_Nerd_Font_Mono:h12"
 -- vim.opt.guifont="Hack:h7"
 -- vim.opt.guifont="Hack_Nerd_Font_Mono:h7.5"
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-    pattern = '*',
-    callback = function()
-        vim.highlight.on_yank({
-            higroup = 'IncSearch',
-            timeout = 40,
-        })
-    end,
+vim.api.nvim_create_autocmd("TextYankPost", {
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({
+			higroup = "IncSearch",
+			timeout = 40,
+		})
+	end,
 })
-
 
 vim.notify = require("notify")
 
 dressing.setup({
-    input = {
-        enabled = true,
-        insert_only = false,
-    },
-    select = {
-        enabled = true,
-        backend = { "telescope", "fzf_lua", "fzf", "builtin", "nui" },
-        trim_prompt = true,
-    },
+	input = {
+		enabled = true,
+		insert_only = false,
+	},
+	select = {
+		enabled = true,
+		backend = { "telescope", "fzf_lua", "fzf", "builtin", "nui" },
+		trim_prompt = true,
+	},
 })
 
 -- Onedark
 od.setup({
-    theme = "deep"
+	theme = "deep",
 })
 
 -- Gruvbox
@@ -64,8 +63,8 @@ vim.g.neon_style = "doom"
 -- Material
 vim.g.material_style = "deep ocean" -- Oceanic, Deep Ocean, Palenight, Lighter, Darker
 mat.setup({
-    lualine_style = "stealth",
-    italics = { comments = true },
+	lualine_style = "stealth",
+	italics = { comments = true },
 })
 
 -- Github
@@ -76,19 +75,19 @@ vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 
 -- Lualine
 gps.setup({
-    separator = "  ",
+	separator = "  ",
 })
 
 ll.setup({
-    sections = {
-        lualine_c = {
-            { "filename" },
-            {
-                gps.get_location,
-                cond = gps.is_available
-            },
-        },
-    }
+	sections = {
+		lualine_c = {
+			{ "filename" },
+			{
+				gps.get_location,
+				cond = gps.is_available,
+			},
+		},
+	},
 })
 
 vim.cmd.colorscheme(colorscheme)

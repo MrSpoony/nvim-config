@@ -18,11 +18,10 @@ local partial = require("luasnip.extras").partial
 local b = utils.b
 local rep = utils.rep
 
-ls.add_snippets("all", {
-}, { type = "autosnippets" })
+ls.add_snippets("all", {}, { type = "autosnippets" })
 
 ls.add_snippets("all", {
-    s("time", partial(vim.fn.strftime, "%H:%M:%S")),
-    s("date", partial(vim.fn.strftime, "%Y-%m-%d")),
-    s("datetime", partial(vim.fn.strftime, "%Y-%m-%d %H:%M:%S")),
+	s("time", partial(vim.fn.strftime, "%H:%M:%S")),
+	s("date", partial(vim.fn.strftime, "%Y-%m-%d")),
+	s("datetime", partial(vim.fn.strftime, "%Y-%m-%d %H:%M:%S")),
 })

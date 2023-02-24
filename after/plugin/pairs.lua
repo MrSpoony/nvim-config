@@ -1,7 +1,7 @@
-local ap = require('nvim-autopairs')
+local ap = require("nvim-autopairs")
 
 ap.setup({
-    disable_in_macro = true,
-    disable_in_visualblock = true,
-    check_ts = true,
+	disable_in_macro = true,
+	disable_in_visualblock = true,
+	check_ts = true,
 })

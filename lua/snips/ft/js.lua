@@ -17,12 +17,13 @@ local lambda = require("luasnip.extras").l
 local b = utils.b
 local rep = utils.rep
 
-
 ls.add_snippets("javascript", {
-    b("cl", {
-        "console.log(", c(1, {
-            { t"\"", i(1, "variable"), t":\", ", rep(1) },
-            { t"\"", i(1, "text"), t"\"" },
-        }), t");"
-    }),
+	b("cl", {
+		"console.log(",
+		c(1, {
+			{ t('"'), i(1, "variable"), t(':", '), rep(1) },
+			{ t('"'), i(1, "text"), t('"') },
+		}),
+		t(");"),
+	}),
 })

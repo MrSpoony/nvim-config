@@ -6,11 +6,6 @@ nvim_tree.setup({
 		highlight_opened_files = "icon",
 		icons = {},
 	},
-	ignore_ft_on_setup = {
-		"startify",
-		"dashboard",
-		"alpha",
-	},
 	open_on_tab = false,
 	update_cwd = true,
 	diagnostics = {
@@ -24,7 +19,7 @@ nvim_tree.setup({
 		ignore_list = {},
 	},
 	view = {
-        adaptive_size = true,
+		adaptive_size = true,
 		width = 40,
 		side = "left",
 	},

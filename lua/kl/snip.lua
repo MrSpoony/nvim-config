@@ -3,45 +3,45 @@ local types = require("luasnip.util.types")
 
 require("snips")
 
-ls.config.set_config {
-    history = true,
-    updateevents = "TextChanged,TextChangedI",
-    enable_autosnippets = true,
-    ext_opts = {
-        [types.choiceNode] = {
-            active = {
-                virt_text = { { " 🞄" } },
-            },
-        },
-    },
-}
+ls.config.set_config({
+	history = true,
+	updateevents = "TextChanged,TextChangedI",
+	enable_autosnippets = true,
+	ext_opts = {
+		[types.choiceNode] = {
+			active = {
+				virt_text = { { " 🞄" } },
+			},
+		},
+	},
+})
 
 -- Load friendly snippets
-require("luasnip.loaders.from_vscode").load({ paths = vim.fn.stdpath("data") .. "/site/pack/packer/start/friendly-snippets/"})
-
+require("luasnip.loaders.from_vscode").load({
+	paths = vim.fn.stdpath("data") .. "/site/pack/packer/start/friendly-snippets/",
+})
 
 for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/snips/ft/*.lua", true)) do
-    loadfile(ft_path)()
+	loadfile(ft_path)()
 end
-
 
 -- <c-e> is my expansion key
 vim.keymap.set({ "i", "s" }, "<C-e>", function()
-    if ls.expand_or_jumpable() then
-        ls.expand_or_jump()
-    end
+	if ls.expand_or_jumpable() then
+		ls.expand_or_jump()
+	end
 end, { silent = true })
 
 -- <c-t> is my jump backwards key.
 vim.keymap.set({ "i", "s" }, "<c-t>", function()
-    if ls.jumpable(-1) then
-        ls.jump(-1)
-    end
+	if ls.jumpable(-1) then
+		ls.jump(-1)
+	end
 end, { silent = true })
 
 -- <c-s-e> is selecting within a list of options.
-vim.keymap.set({"i", "s", "n"}, "<c-s-e>", function()
-    if ls.choice_active() then
-        ls.change_choice(1)
-    end
+vim.keymap.set({ "i", "s", "n" }, "<c-s-e>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
 end)

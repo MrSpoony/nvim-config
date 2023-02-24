@@ -1,7 +1,7 @@
-require('kl.globals')
-require('kl.settings')
+require("kl.globals")
+require("kl.settings")
 -- require('impatient')
-require('kl.plugins')
+require("kl.plugins")
 vim.g.mapleader = " "
-require('kl.keymaps')
+require("kl.keymaps")
 require("kl")
