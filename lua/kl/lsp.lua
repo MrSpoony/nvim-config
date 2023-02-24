@@ -1,4 +1,6 @@
-local lsp_installer = require("nvim-lsp-installer")
+local mason = require("mason")
+local mason_lsp = require("mason-lspconfig")
+local lspconfig = require("lspconfig")
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local copilot_cmp = require("copilot_cmp")
@@ -11,26 +13,48 @@ local ls = require("luasnip")
 local options = lspconfigs.options
 local on_attach = lspconfigs.on_attach
 
-lsp_installer.on_server_ready(function(server)
-    local opts = options
-    if server.name == "gopls" then return end
-    if server.name == "eslint" then
-        opts.on_attach = function(client, bufnr)
-            on_attach(client, bufnr)
-            client.server_capabilities.document_formatting = true
+mason.setup()
+
+mason_lsp.setup({
+    ensure_installed = {
+        "lua_ls",
+        "rust_analyzer",
+        "clangd",
+        "eslint",
+        "tsserver",
+        "gopls",
+    },
+})
+
+mason_lsp.setup_handlers({
+    function(server_name)
+        local opts = options
+        if server_name == "gopls" then
+            return
         end
-        opts.settings = {
-            format = { enable = true },
-        }
+        if server_name == "eslint" then
+            opts.on_attach = function(client, bufnr)
+                on_attach(client, bufnr)
+                client.server_capabilities.document_formatting = true
+            end
+            opts.settings = {
+                format = { enable = true },
+            }
+        end
+        if server_name == "clangd" then
+            opts.capabilities.offsetEncoding = { "utf-16" }
+            opts.cmd = {
+                "clangd",
+                "--background-index",
+                "--enable-config",
+            }
+            lspconfig[server_name].setup(opts)
+        end
     end
-    if server.name == "clangd" then
-        opts.capabilities.offsetEncoding = { "utf-16" }
-    end
-    server:setup(opts)
-end)
+})
 
 
-copilot_cmp.setup()
+-- copilot_cmp.setup()
 
 local compare = cmp.config.compare
 cmp.setup({
@@ -51,9 +75,9 @@ cmp.setup({
         end,
     },
     mapping = {
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-u>"] = cmp.mapping.scroll_docs( -4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<C-q>"] = cmp.mapping.close();
+        ["<C-q>"] = cmp.mapping.close(),
         ["<C-i>"] = cmp.mapping(ls.expand_or_jump),
         ["<c-y>"] = cmp.mapping(
             cmp.mapping.confirm({

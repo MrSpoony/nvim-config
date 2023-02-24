@@ -105,7 +105,8 @@ packer.startup({
 
         -- LSP stuff
         use { "neovim/nvim-lspconfig" }                -- Nvim lsp support
-        use { "williamboman/nvim-lsp-installer" }      -- Easy installation for lsp`s
+        use { "williamboman/mason.nvim" }              -- Easy installation for lsp's
+        use { "williamboman/mason-lspconfig.nvim"}     -- Easy configuration for lsp's
         use { "ray-x/lsp_signature.nvim" }             -- LSP signatures as overlay
         use { "hrsh7th/nvim-cmp" }                     -- Autocompletion engine
         use { "hrsh7th/cmp-nvim-lsp" }                 -- Nvim-cmp source for neovim"s built-in ls client
@@ -149,7 +150,7 @@ packer.startup({
 
 
         -- Own plugin
-        use { "MrSpoony/soicode.vim" } -- For soi stuff with the .stoml support
+        use { "~/code/vim/plugins/soicode.vim" } -- For soi stuff with the .stoml support
 
     end,
     config = {
