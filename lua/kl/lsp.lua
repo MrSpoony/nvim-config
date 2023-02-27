@@ -5,12 +5,9 @@ local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local copilot_cmp = require("copilot_cmp")
 local copilot_suggestion = require("copilot.suggestion")
-local lspconfigs = require("kl.lspconfigs")
-local trouble = require("trouble")
-local nullls = require("null-ls")
 local ls = require("luasnip")
 
-local options = lspconfigs.options
+local options = require("kl.lspconfigs").options
 
 mason.setup()
 
@@ -181,7 +178,7 @@ cmp.setup.cmdline(":", {
 	}),
 })
 
-trouble.setup({
+require("trouble").setup({
 	position = "bottom", -- position of the list can be: bottom, top, left, right
 	height = 10, -- height of the trouble list when position is top or bottom
 	width = 50, -- width of the list when position is left or right
@@ -229,12 +226,13 @@ trouble.setup({
 
 Nnoremap("<leader>xx", vim.cmd.Trouble)
 
-nullls.setup({
+local null_ls = require("null-ls")
+null_ls.setup({
 	sources = {
-		nullls.builtins.formatting.stylua,
-		nullls.builtins.formatting.prettier,
-		nullls.builtins.diagnostics.eslint,
-		nullls.builtins.completion.spell,
-		nullls.builtins.code_actions.gitsigns,
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.diagnostics.eslint,
+		null_ls.builtins.completion.spell,
+		null_ls.builtins.code_actions.gitsigns,
 	},
 })

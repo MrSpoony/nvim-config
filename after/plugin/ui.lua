@@ -1,13 +1,8 @@
 local colorscheme = "catppuccin"
 
-local dressing = require("dressing")
-local od = require("onedark")
-local mat = require("material")
-local gh = require("github-theme")
+local nonicons_extention = require("nvim-nonicons.extentions.lualine")
 
-local ll = require("lualine")
-local gps = require("nvim-gps")
-
+-- Neovide
 vim.g.neovide_refresh_rate = 300
 -- vim.g.neovide_transparency=0.5
 vim.g.neovide_cursor_vfx_mode = "pixiedust"
@@ -21,6 +16,7 @@ vim.opt.guifont = "JetBrainsMono_Nerd_Font_Mono:h12"
 -- vim.opt.guifont="Hack:h7"
 -- vim.opt.guifont="Hack_Nerd_Font_Mono:h7.5"
 
+
 vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 	callback = function()
@@ -31,9 +27,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+
+require("notify").setup({
+  icons = nonicons_extention.icons,
+})
+
 vim.notify = require("notify")
 
-dressing.setup({
+
+require("dressing").setup({
 	input = {
 		enabled = true,
 		insert_only = false,
@@ -45,50 +47,40 @@ dressing.setup({
 	},
 })
 
--- Onedark
-od.setup({
-	theme = "deep",
-})
+-- Colorscheme
+if colorscheme == "catppuccin" then
+	vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+	vim.cmd.highlight("Folded guibg=#212231")
+elseif colorscheme == "onedark" then
+	require("onedark").setup({
+		theme = "deep",
+	})
+elseif colorscheme == "gruvbox" then
+	vim.g.gruvbox_material_foreground = "material" -- material, mix, original
+	vim.g.gruvbox_material_background = "hard" -- hard, medium, soft
+elseif colorscheme == "tokyonight" then
+	vim.g.tokyonight_style = "night"
+elseif colorscheme == "neon" then
+	vim.g.neon_style = "doom"
+elseif colorscheme == "material" then
+	vim.g.material_style = "deep ocean" -- Oceanic, Deep Ocean, Palenight, Lighter, Darker
+	require("material").setup({
+		lualine_style = "stealth",
+		italics = { comments = true },
+	})
+elseif colorscheme == "github" then
+	require("github-theme").setup({})
+end
 
--- Gruvbox
-vim.g.gruvbox_material_foreground = "material" -- material, mix, original
-vim.g.gruvbox_material_background = "hard" -- hard, medium, soft
+vim.cmd.colorscheme(colorscheme)
 
--- Tokyo Night
-vim.g.tokyonight_style = "night"
-
--- Neon
-vim.g.neon_style = "doom"
-
--- Material
-vim.g.material_style = "deep ocean" -- Oceanic, Deep Ocean, Palenight, Lighter, Darker
-mat.setup({
-	lualine_style = "stealth",
-	italics = { comments = true },
-})
-
--- Github
-gh.setup({})
-
--- Catppuccin
-vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-
--- Lualine
-gps.setup({
-	separator = "  ",
-})
-
-ll.setup({
+require("lualine").setup({
 	sections = {
+		lualine_a = { nonicons_extention.mode },
 		lualine_c = {
 			{ "filename" },
-			{
-				gps.get_location,
-				cond = gps.is_available,
-			},
 		},
 	},
 })
 
-vim.cmd.colorscheme(colorscheme)
-vim.cmd.highlight("Folded guibg=#212231")
+require("nvim-nonicons").setup({})

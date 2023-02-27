@@ -18,7 +18,7 @@ ls.config.set_config({
 
 -- Load friendly snippets
 require("luasnip.loaders.from_vscode").load({
-	paths = vim.fn.stdpath("data") .. "/site/pack/packer/start/friendly-snippets/",
+	paths = vim.fn.stdpath("data") .. "/lazy/friendly-snippets/",
 })
 
 for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/snips/ft/*.lua", true)) do
