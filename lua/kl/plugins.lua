@@ -19,9 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy = require("lazy")
 lazy.setup({
-	"lewis6991/impatient.nvim", -- Speed up startup times
-
-	-- Dependencies for others
 	"nvim-lua/plenary.nvim", -- Some helpful lua functions other plugins (telecope) need
 	{ "rcarriga/nvim-notify", lazy = true }, -- Notifcations
 	"tami5/sqlite.lua", -- Store stuff in sqlite database for more speed
@@ -259,6 +256,7 @@ lazy.setup({
 	-- Snippets
 	{
 		"L3MON4D3/LuaSnip",
+		lazy = true,
 		build = "make install_jsregexp",
 	}, -- Snippet engine with really nice functionalities
 
