@@ -30,7 +30,7 @@ local function set_default_formatter_for_filetypes(language_server_name, filetyp
 end
 
 M.on_attach = function(
-	_, --[[client]]
+	_, -- client
 	bufnr
 )
 	lspsignature.on_attach({
@@ -55,26 +55,6 @@ M.on_attach = function(
 
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-	local opts = { silent = true }
-	-- Diagnostics mappings
-	Nnoremap("<leader>df", vim.diagnostic.open_float, opts)
-	Nnoremap("[d", vim.diagnostic.goto_prev, opts)
-	Nnoremap("]d", vim.diagnostic.goto_next, opts)
-	Nnoremap("<leader>q", vim.diagnostic.setloclist, opts)
-
-	Nnoremap("gD", vim.lsp.buf.declaration, opts)
-	Nnoremap("K", vim.lsp.buf.hover, opts)
-	Nnoremap("<C-M>", vim.lsp.buf.signature_help, opts)
-	Nnoremap("<leader>D", vim.lsp.buf.type_definition, opts)
-	Nnoremap("<leader>rn", vim.lsp.buf.rename, opts)
-	Nnoremap("<leader>ca", vim.lsp.buf.code_action, opts)
-	Vnoremap("<leader>ca", vim.lsp.buf.range_code_action, opts)
-	Nnoremap("<m-CR>", vim.lsp.buf.code_action, opts)
-	Nnoremap("<a-CR>", vim.lsp.buf.code_action, opts)
-	Nnoremap("<leader>fo", function()
-		vim.lsp.buf.format({})
-	end, opts)
 end
 
 local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities())

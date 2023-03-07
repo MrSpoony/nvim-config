@@ -8,6 +8,25 @@
 -- Vnoremap("gj", "j")
 -- Vnoremap("gk", "k")
 
+-- LSP stuff
+local opts = { silent = true }
+Nnoremap("<leader>df", vim.diagnostic.open_float, opts)
+Nnoremap("[d", vim.diagnostic.goto_prev, opts)
+Nnoremap("]d", vim.diagnostic.goto_next, opts)
+Nnoremap("<leader>q", vim.diagnostic.setloclist, opts)
+
+Nnoremap("gD", vim.lsp.buf.declaration, opts)
+Nnoremap("K", vim.lsp.buf.hover, opts)
+Nnoremap("<C-M>", vim.lsp.buf.signature_help, opts)
+Nnoremap("<leader>D", vim.lsp.buf.type_definition, opts)
+Nnoremap("<leader>rn", vim.lsp.buf.rename, opts)
+Nnoremap("<leader>ca", vim.lsp.buf.code_action, opts)
+Vnoremap("<leader>ca", vim.lsp.buf.range_code_action, opts)
+Nnoremap("<m-CR>", vim.lsp.buf.code_action, opts)
+Nnoremap("<a-CR>", vim.lsp.buf.code_action, opts)
+Nnoremap("<leader>fo", vim.lsp.buf.format, opts)
+
+
 -- don't add curly brace jumps to my jump list
 Nnoremap("}", '<cmd>execute "keepjumps norm! " . v:count1 . "}"<CR>', { silent = true })
 Nnoremap("{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent = true })
