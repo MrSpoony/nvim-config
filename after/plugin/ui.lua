@@ -1,4 +1,4 @@
-local colorscheme = "catppuccin"
+local colors = "gruvbox"
 
 local nonicons_extention = require("nvim-nonicons.extentions.lualine")
 
@@ -48,31 +48,41 @@ require("dressing").setup({
 })
 
 -- Colorscheme
-if colorscheme == "catppuccin" then
-	vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-	vim.cmd.highlight("Folded guibg=#212231")
-elseif colorscheme == "onedark" then
-	require("onedark").setup({
-		theme = "deep",
-	})
-elseif colorscheme == "gruvbox" then
-	vim.g.gruvbox_material_foreground = "material" -- material, mix, original
-	vim.g.gruvbox_material_background = "hard" -- hard, medium, soft
-elseif colorscheme == "tokyonight" then
-	vim.g.tokyonight_style = "night"
-elseif colorscheme == "neon" then
-	vim.g.neon_style = "doom"
-elseif colorscheme == "material" then
-	vim.g.material_style = "deep ocean" -- Oceanic, Deep Ocean, Palenight, Lighter, Darker
-	require("material").setup({
-		lualine_style = "stealth",
-		italics = { comments = true },
-	})
-elseif colorscheme == "github" then
-	require("github-theme").setup({})
+function ColorIt(colorscheme)
+	if colorscheme == "catppuccin" then
+		vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+		vim.cmd.highlight("Folded guibg=#212231")
+		vim.cmd.colorscheme("catppuccin")
+	elseif colorscheme == "onedark" then
+		require("onedark").setup({
+			theme = "deep",
+		})
+		vim.cmd.colorscheme("onedark")
+	elseif colorscheme == "gruvbox" then
+		vim.g.gruvbox_material_better_performance = 1
+		vim.g.gruvbox_material_foreground = "mix" -- material, mix, original
+		vim.g.gruvbox_material_background = "medium" -- hard, medium, soft
+		vim.cmd.colorscheme("gruvbox-material")
+	elseif colorscheme == "tokyonight" then
+		vim.g.tokyonight_style = "night"
+		vim.cmd.colorscheme("tokyonight")
+	elseif colorscheme == "neon" then
+		vim.g.neon_style = "doom"
+		vim.cmd.colorscheme("neon")
+	elseif colorscheme == "material" then
+		vim.g.material_style = "deep ocean" -- Oceanic, Deep Ocean, Palenight, Lighter, Darker
+		require("material").setup({
+			lualine_style = "stealth",
+			italics = { comments = true },
+		})
+		vim.cmd.colorscheme("material")
+	elseif colorscheme == "github" then
+		require("github-theme").setup({})
+		vim.cmd.colorscheme("github-theme")
+	end
 end
 
-vim.cmd.colorscheme(colorscheme)
+ColorIt(colors)
 
 require("lualine").setup({
 	sections = {
