@@ -43,8 +43,8 @@ M.map = createMap("")
 
 function M.fn(callback, ...)
 	local args = { ... }
-	---@diagnostic disable-next-line: deprecated
 	return function()
+		---@diagnostic disable-next-line: deprecated
 		callback(unpack(args))
 	end
 end
