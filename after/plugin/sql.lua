@@ -5,13 +5,13 @@ local run_formatter = function(text)
 
 	local j = require("plenary.job"):new({
 		command = "pg_format",
-		args = { "--tabs" },
+		args = { "--tabs",  "--wrap-after", 1, "--wrap-limit", 100 },
 		writer = { result },
 	})
 	return j:sync()
 end
 
-local embedded_sql = vim.treesitter.parse_query(
+local embedded_sql = vim.treesitter.query.parse(
 	"go",
 	[[
 (
@@ -59,10 +59,27 @@ local format_sql = function()
 
 			-- local indentation = string.rep(" ", range[2])
 
+			local replacements = {}
+			text:gsub("%$%d+", function(dollar)
+				text = text:gsub(dollar, function(match)
+					table.insert(replacements, {"dollar", match})
+					return "__replaced__dollar__" .. #replacements .. "__"
+				end)
+			end)
+
+			 text:gsub("?", function(question )
+				text = text:gsub(question, function(match)
+					table.insert(replacements, {"question", match})
+					return "__replaced__question__" .. #replacements .. "__"
+				end)
+			end)
+
 			-- Run the formatter, based on the node text
-			-- P(text)
 			local formatted = run_formatter(text)
-			-- P(formatted)
+
+			for i, replacement in ipairs(replacements) do
+				formatted = formatted:gsub("__replaced__" .. replacement[1] .. "__" .. i .. "__", replacement[2])
+			end
 
 			-- Add some indentation (can be anything you like!)
 			-- for idx, line in ipairs(formatted) do

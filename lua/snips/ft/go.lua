@@ -15,7 +15,6 @@ local fmt = require("luasnip.extras.fmt").fmt
 local lambda = require("luasnip.extras").l
 
 local ts_locals = require("nvim-treesitter.locals")
-local ts_utils = require("nvim-treesitter.ts_utils")
 local get_node_text = vim.treesitter.get_node_text
 
 local b = utils.b
@@ -95,7 +94,7 @@ local function_node_types = {
 }
 
 local function go_result_type(info)
-	local cursor_node = ts_utils.get_node_at_cursor()
+	local cursor_node = vim.treesitter.get_node()
 	local scope = ts_locals.get_scope_tree(cursor_node, 0)
 
 	local function_node
@@ -111,7 +110,7 @@ local function go_result_type(info)
 		return t("")
 	end
 
-	local query = vim.treesitter.parse_query(
+	local query = vim.treesitter.query.parse(
 		"go",
 		[[
       [

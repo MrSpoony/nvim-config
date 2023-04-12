@@ -25,9 +25,9 @@ mason_lsp.setup({
 mason_lsp.setup_handlers({
 	function(server_name)
 		local opts = vim.deepcopy(options)
-		if server_name == "gopls" then
-			return
-		end
+		-- if server_name == "gopls" then
+		-- 	return
+		-- end
 		if server_name == "eslint" then
 			opts.settings = {
 				format = { enable = true },

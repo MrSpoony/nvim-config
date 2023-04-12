@@ -1,12 +1,10 @@
-local go = require("go")
-
 local lspconfigs = require("kl.lspconfigs")
 local opts = lspconfigs.options
 
 opts.highlight_hovered_item = nil
 opts.show_guides = nil
 
-go.setup({
+require("go").setup({
 	go = "go", -- go command, can be go[default] or go1.18beta1
 	goimport = "gopls", -- goimport command, can be gopls[default] or goimport
 	fillstruct = "gopls", -- can be nil (use fillstruct, slower) and gopls

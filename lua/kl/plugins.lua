@@ -232,7 +232,7 @@ require("lazy").setup({
 		lazy = true,
 		event = { "CmdlineEnter" },
 		ft = { "go", "gomod" },
-		build = '<cmd.lua require("go.install").update_all_sync()<CR>',
+		build = '<cmd>lua require("go.install").update_all_sync()<CR>',
 	},
 	--  "hdiniz/vim-gradle",                     
 	"neoclide/vim-jsx-improve",
