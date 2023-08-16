@@ -26,7 +26,6 @@ Nnoremap("<m-CR>", vim.lsp.buf.code_action, opts)
 Nnoremap("<a-CR>", vim.lsp.buf.code_action, opts)
 Nnoremap("<leader>fo", vim.lsp.buf.format, opts)
 
-
 -- don't add curly brace jumps to my jump list
 Nnoremap("}", '<cmd>execute "keepjumps norm! " . v:count1 . "}"<CR>', { silent = true })
 Nnoremap("{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent = true })
@@ -86,6 +85,9 @@ Nnoremap("<leader>bq", "<cmd>quit!<CR>")
 Nnoremap("<leader>bd", vim.cmd.bdelete)
 Nnoremap("<leader>ba", "<cmd>quitall!<CR>")
 
+Nnoremap("<leader>sp", "<cmd>sp<CR>")
+Nnoremap("<leader>vp", "<cmd>vsp<CR>")
+
 Nnoremap(":", ";")
 Nnoremap(";", ":")
 Vnoremap(":", ";")
@@ -96,4 +98,10 @@ for i = 25, 36 do
 	Nmap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
 	Imap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
 	Xmap("<F" .. i .. ">", "<F" .. (i - 24) .. ">")
+end
+
+for i = 1, 12 do
+	Nmap("<C-F" .. i .. ">", "<F" .. i .. ">")
+	Imap("<C-F" .. i .. ">", "<F" .. i .. ">")
+	Xmap("<C-F" .. i .. ">", "<F" .. i .. ">")
 end

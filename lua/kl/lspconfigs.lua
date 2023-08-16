@@ -42,7 +42,7 @@ M.on_attach = function(
 
 	set_default_formatter_for_filetypes("gopls", { "go" })
 
-	set_default_formatter_for_filetypes("eslint", {
+	set_default_formatter_for_filetypes("prettier", {
 		"javascript",
 		"javascriptreact",
 		"typescript",

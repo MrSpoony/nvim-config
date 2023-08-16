@@ -1,6 +1,6 @@
 local utils = require("kl.utils")
 
-P = vim.pretty_print
+P = vim.print
 
 Fn = utils.fn
 

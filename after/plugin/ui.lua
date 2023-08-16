@@ -53,6 +53,7 @@ function ColorIt(colorscheme)
 		vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 		vim.cmd.highlight("Folded guibg=#212231")
 		vim.cmd.colorscheme("catppuccin")
+		vim.cmd.highlight("Folded guibg=#212231")
 	elseif colorscheme == "onedark" then
 		require("onedark").setup({
 			theme = "deep",

@@ -60,6 +60,8 @@ o.termguicolors = true
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.g.omni_sql_no_default_maps = 1
+
 vim.api.nvim_create_user_command("WQ", "wq", {})
 vim.api.nvim_create_user_command("Wq", "wq", {})
 vim.api.nvim_create_user_command("W", "w", {})
@@ -80,6 +82,12 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 			return
 		end
 		o.colorcolumn = "80"
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	callback = function()
+		vim.lsp.buf.format()
 	end,
 })
 

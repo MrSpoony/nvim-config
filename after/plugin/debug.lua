@@ -1,36 +1,29 @@
 local dap = require("dap")
-local dapgo = require("dap-go")
-local dui = require("dapui")
-local dapvtext = require("nvim-dap-virtual-text")
-local debugprint = require("debugprint")
-
-dapvtext.setup()
-dui.setup()
-dapgo.setup()
 
 Nnoremap("<leader>dc", function()
-	dui.open()
+	require("dapui").open()
 	dap.continue()
 end)
-Nnoremap("<F3>", dap.step_back)
-Nnoremap("<F4>", dap.step_out)
-Nnoremap("<F5>", dap.continue)
-Nnoremap("<F7>", dap.step_into)
-Nnoremap("<F6>", dap.step_over)
-Nnoremap("<F10>", dap.restart)
-Nnoremap("<leader>dr", function()
-	dap.close()
-	dui.open()
-	dap.continue()
-end)
+
+Nnoremap("<C-Y>", dap.step_back)
+Nnoremap("<C-U>", dap.step_out)
+
+Nnoremap("<C-E>", dap.step_into)
+Nnoremap("<C-N>", dap.step_over)
+
+Nnoremap("<leader>dr", dap.restart)
+
 Nnoremap("<leader>ds", function()
 	dap.close()
-	dui.close()
+	require("dapui").close()
 end)
+
+Nnoremap("<leader>du", function()
+	require("dapui").toggle()
+end)
+
 Nnoremap("<leader>dd", dap.toggle_breakpoint)
 Nnoremap("<leader>dt", function()
 	vim.ui.input("Breakpoint condition: ", dap.toggle_breakpoint)
 end)
 Nnoremap("<leader>da", dap.clear_breakpoints)
-
-debugprint.setup({})

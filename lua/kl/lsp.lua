@@ -1,5 +1,3 @@
-local mason = require("mason")
-local mason_lsp = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -9,31 +7,20 @@ local ls = require("luasnip")
 
 local options = require("kl.lspconfigs").options
 
-mason.setup()
-
-mason_lsp.setup({
-	ensure_installed = {
-		"lua_ls",
-		"rust_analyzer",
-		"clangd",
-		"eslint",
-		"tsserver",
-		"gopls",
-	},
-})
-
-mason_lsp.setup_handlers({
+require("mason-lspconfig").setup_handlers({
 	function(server_name)
 		local opts = vim.deepcopy(options)
-		-- if server_name == "gopls" then
-		-- 	return
-		-- end
 		if server_name == "eslint" then
 			opts.settings = {
 				format = { enable = true },
 			}
-		end
-		if server_name == "clangd" then
+		elseif server_name == "gopls" then
+			opts.settings = {
+				gopls = {
+					gofumpt = true,
+				},
+			}
+		elseif server_name == "clangd" then
 			opts.capabilities.offsetEncoding = { "utf-16" }
 			opts.cmd = {
 				"clangd",
@@ -41,12 +28,10 @@ mason_lsp.setup_handlers({
 				"--enable-config",
 			}
 		end
+
 		lspconfig[server_name].setup(opts)
 	end,
 })
-
-
-copilot_cmp.setup()
 
 local compare = cmp.config.compare
 cmp.setup({
@@ -230,11 +215,10 @@ Nnoremap("<leader>xx", vim.cmd.Trouble)
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
-		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.prettier,
-		null_ls.builtins.formatting.pg_format,
-		null_ls.builtins.diagnostics.eslint,
-		null_ls.builtins.completion.spell,
+		-- null_ls.builtins.formatting.pg_format,
+		-- null_ls.builtins.diagnostics.eslint,
+		-- null_ls.builtins.completion.spell,
 		null_ls.builtins.code_actions.gitsigns,
 	},
 })
