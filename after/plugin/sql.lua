@@ -5,7 +5,7 @@ local run_formatter = function(text)
 
 	local j = require("plenary.job"):new({
 		command = "pg_format",
-		args = { "--tabs",  "--wrap-after", 1, "--wrap-limit", 100 },
+		args = { "--tabs", "--wrap-after", 1, "--wrap-limit", 100 },
 		writer = { result },
 	})
 	return j:sync()
@@ -62,14 +62,14 @@ local format_sql = function()
 			local replacements = {}
 			text:gsub("%$%d+", function(dollar)
 				text = text:gsub(dollar, function(match)
-					table.insert(replacements, {"dollar", match})
+					table.insert(replacements, { "dollar", match })
 					return "__replaced__dollar__" .. #replacements .. "__"
 				end)
 			end)
 
-			 text:gsub("?", function(question )
+			text:gsub("?", function(question)
 				text = text:gsub(question, function(match)
-					table.insert(replacements, {"question", match})
+					table.insert(replacements, { "question", match })
 					return "__replaced__question__" .. #replacements .. "__"
 				end)
 			end)
@@ -107,10 +107,3 @@ local format_sql = function()
 end
 
 vim.api.nvim_create_user_command("FormatSql", format_sql, {})
-
--- vim.api.nvim_create_autocmd("BufWritePre", {
---     pattern = "*.go",
---     callback = function()
---         format_sql()
---     end,
--- })

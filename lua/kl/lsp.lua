@@ -20,6 +20,23 @@ require("mason-lspconfig").setup_handlers({
 					gofumpt = true,
 				},
 			}
+
+			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+				pattern = "*.go",
+				callback = function()
+					local params = vim.lsp.util.make_range_params()
+					local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+					for _, res in pairs(result or {}) do
+						for _, r in pairs(res.result or {}) do
+							if (r.title == "Organize Imports" or r.title:find("Add import:")) and r.edit then
+								vim.lsp.util.apply_workspace_edit(r.edit, "UTF-8")
+							end
+						end
+					end
+
+					vim.lsp.buf.format()
+				end
+			})
 		elseif server_name == "clangd" then
 			opts.capabilities.offsetEncoding = { "utf-16" }
 			opts.cmd = {
@@ -216,9 +233,8 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.prettier,
-		-- null_ls.builtins.formatting.pg_format,
-		-- null_ls.builtins.diagnostics.eslint,
-		-- null_ls.builtins.completion.spell,
+		null_ls.builtins.formatting.pg_format,
+		null_ls.builtins.formatting.goimports,
 		null_ls.builtins.code_actions.gitsigns,
 	},
 })

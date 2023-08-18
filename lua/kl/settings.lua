@@ -163,13 +163,6 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	callback = foldOneLineReturnOccurences,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	pattern = "*.rs",
-	callback = function()
-		vim.lsp.buf.format()
-	end,
-})
-
 o.foldmethod = "manual"
 o.fillchars = "fold: "
 o.foldtext = "v:lua.foldText()"
