@@ -194,12 +194,15 @@ require("lazy").setup({
 			{ "<M-k>", function() require("tmux").resize_bottom() end },
 			{ "<M-h>", function() require("tmux").resize_left() end },
 			{ "<M-l>", function() require("tmux").resize_right() end },
+			{ "<C-j>", function() require("tmux").move_top() end },
+			{ "<C-k>", function() require("tmux").move_bottom() end },
+			{ "<C-h>", function() require("tmux").move_left() end },
+			{ "<C-l>", function() require("tmux").move_right() end },
 			{ "∆", function() require("tmux").resize_top() end },
 			{ "˚", function() require("tmux").resize_bottom() end },
 			{ "˙", function() require("tmux").resize_left() end },
 			{ "¬", function() require("tmux").resize_right() end },
 		},
-		-- lazy = true
 	},
 	{ "ckarnell/Antonys-macro-repeater", event = "RecordingEnter" },
 	"AndrewRadev/splitjoin.vim",
@@ -232,7 +235,6 @@ require("lazy").setup({
 	-- New "Verbs"
 	{
 		"numToStr/Comment.nvim",
-		lazy = true,
 		opts = {
 			toggler = {
 				line = "gcc",
@@ -263,23 +265,26 @@ require("lazy").setup({
 	},
 	{
 		"gbprod/substitute.nvim",
-		lazy = true,
-		opts = {
-			highlight_substituted_text = {
-				enabled = false,
-				timer = 500,
-			},
-		},
-		keys = {
-			{ "s",          function() require("substitute").operator() end,                   "x" },
-			{ "ss",         function() require("substitute").line() end },
-			{ "S",          function() require("substitute").eol() end },
-			{ "s",          function() require("substitute").visual() end,                     "v" },
-			{ "<leader>s",  function() require("substitute").operator({ register = "+" }) end, "x" },
-			{ "<leader>ss", function() require("substitute").line({ register = "+" }) end },
-			{ "<leader>S",  function() require("substitute").eol({ register = "+" }) end },
-			{ "<leader>s",  function() require("substitute").visual({ register = "+" }) end,   "v" },
-		}
+		config = function()
+			local sub = require("substitute")
+
+			sub.setup({
+				highlight_substituted_text = {
+					enabled = false,
+					timer = 500,
+				},
+			})
+
+			Nnoremap("s", sub.operator)
+			Nnoremap("ss", sub.line)
+			Nnoremap("S", sub.eol)
+			Xnoremap("s", sub.visual)
+
+			Nnoremap("<leader>s", Fn(sub.operator, { register = "+" }))
+			Nnoremap("<leader>ss", Fn(sub.line, { register = "+" }))
+			Nnoremap("<leader>S", Fn(sub.eol, { register = "+" }))
+			Xnoremap("<leader>s", Fn(sub.visual, { register = "+" }))
+		end
 	},
 
 	-- New "Nouns"
