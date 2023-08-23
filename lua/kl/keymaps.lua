@@ -67,6 +67,9 @@ Nnoremap("<leader>y", '"+y')
 Nnoremap("<leader>Y", '"+y$')
 Vnoremap("<leader>y", '"+y')
 
+Nnoremap("<leader>w", "<cmd>noautocmd w<CR>")
+Vnoremap("<leader>w", "<cmd>noautocmd w<CR>")
+
 Nnoremap("<leader>+", "<cmd>vertical resize +5<CR>")
 Nnoremap("<leader>-", "<cmd>vertical resize -5<CR>")
 
