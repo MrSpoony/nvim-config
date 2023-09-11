@@ -86,6 +86,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.go", "*.java", "*.rs", "*.cpp", "*.c" },
 	callback = function()
 		vim.lsp.buf.format()
 	end,

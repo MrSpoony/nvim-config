@@ -359,6 +359,7 @@ require("lazy").setup({
 	-- Git
 	{
 		"lewis6991/gitsigns.nvim",
+		cmd = "Gitsigns",
 		opts = {
 			watch_gitdir = {
 				interval = 500,
@@ -371,7 +372,7 @@ require("lazy").setup({
 				delay = 1000,
 				ignore_whitespace = false,
 			},
-			current_line_blame_formatter = " ﳑ <author>, <author_time:%Y-%m-%d> - <summary>",
+			-- current_line_blame_formatter = " ﳑ <author>, <author_time:%Y-%m-%d> - <summary>",
 		},
 		keys = {
 			{ "<leader>ga", "<cmd>!git fetch --all<CR>" },
@@ -380,6 +381,7 @@ require("lazy").setup({
 			{ "[g",         function() require("gitsigns").prev_hunk() end },
 		}
 	},
+	"sindrets/diffview.nvim",
 	"rhysd/committia.vim",
 
 	-- Snippets

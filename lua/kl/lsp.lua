@@ -1,7 +1,6 @@
 local lspconfig = require("lspconfig")
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local copilot_cmp = require("copilot_cmp")
 local copilot_suggestion = require("copilot.suggestion")
 local ls = require("luasnip")
 
