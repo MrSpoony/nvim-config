@@ -17,7 +17,7 @@ Nnoremap("<leader>q", vim.diagnostic.setloclist, opts)
 
 Nnoremap("gD", vim.lsp.buf.declaration, opts)
 Nnoremap("K", vim.lsp.buf.hover, opts)
-Nnoremap("<C-M>", vim.lsp.buf.signature_help, opts)
+-- Nnoremap("<C-M>", vim.lsp.buf.signature_help, opts)
 Nnoremap("<leader>D", vim.lsp.buf.type_definition, opts)
 Nnoremap("<leader>rn", vim.lsp.buf.rename, opts)
 Nnoremap("<leader>ca", vim.lsp.buf.code_action, opts)

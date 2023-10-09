@@ -6,7 +6,7 @@ Nnoremap("<leader>dc", function()
 end)
 
 Nnoremap("<C-Y>", dap.step_back)
-Nnoremap("<C-U>", dap.step_out)
+Nnoremap("<C-M>", dap.step_out)
 
 Nnoremap("<C-E>", dap.step_into)
 Nnoremap("<C-N>", dap.step_over)
