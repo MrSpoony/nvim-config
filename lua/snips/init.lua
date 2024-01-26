@@ -35,10 +35,7 @@ end
 
 utils.onBegin = function(line_to_cursor, matched_trigger)
 	line_to_cursor = line_to_cursor:gsub("%s+", "")
-	if line_to_cursor == matched_trigger then
-		return true
-	end
-	return false
+	return line_to_cursor == matched_trigger
 end
 
 utils.inWord = function(line, trigger)

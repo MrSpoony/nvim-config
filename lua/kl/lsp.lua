@@ -234,6 +234,8 @@ null_ls.setup({
 		null_ls.builtins.formatting.prettier,
 		null_ls.builtins.formatting.pg_format,
 		null_ls.builtins.formatting.goimports,
+		null_ls.builtins.diagnostics.golangci_lint,
+		null_ls.builtins.code_actions.refactoring,
 		null_ls.builtins.code_actions.gitsigns,
 	},
 })

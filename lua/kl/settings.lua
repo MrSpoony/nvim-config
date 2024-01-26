@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.go", "*.java", "*.rs", "*.cpp", "*.c" },
+	pattern = { "*.go", "*.java", "*.rs", "*.cpp", "*.c", "*.md" },
 	callback = function()
 		vim.lsp.buf.format()
 	end,
@@ -159,10 +159,10 @@ local function foldOneLineReturnOccurences()
 	end
 end
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-	pattern = { "*.go", "*.java", "*.rs", "*.cpp", "*.c" },
-	callback = foldOneLineReturnOccurences,
-})
+-- vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+-- 	pattern = { "*.go", "*.java", "*.rs", "*.cpp", "*.c" },
+-- 	callback = foldOneLineReturnOccurences,
+-- })
 
 o.foldmethod = "manual"
 o.fillchars = "fold: "

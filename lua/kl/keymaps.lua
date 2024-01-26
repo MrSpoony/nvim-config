@@ -21,7 +21,7 @@ Nnoremap("K", vim.lsp.buf.hover, opts)
 Nnoremap("<leader>D", vim.lsp.buf.type_definition, opts)
 Nnoremap("<leader>rn", vim.lsp.buf.rename, opts)
 Nnoremap("<leader>ca", vim.lsp.buf.code_action, opts)
--- Vnoremap("<leader>ca", vim.lsp.buf.range_code_action, opts)
+Vnoremap("<leader>ca", vim.lsp.buf.code_action, opts)
 Nnoremap("<m-CR>", vim.lsp.buf.code_action, opts)
 Nnoremap("<a-CR>", vim.lsp.buf.code_action, opts)
 Nnoremap("<leader>fo", vim.lsp.buf.format, opts)
@@ -40,6 +40,22 @@ Inoremap("<Tab>", function()
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, true, true), "n", true)
 end)
 
+local function removeQFItem()
+  local curqfidx = vim.fn.line('.') - 1
+  local qfall = vim.fn.getqflist()
+  vim.fn.remove(qfall, curqfidx)
+  vim.fn.setqflist(qfall, 'r')
+  vim.cmd('execute ' .. curqfidx .. ' + 1 . \"cfirst\"')
+  vim.cmd [[ :copen ]]
+end
+vim.api.nvim_create_autocmd({"FileType"}, {
+	pattern = { "qf" },
+	callback = function()
+		Nnoremap("dd", removeQFItem, { buffer = true })
+	end,
+})
+
+Nnoremap("<buffer> <CR>", "<CR>")
 -- Center cursor on search or scroll
 Nnoremap("n", "nzzzv")
 Nnoremap("N", "Nzzzv")

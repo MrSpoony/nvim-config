@@ -340,9 +340,19 @@ require("lazy").setup({
 		event = "InsertEnter"
 	},
 
-	"rafamadriz/friendly-snippets",
 	{ "folke/trouble.nvim",              lazy = true },
 	"jose-elias-alvarez/null-ls.nvim",
+	{
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("refactoring").setup()
+		end,
+	},
+
 
 	"neoclide/vim-jsx-improve",
 	"lervag/vimtex",
@@ -388,8 +398,10 @@ require("lazy").setup({
 	{
 		"L3MON4D3/LuaSnip",
 		lazy = true,
+		version = "v2.*",
 		build = "make install_jsregexp",
 	},
+	{ "rafamadriz/friendly-snippets" },
 
 	-- Own plugin
 	-- "~/code/vim/plugins/soicode.vim",
