@@ -36,6 +36,18 @@ require("mason-lspconfig").setup_handlers({
 					vim.lsp.buf.format()
 				end
 			})
+		elseif server_name == "rust_analyzer" then
+			opts.settings = {
+				["rust-analyzer"] = {
+					rustfmt = {
+						overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
+						overrideSave = true,
+					},
+					checkOnSave = {
+						command = "clippy",
+					},
+				},
+			}
 		elseif server_name == "clangd" then
 			opts.capabilities.offsetEncoding = { "utf-16" }
 			opts.cmd = {
