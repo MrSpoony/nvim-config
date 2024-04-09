@@ -6,67 +6,76 @@ local ls = require("luasnip")
 
 local options = require("kl.lspconfigs").options
 
-require("mason-lspconfig").setup_handlers({
-	function(server_name)
-		local opts = vim.deepcopy(options)
-		if server_name == "eslint" then
-			opts.settings = {
-				format = { enable = true },
-			}
-		elseif server_name == "gopls" then
-			opts.settings = {
-				gopls = {
-					gofumpt = true,
+
+local lsp_servers = {
+	lua_ls = {
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = { "vim" },
+					disable = { "different-requires" },
 				},
-			}
-
-			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-				pattern = "*.go",
-				callback = function()
-					local params = vim.lsp.util.make_range_params()
-					local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
-					for _, res in pairs(result or {}) do
-						for _, r in pairs(res.result or {}) do
-							if (r.title == "Organize Imports" or r.title:find("Add import:")) and r.edit then
-								vim.lsp.util.apply_workspace_edit(r.edit, "UTF-8")
-							end
-						end
-					end
-
-					vim.lsp.buf.format()
-				end
-			})
-		elseif server_name == "rust_analyzer" then
-			opts.settings = {
-				["rust-analyzer"] = {
-					rustfmt = {
-						overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
-						overrideSave = true,
-					},
-					checkOnSave = {
-						command = "clippy",
-					},
+			},
+		},
+	},
+	rust_analyzer = {
+		settings = {
+			["rust-analyzer"] = {
+				rustfmt = {
+					overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
+					overrideSave = true,
 				},
-			}
-		elseif server_name == "tailwindcss" then
-			opts.filetypes = { "html", "javascript", "typescript", "rust" }
-		elseif server_name == "clangd" then
-			opts.capabilities.offsetEncoding = { "utf-16" }
-			opts.cmd = {
-				"clangd",
-				"--background-index",
-				"--enable-config",
-			}
-		elseif server_name == "hls" then
-			opts.root_dir = vim.loop.cwd
-			opts.settings = {
-				rootMarkers = { "./git/" }
-			}
-		end
+				checkOnSave = {
+					command = "clippy",
+				},
+			},
+			cargo = {
+				features = { "all" },
+			},
+		},
+	},
+	htmx = {},
+	eslint = {
+		settings = {
+			format = { enable = true },
+		},
+	},
+	tsserver = {},
+	angularls = {},
+	gopls = {
+		settings = {
+			gopls = {
+				gofumpt = true,
+			},
+		},
+	},
+	templ = {},
+	pyright = {},
+	html = {},
+	yamlls = {},
+	jsonls = {},
+	tailwindcss = {
+		filetypes = { "html", "javascript", "typescript", "rust" },
+	},
+	clangd = {
+		capabilities = { offsetEncoding = { "utf-16" } },
+		cmd = {
+			"clangd",
+			"--background-index",
+			"--enable-config",
+		},
+	},
+	hls = {
+		root_dir = vim.loop.cwd,
+		settings = {
+			rootMarkers = { "./git/" },
+		},
+	},
+}
 
-		lspconfig[server_name].setup(opts)
-	end,
-})
+for server, config in pairs(lsp_servers) do
+	lspconfig[server].setup(vim.tbl_deep_extend("force", options, config))
+end
 
 local compare = cmp.config.compare
 cmp.setup({

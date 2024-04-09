@@ -1,11 +1,6 @@
-local lspconfigs = require("kl.lspconfigs")
 local utils = require("kl.utils")
 local json = require("kl.utils.json")
 local notify = require("notify")
-
-local opts = lspconfigs.options
-
-opts.highlight_hovered_item = nil
 
 local test_funcs = vim.treesitter.query.parse(
 	"go",

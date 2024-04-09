@@ -61,11 +61,6 @@ local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_cli
 
 M.options = {
 	on_attach = M.on_attach,
-	highlight_hovered_item = true,
-	show_guides = true,
-	flags = {
-		debounce_text_changes = 150,
-	},
 	capabilities = capabilities,
 }
 

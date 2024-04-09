@@ -15,13 +15,11 @@ ls.config.set_config({
 })
 
 -- Load friendly snippets
-require("luasnip.loaders.from_vscode").load({
-	paths = vim.fn.stdpath("data") .. "/lazy/friendly-snippets/",
-})
-
--- Load vscode snippets
-require("luasnip.loaders.from_vscode").load({
-	paths = "~/.config/nvim/lua/snips/lsp/ft",
+require("luasnip.loaders.from_vscode").lazy_load({
+	paths = {
+		vim.fn.stdpath("data") .. "/lazy/friendly-snippets/",
+		vim.fn.stdpath("config") .. "/lua/snips/lsp/ft/",
+	}
 })
 
 local files = vim.fn.glob(vim.fn.stdpath("config") .. "/lua/kl/snips/ft/*.lua", false, true)

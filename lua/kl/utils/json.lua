@@ -1,3 +1,5 @@
+-- Library is from https://github.com/rxi/json.lua
+
 --[[ json.lua
 
 A compact pure-Lua JSON library.

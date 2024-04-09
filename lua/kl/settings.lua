@@ -86,10 +86,26 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.go", "*.java", "*.rs", "*.cpp", "*.c", "*.md" },
+	pattern = { "*.java", "*.rs", "*.cpp", "*.c", "*.md" },
 	callback = function()
 		vim.lsp.buf.format()
 	end,
+})
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = "*.go",
+	callback = function()
+		local params = vim.lsp.util.make_range_params()
+		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+		for _, res in pairs(result or {}) do
+			for _, r in pairs(res.result or {}) do
+				if (r.title == "Organize Imports" or r.title:find("Add import:")) and r.edit then
+					vim.lsp.util.apply_workspace_edit(r.edit, "UTF-8")
+				end
+			end
+		end
+
+		vim.lsp.buf.format()
+	end
 })
 
 o.foldmethod = "manual"
