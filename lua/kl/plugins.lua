@@ -52,8 +52,7 @@ require("lazy").setup({
 
 	{ "nvim-lualine/lualine.nvim",   lazy = true },
 	"mhinz/vim-startify",
-	{ "stevearc/dressing.nvim", lazy = true },
-	{ "ray-x/guihua.lua",       build = "cd lua/fzy && make" },
+	{ "stevearc/dressing.nvim",          lazy = true },
 	"voldikss/vim-floaterm",
 	"kyazdani42/nvim-web-devicons",
 	{
@@ -63,37 +62,36 @@ require("lazy").setup({
 	"neovide/neovide",
 	{
 		"kyazdani42/nvim-tree.lua",
-		opts = {
-			renderer = {
-				group_empty = true,
-				highlight_opened_files = "icon",
-				icons = {},
-			},
-			open_on_tab = false,
-			update_cwd = true,
-			diagnostics = {
-				enable = true,
-				show_on_dirs = false,
-			},
-			update_focused_file = {
-				enable = true,
+		config = function()
+			require("nvim-tree").setup({
+				renderer = {
+					group_empty = true,
+					highlight_opened_files = "icon",
+					icons = {},
+				},
+				open_on_tab = false,
 				update_cwd = true,
-				update_root = true,
-				ignore_list = {},
-			},
-			view = {
-				adaptive_size = true,
-				width = 40,
-				side = "left",
-			},
-			trash = {
-				cmd = "trash",
-				require_confirm = true,
-			},
-		},
-		keys = {
-			{ "<C-f>", "<cmd>Telescope file_browser<cr>" }
-		}
+				diagnostics = {
+					enable = true,
+					show_on_dirs = false,
+				},
+				update_focused_file = {
+					enable = true,
+					update_cwd = true,
+					update_root = true,
+					ignore_list = {},
+				},
+				view = {
+					adaptive_size = true,
+					width = 40,
+					side = "left",
+				},
+				trash = {
+					cmd = "trash",
+					require_confirm = true,
+				},
+			})
+		end
 	},
 
 	-- Treesitter
@@ -129,7 +127,7 @@ require("lazy").setup({
 	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
-		lazy = true,
+		-- lazy = true,
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter", },
 	},
 	{
@@ -186,22 +184,22 @@ require("lazy").setup({
 			},
 		},
 		keys = {
-			{ "<Up>", function() require("tmux").resize_top() end },
-			{ "<Down>", function() require("tmux").resize_bottom() end },
-			{ "<Left>", function() require("tmux").resize_left() end },
+			{ "<Up>",    function() require("tmux").resize_top() end },
+			{ "<Down>",  function() require("tmux").resize_bottom() end },
+			{ "<Left>",  function() require("tmux").resize_left() end },
 			{ "<Right>", function() require("tmux").resize_right() end },
-			{ "<M-j>", function() require("tmux").resize_top() end },
-			{ "<M-k>", function() require("tmux").resize_bottom() end },
-			{ "<M-h>", function() require("tmux").resize_left() end },
-			{ "<M-l>", function() require("tmux").resize_right() end },
-			{ "<C-j>", function() require("tmux").move_top() end },
-			{ "<C-k>", function() require("tmux").move_bottom() end },
-			{ "<C-h>", function() require("tmux").move_left() end },
-			{ "<C-l>", function() require("tmux").move_right() end },
-			{ "∆", function() require("tmux").resize_top() end },
-			{ "˚", function() require("tmux").resize_bottom() end },
-			{ "˙", function() require("tmux").resize_left() end },
-			{ "¬", function() require("tmux").resize_right() end },
+			{ "<M-j>",   function() require("tmux").resize_top() end },
+			{ "<M-k>",   function() require("tmux").resize_bottom() end },
+			{ "<M-h>",   function() require("tmux").resize_left() end },
+			{ "<M-l>",   function() require("tmux").resize_right() end },
+			{ "<C-j>",   function() require("tmux").move_top() end },
+			{ "<C-k>",   function() require("tmux").move_bottom() end },
+			{ "<C-h>",   function() require("tmux").move_left() end },
+			{ "<C-l>",   function() require("tmux").move_right() end },
+			{ "∆",     function() require("tmux").resize_top() end },
+			{ "˚",      function() require("tmux").resize_bottom() end },
+			{ "˙",      function() require("tmux").resize_left() end },
+			{ "¬",      function() require("tmux").resize_right() end },
 		},
 	},
 	{ "ckarnell/Antonys-macro-repeater", event = "RecordingEnter" },
@@ -229,7 +227,7 @@ require("lazy").setup({
 		dependencies = { "nvim-lua/plenary.nvim", },
 	},
 	"sheerun/vim-polyglot",
-	{ "norcalli/nvim-colorizer.lua",     lazy = true },
+	{ "norcalli/nvim-colorizer.lua", lazy = true },
 	"gpanders/editorconfig.nvim",
 
 	-- New "Verbs"
@@ -298,7 +296,7 @@ require("lazy").setup({
 
 	-- LSP stuff
 	"neovim/nvim-lspconfig",
-	{ "williamboman/mason.nvim",  lazy = true, config = true },
+	{ "williamboman/mason.nvim",     lazy = true, config = true },
 	{
 		"williamboman/mason-lspconfig.nvim",
 
@@ -340,7 +338,6 @@ require("lazy").setup({
 		event = "InsertEnter"
 	},
 
-	{ "folke/trouble.nvim",              lazy = true },
 	"jose-elias-alvarez/null-ls.nvim",
 	{
 		"ThePrimeagen/refactoring.nvim",
@@ -404,5 +401,5 @@ require("lazy").setup({
 	{ "rafamadriz/friendly-snippets" },
 
 	-- Own plugin
-	-- "~/code/vim/plugins/soicode.vim",
+	{ dir = "~/code/vim/plugins/soicode.vim" },
 })

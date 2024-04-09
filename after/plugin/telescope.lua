@@ -30,7 +30,7 @@ local le = ts.load_extension
 le("fzf")
 le("zoxide")
 le("smart_history")
-le("harpoon")
+-- le("harpoon")
 le("file_browser")
 
 local ex = ts.extensions

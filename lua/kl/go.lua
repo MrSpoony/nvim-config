@@ -7,35 +7,6 @@ local opts = lspconfigs.options
 
 opts.highlight_hovered_item = nil
 
-vim.api.nvim_create_autocmd({ "BufNewFile" }, {
-	pattern = "*.go",
-	callback = function()
-		local dir = vim.fn.expand("%:p:h")
-		dir = dir:gsub(".*/", "")
-		dir = "package " .. dir
-		vim.fn.append(0, dir)
-	end,
-})
-local api = require("nvim-tree.api")
-local Event = require("nvim-tree.api").events.Event
-api.events.subscribe(Event.FileCreated, function(data)
-	if not data.fname:find(".go") then
-		return
-	end
-	local dir = data.fname
-	dir = dir:gsub("/[^/]*$", "")
-	dir = dir:gsub(".*/", "")
-	dir = "package " .. dir .. "\n"
-	vim.fn.system('echo "' .. dir .. '" > ' .. data.fname)
-end)
-
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	pattern = "*_test.go",
-	callback = function()
-
-	end,
-})
-
 local test_funcs = vim.treesitter.query.parse(
 	"go",
 	[[
@@ -101,8 +72,6 @@ local run_tests = function(func_name)
 		end,
 		on_exit = function()
 			vim.schedule(function()
-				vim.print(vim.inspect(test_notification_window_ids))
-				vim.print(vim.inspect(test_results))
 				for k, v in pairs(test_results) do
 					if v == "pass" and k == func_name then
 						if test_notification_window_ids[k] then

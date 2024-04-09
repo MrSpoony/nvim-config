@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 
 require("notify").setup({
-  icons = nonicons_extention.icons,
+	icons = nonicons_extention.icons,
 })
 
 vim.notify = require("notify")

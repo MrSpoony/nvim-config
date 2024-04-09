@@ -59,7 +59,6 @@ local function getIdentifierText(nodes)
 	end
 	local srow, scol = identifierNode:start()
 	local erow, ecol = identifierNode:end_()
-	P(srow, scol, erow, ecol)
 	return vim.api.nvim_buf_get_text(0, srow, scol, erow, ecol, {})
 end
 
@@ -102,12 +101,10 @@ local function getLongLongAlias()
 			goto continueLL
 		end
 		local nodes = getAllNodes(v.node)
-		P(nodes)
 		if nodes[1].type ~= "using" then
 			goto continueLL
 		end
 		local identifierText = getIdentifierText(nodes)
-		P(identifierText)
 		if
 			nodes[4].type == "type_descriptor"
 				and nodes[4].children[1].type == "long"
