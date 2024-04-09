@@ -1,4 +1,4 @@
-local utils = require("snips")
+local utils = require("kl.snips")
 local ls = require("luasnip")
 local s = utils.snippet
 local sn = ls.snippet_node

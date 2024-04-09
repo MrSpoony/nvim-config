@@ -1,0 +1,58 @@
+{
+    "Table driven test": {
+        "prefix": "tabletest",
+        "body": [
+            "func Test${1:YourFunc}(t *testing.T) {",
+            "\ttestCases := map[string]struct{",
+            "\t\tinput string",
+            "\t\texpected string",
+            "\t}{",
+            "\t\t\t\"name\": {input: \"happy path\", expected: \"happy path\"},",
+            "\t}",
+            "\tfor name, tc := range testCases {",
+            "\t\tt.Run(name, func(t *testing.T) {",
+            "\t\t\tgot := ${1:YourFunc}(tc.input)",
+            "\t\t\tassert.Equal(t, tc.expected, got)",
+            "\t\t})",
+            "\t}",
+            "}"
+        ],
+        "description": "Create basic structure for a table driven test"
+    },
+    "Mock DB test": {
+        "prefix": "mockdbtest",
+        "body": [
+            "func Test${1:YourFunc}(t *testing.T) {",
+            "\tif testing.Short() {",
+            "\t\tt.Skip(\"skipping Test${1:YourFunc} in short mode\")",
+            "\t}",
+            "",
+            "\t// ==================================================",
+            "\t// Test setup",
+            "",
+            "\tepg, err := mockpg.New()",
+            "\tif err != nil {",
+            "\t\tt.Fatal(err)",
+            "\t}",
+            "\tdefer epg.Close()",
+            "\tdb := epg.DB()",
+            "",
+            "\t// ==================================================",
+            "\t// Test cases",
+            "",
+            "\tt.Run(\"empty\", func(t *testing.T) {",
+            "\t\tvar (",
+            "\t\t\tinput []int64",
+            "\t\t)",
+            "",
+            "\t\t// input = []int64{1}",
+            "",
+            "\t\tres, err := db.${1:YourFunc}(context.Background(), input)",
+            "\t\tassert.Nil(t, err, err)",
+            "\t\tassert.Equal(t, 2501, len(res))",
+            "\t})",
+            "}"
+        ],
+        "description": "Create basic structure for a mock in memory db test"
+    }
+}

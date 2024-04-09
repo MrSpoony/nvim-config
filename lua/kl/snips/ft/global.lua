@@ -1,5 +1,5 @@
+local utils = require("kl.snips")
 local ls = require("luasnip")
-local utils = require("snips")
 local s = utils.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node
@@ -13,17 +13,15 @@ local events = require("luasnip.util.events")
 local ai = require("luasnip.nodes.absolute_indexer")
 local fmt = require("luasnip.extras.fmt").fmt
 local lambda = require("luasnip.extras").l
+local partial = require("luasnip.extras").partial
 
 local b = utils.b
 local rep = utils.rep
 
-ls.add_snippets("javascript", {
-	b("cl", {
-		"console.log(",
-		c(1, {
-			{ t('"'), i(1, "variable"), t(':", '), rep(1) },
-			{ t('"'), i(1, "text"), t('"') },
-		}),
-		t(");"),
-	}),
+ls.add_snippets("all", {}, { type = "autosnippets" })
+
+ls.add_snippets("all", {
+	s("time", partial(vim.fn.strftime, "%H:%M:%S")),
+	s("date", partial(vim.fn.strftime, "%Y-%m-%d")),
+	s("datetime", partial(vim.fn.strftime, "%Y-%m-%d %H:%M:%S")),
 })

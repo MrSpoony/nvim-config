@@ -1,3 +1,4 @@
+vim.loader.enable()
 require("kl.globals")
 require("kl.settings")
 vim.g.mapleader = " "

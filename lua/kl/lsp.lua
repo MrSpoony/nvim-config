@@ -48,6 +48,8 @@ require("mason-lspconfig").setup_handlers({
 					},
 				},
 			}
+		elseif server_name == "tailwindcss" then
+			opts.filetypes = { "html", "javascript", "typescript", "rust" }
 		elseif server_name == "clangd" then
 			opts.capabilities.offsetEncoding = { "utf-16" }
 			opts.cmd = {

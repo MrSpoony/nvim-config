@@ -3,7 +3,7 @@ import sqlparse
 import re
 
 content = sys.stdin.read()
-content = re.sub(r'\$([0-9]+)', '__id__\g<1>__', content)
+content = re.sub(r'\$([0-9]+)', r'__id__\g<1>__', content)
 
 
 content = sqlparse.format(content,
@@ -17,5 +17,5 @@ content = sqlparse.format(content,
 )
 
 
-content = re.sub(r'__id__([0-9]+)__', '$\g<1>', content)
+content = re.sub(r'__id__([0-9]+)__', r'$\g<1>', content)
 print(content.strip())

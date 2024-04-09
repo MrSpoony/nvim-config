@@ -1,5 +1,5 @@
+local utils = require("kl.snips")
 local ls = require("luasnip")
-local utils = require("snips")
 local s = utils.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node
@@ -14,24 +14,26 @@ local ai = require("luasnip.nodes.absolute_indexer")
 local fmt = require("luasnip.extras.fmt").fmt
 local lambda = require("luasnip.extras").l
 
+local ts_locals = require("nvim-treesitter.locals")
+local get_node_text = vim.treesitter.get_node_text
+
 local b = utils.b
+local w = utils.w
 local rep = utils.rep
 
-ls.add_snippets("markdown", {
-  s("t",
-    fmt(
-      "{}[{}] {}",
-      {
-        f(function()
-          local curline = vim.fn.getline(".")
-          if string.find(curline, "-") then
-            return ""
-          else
-            return "- "
-          end
-        end, {}, {}),
-        c(2, { t " ", t "-", t "x" }),
-        i(1, "task"),
-      }
-    ))
+
+ls.add_snippets("go", {
+    b("efi", {
+        t { "if err != nil {", "\t" },
+        i(0),
+        t { "", "}" },
+    }),
+})
+
+ls.add_snippets("go", {
+    b("fm", {
+        t { "func main() {", "\t" },
+        i(0),
+        t { "", "}" },
+    }),
 })

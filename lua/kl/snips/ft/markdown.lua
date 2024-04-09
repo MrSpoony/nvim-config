@@ -1,4 +1,4 @@
-local utils = require("snips")
+local utils = require("kl.snips")
 local ls = require("luasnip")
 local s = utils.snippet
 local sn = ls.snippet_node
@@ -13,15 +13,25 @@ local events = require("luasnip.util.events")
 local ai = require("luasnip.nodes.absolute_indexer")
 local fmt = require("luasnip.extras.fmt").fmt
 local lambda = require("luasnip.extras").l
-local partial = require("luasnip.extras").partial
 
 local b = utils.b
 local rep = utils.rep
 
-ls.add_snippets("all", {}, { type = "autosnippets" })
-
-ls.add_snippets("all", {
-	s("time", partial(vim.fn.strftime, "%H:%M:%S")),
-	s("date", partial(vim.fn.strftime, "%Y-%m-%d")),
-	s("datetime", partial(vim.fn.strftime, "%Y-%m-%d %H:%M:%S")),
+ls.add_snippets("markdown", {
+  s("t",
+    fmt(
+      "{}[{}] {}",
+      {
+        f(function()
+          local curline = vim.fn.getline(".")
+          if string.find(curline, "-") then
+            return ""
+          else
+            return "- "
+          end
+        end, {}, {}),
+        c(2, { t " ", t "-", t "x" }),
+        i(1, "task"),
+      }
+    ))
 })

@@ -34,6 +34,7 @@ le("smart_history")
 le("file_browser")
 
 local ex = ts.extensions
+
 Nnoremap("<leader>cd", ex.zoxide.list)
 Nnoremap("<leader>tt", builtin.find_files)
 Nnoremap("<leader>tb", ex.file_browser.file_browser)
