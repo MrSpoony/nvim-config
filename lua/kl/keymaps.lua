@@ -96,9 +96,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	end,
 })
 
-Nnoremap("<C-C>", vim.cmd.vsplit)
-Nnoremap("<C-B>", vim.cmd.split)
-
 Nnoremap("<leader>q", "<cmd>bdelete!<CR>")
 Nnoremap("<leader>bq", "<cmd>quit!<CR>")
 Nnoremap("<leader>bd", vim.cmd.bdelete)
