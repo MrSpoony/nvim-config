@@ -327,6 +327,7 @@ require("lazy").setup({
     { "rafamadriz/friendly-snippets" },
 
     -- Own plugin
+    { dir = "~/code/vim/plugins/soicode.vim"},
     {
         dir = "~/code/lua/soicode.nvim",
         opts = {

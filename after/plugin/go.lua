@@ -1,5 +1,4 @@
 local utils = require("kl.utils")
-local json = require("kl.utils.json")
 local notify = require("notify")
 
 local test_funcs = vim.treesitter.query.parse(
@@ -31,7 +30,7 @@ local run_tests = function(func_name)
 			if not data or data == "" then return end
 			local line = data
 			if not line or line == "" then return end
-			local obj = json.parse(line)
+			local obj = vim.json.decode(line)
 			if not obj then return end
 
 			local action = obj.Action
