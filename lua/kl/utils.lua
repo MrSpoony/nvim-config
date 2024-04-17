@@ -60,10 +60,9 @@ end
 
 M.is_mac = vim.fn.has("macunix")
 M.get_root = function(bufnr, lang)
-  local parser = vim.treesitter.get_parser(bufnr, lang, {})
-  local tree = parser:parse()[1]
-  return tree:root()
+	local parser = vim.treesitter.get_parser(bufnr, lang, {})
+	local tree = parser:parse()[1]
+	return tree:root()
 end
-
 
 return M

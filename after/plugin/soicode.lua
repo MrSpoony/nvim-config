@@ -11,7 +11,9 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 Nnoremap("<leader>r1", function()
-	vim.ui.select(vim.fn["soicode#ListOfSamples"](), { prompt = "Which sample to run?", }, function(choice) vim.cmd("SOIRunOneSample " .. choice) end)
+	vim.ui.select(vim.fn["soicode#ListOfSamples"](), { prompt = "Which sample to run?" }, function(choice)
+		vim.cmd("SOIRunOneSample " .. choice)
+	end)
 end)
 
 Nnoremap("<leader>ra", "<cmd>SOIRunAllSamples<CR>")

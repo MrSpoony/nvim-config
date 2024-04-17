@@ -76,33 +76,8 @@ require("nvim-treesitter.configs").setup({
 		use_virtual_text = true,
 		lint_events = { "BufWrite", "CursorHold" },
 	},
-	refactor = {
-		highlight_definitions = true,
-		highlight_current_scope = {
-			enable = false,
-		},
-		clear_on_cursor_move = false,
-	},
 	textobjects = {
 		enable = true,
-		keymaps = {
-			["iL"] = {
-				go = "(function_definition) @function",
-			},
-			["af"] = "@function.outer",
-			["if"] = "@function.inner",
-			["aC"] = "@class.outer",
-			["iC"] = "@class.inner",
-			["ac"] = "@conditional.outer",
-			["ic"] = "@conditional.inner",
-			["al"] = "@loop.outer",
-			["il"] = "@loop.inner",
-			["is"] = "@statement.inner",
-			["as"] = "@statement.outer",
-			["ad"] = "@comment.outer",
-			["am"] = "@call.outer",
-			["im"] = "@call.inner",
-		},
 		select = {
 			enable = true,
 			keymaps = {

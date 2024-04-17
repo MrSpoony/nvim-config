@@ -21,19 +21,18 @@ local b = utils.b
 local w = utils.w
 local rep = utils.rep
 
-
 ls.add_snippets("go", {
-    b("efi", {
-        t { "if err != nil {", "\t" },
-        i(0),
-        t { "", "}" },
-    }),
+	b("efi", {
+		t({ "if err != nil {", "\t" }),
+		i(0),
+		t({ "", "}" }),
+	}),
 })
 
 ls.add_snippets("go", {
-    b("fm", {
-        t { "func main() {", "\t" },
-        i(0),
-        t { "", "}" },
-    }),
+	b("fm", {
+		t({ "func main() {", "\t" }),
+		i(0),
+		t({ "", "}" }),
+	}),
 })

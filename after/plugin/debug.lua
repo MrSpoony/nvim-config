@@ -29,7 +29,6 @@ Nnoremap("<leader>dt", function()
 end)
 Nnoremap("<leader>da", dap.clear_breakpoints)
 
-
 dap.adapters.ghc = {
 	type = "executable",
 	command = "haskell-debug-adapter",
@@ -37,22 +36,21 @@ dap.adapters.ghc = {
 }
 
 dap.adapters.cppdbg = {
-	id = 'cppdbg',
-	type = 'executable',
-	command = 'OpenDebugAD7',
+	id = "cppdbg",
+	type = "executable",
+	command = "OpenDebugAD7",
 }
-
 
 -- Execute codelldb --port 13000
 dap.adapters.codelldb = {
-	id = 'codelldb',
-	type = 'server',
-	host = '127.0.0.1',
+	id = "codelldb",
+	type = "server",
+	host = "127.0.0.1",
 	port = 13000,
 	executable = {
 		command = "codelldb",
-		args = {"--port", "13000"},
-	}
+		args = { "--port", "13000" },
+	},
 }
 
 local function get_cpp_program(type)
@@ -60,16 +58,19 @@ local function get_cpp_program(type)
 	if type == "codelldb" then
 		typeflag = "--debug "
 	end
-	local flags = "-Wall -Wextra -fdiagnostics-color=never -Wno-sign-compare -std=c++20 -static " .. typeflag ..
-		vim.fn.expand("%:p") .. " -o " .. vim.fn.expand("%:p:r")
+	local flags = "-Wall -Wextra -fdiagnostics-color=never -Wno-sign-compare -std=c++20 -static "
+		.. typeflag
+		.. vim.fn.expand("%:p")
+		.. " -o "
+		.. vim.fn.expand("%:p:r")
 	local j = require("plenary.job"):new({
 		command = "g++",
 		args = vim.split(flags, " "),
 		on_stderr = function(_, data)
-			require 'notify' ("Compilation failed: \n" .. data)
+			require("notify")("Compilation failed: \n" .. data)
 		end,
 		on_stdout = function(_, data)
-			require 'notify' ("Compilation failed: \n" .. data)
+			require("notify")("Compilation failed: \n" .. data)
 		end,
 	})
 	local _, code = j:sync()
@@ -88,7 +89,7 @@ dap.configurations.cpp = {
 		program = function()
 			return get_cpp_program()
 		end,
-		cwd = '${workspaceFolder}',
+		cwd = "${workspaceFolder}",
 		stopAtEntry = true,
 	},
 	{
@@ -98,30 +99,30 @@ dap.configurations.cpp = {
 		program = function()
 			return get_cpp_program("codelldb")
 		end,
-		cwd = '${workspaceFolder}',
+		cwd = "${workspaceFolder}",
 		stopAtEntry = true,
 		terminal = "integrated",
-	}
+	},
 }
 
 dap.configurations.haskell = {
 	{
-		type = 'ghc',
-		request = 'launch',
+		type = "ghc",
+		request = "launch",
 		name = "haskell(stack)",
-		workspace = '${workspaceFolder}',
+		workspace = "${workspaceFolder}",
 		startup = "${workspaceFolder}/app/Main.hs",
-		startupFunc = '', -- defaults to 'main' if not set
-		startupArgs = '',
+		startupFunc = "", -- defaults to 'main' if not set
+		startupArgs = "",
 		stopOnEntry = false,
-		mainArgs = '',
+		mainArgs = "",
 		ghciEnv = vim.empty_dict(),
-		ghciPrompt = 'λ: ',
-		ghciInitialPrompt = 'ghci> ',
+		ghciPrompt = "λ: ",
+		ghciInitialPrompt = "ghci> ",
 		ghciCmd = "stack ghci --test --no-load --no-build --main-is TARGET --ghci-options -fprint-evld-with-show",
 		forceInspect = false,
-		logFile = vim.fn.stdpath('data') .. '/haskell-dap.log',
-		logLevel = 'Warning',
+		logFile = vim.fn.stdpath("data") .. "/haskell-dap.log",
+		logLevel = "Warning",
 	},
 	{
 		type = "ghc",
@@ -140,6 +141,6 @@ dap.configurations.haskell = {
 		ghciEnv = {},
 		logFile = "${workspaceFolder}/.vscode/phoityne.log",
 		logLevel = "WARNING",
-		forceInspect = false
-	}
-};
+		forceInspect = false,
+	},
+}

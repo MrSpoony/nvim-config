@@ -18,20 +18,19 @@ local b = utils.b
 local rep = utils.rep
 
 ls.add_snippets("markdown", {
-  s("t",
-    fmt(
-      "{}[{}] {}",
-      {
-        f(function()
-          local curline = vim.fn.getline(".")
-          if string.find(curline, "-") then
-            return ""
-          else
-            return "- "
-          end
-        end, {}, {}),
-        c(2, { t " ", t "-", t "x" }),
-        i(1, "task"),
-      }
-    ))
+	s(
+		"t",
+		fmt("{}[{}] {}", {
+			f(function()
+				local curline = vim.fn.getline(".")
+				if string.find(curline, "-") then
+					return ""
+				else
+					return "- "
+				end
+			end, {}, {}),
+			c(2, { t(" "), t("-"), t("x") }),
+			i(1, "task"),
+		})
+	),
 })

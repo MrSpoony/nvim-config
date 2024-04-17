@@ -41,14 +41,14 @@ Inoremap("<Tab>", function()
 end)
 
 local function removeQFItem()
-  local curqfidx = vim.fn.line('.') - 1
-  local qfall = vim.fn.getqflist()
-  vim.fn.remove(qfall, curqfidx)
-  vim.fn.setqflist(qfall, 'r')
-  vim.cmd('execute ' .. curqfidx .. ' + 1 . \"cfirst\"')
-  vim.cmd [[ :copen ]]
+	local curqfidx = vim.fn.line(".") - 1
+	local qfall = vim.fn.getqflist()
+	vim.fn.remove(qfall, curqfidx)
+	vim.fn.setqflist(qfall, "r")
+	vim.cmd("execute " .. curqfidx .. ' + 1 . "cfirst"')
+	vim.cmd([[ :copen ]])
 end
-vim.api.nvim_create_autocmd({"FileType"}, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "qf" },
 	callback = function()
 		Nnoremap("dd", removeQFItem, { buffer = true })

@@ -1,11 +1,13 @@
-local lspconfig = require("lspconfig")
+local status, lspconfig = pcall(require, "lspconfig")
+if not status then
+	return
+end
 local cmp = require("cmp")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local copilot_suggestion = require("copilot.suggestion")
 local ls = require("luasnip")
 
 local options = require("kl.lspconfigs").options
-
 
 local lsp_servers = {
 	lua_ls = {

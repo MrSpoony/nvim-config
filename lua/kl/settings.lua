@@ -105,7 +105,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		end
 
 		vim.lsp.buf.format()
-	end
+	end,
 })
 
 o.foldmethod = "manual"

@@ -16,7 +16,6 @@ vim.opt.guifont = "JetBrainsMono_Nerd_Font_Mono:h12"
 -- vim.opt.guifont="Hack:h7"
 -- vim.opt.guifont="Hack_Nerd_Font_Mono:h7.5"
 
-
 vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 	callback = function()
@@ -27,13 +26,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
-
 require("notify").setup({
 	icons = nonicons_extention.icons,
 })
 
 vim.notify = require("notify")
-
 
 require("dressing").setup({
 	input = {
