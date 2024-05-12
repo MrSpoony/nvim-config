@@ -21,7 +21,7 @@ require("nvim-treesitter.configs").setup({
 		"lua",
 		"luadoc",
 		"make",
-		"markdown",
+		-- "markdown",
 		"ocaml",
 		"printf",
 		"prisma",
@@ -32,7 +32,8 @@ require("nvim-treesitter.configs").setup({
 		"scss",
 		"sql",
 		"toml",
-		"vimdoc",
+		-- "vim",
+		-- "vimdoc",
 		"xml",
 		"yaml",
 		"zig",
@@ -52,7 +53,7 @@ require("nvim-treesitter.configs").setup({
 	},
 	highlight = {
 		enable = true,
-		disable = { "latex" },
+		disable = { "latex", "rst" },
 	},
 	playground = {
 		enable = true,
