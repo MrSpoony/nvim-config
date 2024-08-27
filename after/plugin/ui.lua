@@ -1,4 +1,4 @@
-local colors = "catppuccin"
+local colors = "gruvbox"
 
 local nonicons_extention = require("nvim-nonicons.extentions.lualine")
 
