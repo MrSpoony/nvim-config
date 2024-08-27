@@ -276,7 +276,6 @@ require("lazy").setup({
         lazy = true,
         config = true,
     },
-    { "theHamsta/nvim-dap-virtual-text", config = true },
     { "leoluz/nvim-dap-go",              config = true },
 
     -- Git
