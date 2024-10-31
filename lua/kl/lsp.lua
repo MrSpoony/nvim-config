@@ -36,17 +36,21 @@ local lsp_servers = {
             },
         },
     },
-    htmx = {},
+    -- htmx = {},
     eslint = {
         settings = {
             format = { enable = true },
         },
     },
-    tsserver = {},
+    ts_ls = {},
     angularls = {},
     gopls = {
         settings = {
             gopls = {
+                analyses = {
+                    unusedparams = true,
+                },
+                staticcheck = true,
                 gofumpt = true,
             },
         },
@@ -56,9 +60,9 @@ local lsp_servers = {
     -- html = {},
     yamlls = {},
     jsonls = {},
-    tailwindcss = {
-        filetypes = { "html", "javascript", "typescript", "rust" },
-    },
+    -- tailwindcss = {
+    --     filetypes = { "html", "javascript", "typescript", "rust" },
+    -- },
     clangd = {
         capabilities = { offsetEncoding = { "utf-16" } },
         cmd = {

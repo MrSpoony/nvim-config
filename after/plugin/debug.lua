@@ -104,13 +104,6 @@ dap.configurations.cpp = {
         terminal = "integrated",
     },
 }
-table.insert(dap.configurations.go, {
-    name = "Remote debug API server",
-    type = "go",
-    request = "attach",
-    mode = "remote",
-    port = 2345,
-})
 
 dap.configurations.haskell = {
     {
