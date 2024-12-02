@@ -86,6 +86,12 @@ require("lazy").setup({
         dependencies = { "nvim-telescope/telescope.nvim" },
     },
 
+    {
+        "nvim-tree/nvim-tree.lua",
+        config = true,
+        cmd = "NvimTreeToggle",
+    },
+
     -- Other stuff
     "tpope/vim-repeat",
     "tpope/vim-abolish",
@@ -253,9 +259,19 @@ require("lazy").setup({
         event = "InsertEnter",
     },
 
+    { "nvim-java/nvim-java", config = true },
+
     "jose-elias-alvarez/null-ls.nvim",
 
     "lervag/vimtex",
+    {
+        'akinsho/flutter-tools.nvim',
+        lazy = false,
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+        },
+        config = true,
+    },
 
     {
         "iamcco/markdown-preview.nvim",
@@ -276,7 +292,8 @@ require("lazy").setup({
         lazy = true,
         config = true,
     },
-    { "leoluz/nvim-dap-go",              config = true },
+    { "sbdchd/neoformat" },
+    { "leoluz/nvim-dap-go",  config = true },
 
     -- Git
     {
@@ -328,7 +345,7 @@ require("lazy").setup({
     },
 
     -- Own plugin
-    { dir = "~/code/vim/plugins/soicode.vim" },
+    -- { dir = "~/code/vim/plugins/soicode.vim" },
     {
         dir = "~/code/lua/soicode.nvim",
         opts = {

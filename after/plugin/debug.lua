@@ -24,6 +24,7 @@ Nnoremap("<leader>du", function()
 end)
 
 Nnoremap("<leader>dd", dap.toggle_breakpoint)
+Nnoremap("<leader>db", function() dap.set_breakpoint(vim.fn.input("Condition: ")) end)
 Nnoremap("<leader>dt", function()
     vim.ui.input("Breakpoint condition: ", dap.toggle_breakpoint)
 end)

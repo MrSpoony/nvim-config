@@ -1,3 +1,4 @@
+local format = require("kl.format")
 -- Nnoremap("j", "gj")
 -- Nnoremap("k", "gk")
 -- Nnoremap("gj", "j")
@@ -24,7 +25,7 @@ Nnoremap("<leader>ca", vim.lsp.buf.code_action, opts)
 Vnoremap("<leader>ca", vim.lsp.buf.code_action, opts)
 Nnoremap("<m-CR>", vim.lsp.buf.code_action, opts)
 Nnoremap("<a-CR>", vim.lsp.buf.code_action, opts)
-Nnoremap("<leader>fo", vim.lsp.buf.format, opts)
+Nnoremap("<leader>fo", format, opts)
 
 -- don't add curly brace jumps to my jump list
 Nnoremap("}", '<cmd>execute "keepjumps norm! " . v:count1 . "}"<CR>', { silent = true })

@@ -20,13 +20,14 @@ local lsp_servers = {
             },
         },
     },
+    bashls = {},
     rust_analyzer = {
         settings = {
             ["rust-analyzer"] = {
-                rustfmt = {
-                    overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
-                    overrideSave = true,
-                },
+                -- rustfmt = {
+                --     overrideCommand = { "leptosfmt", "--stdin", "--rustfmt" },
+                --     overrideSave = true,
+                -- },
                 checkOnSave = {
                     command = "clippy",
                 },
@@ -37,6 +38,7 @@ local lsp_servers = {
         },
     },
     -- htmx = {},
+    gleam = {},
     eslint = {
         settings = {
             format = { enable = true },
@@ -44,6 +46,7 @@ local lsp_servers = {
     },
     ts_ls = {},
     angularls = {},
+    dartls = {},
     gopls = {
         settings = {
             gopls = {
@@ -60,9 +63,10 @@ local lsp_servers = {
     -- html = {},
     yamlls = {},
     jsonls = {},
-    -- tailwindcss = {
-    --     filetypes = { "html", "javascript", "typescript", "rust" },
-    -- },
+    ["gitlab_ci_ls"] = {},
+	tailwindcss = {
+		filetypes = { "html", "javascript", "typescript", "rust" },
+	},
     clangd = {
         capabilities = { offsetEncoding = { "utf-16" } },
         cmd = {
@@ -71,6 +75,8 @@ local lsp_servers = {
             "--enable-config",
         },
     },
+    jdtls = {},
+    kotlin_language_server = {},
     hls = {
         root_dir = vim.loop.cwd,
         settings = {

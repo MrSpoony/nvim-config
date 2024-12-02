@@ -1,3 +1,4 @@
+local format = require("kl.format")
 local o = vim.opt
 
 o.clipboard = {} -- { 'unnamed', 'unnamedplus' }
@@ -86,9 +87,9 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.java", "*.rs", "*.cpp", "*.c" },
+	pattern = { "*.java", "*.rs", "*.cpp", "*.c", "*.py" },
 	callback = function()
-		vim.lsp.buf.format()
+        format()
 	end,
 })
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -104,7 +105,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 			end
 		end
 
-		vim.lsp.buf.format()
+        format()
 	end,
 })
 
