@@ -68,11 +68,12 @@ local lsp_servers = {
 		filetypes = { "html", "javascript", "typescript", "rust" },
 	},
     clangd = {
-        capabilities = { offsetEncoding = { "utf-16" } },
+        capabilities = { offsetEncoding = "utf-16" },
         cmd = {
             "clangd",
             "--background-index",
             "--enable-config",
+            "--offset-encoding=utf-16",
         },
     },
     jdtls = {},

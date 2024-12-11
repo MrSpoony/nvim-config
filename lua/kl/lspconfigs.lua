@@ -30,7 +30,7 @@ local function set_default_formatter_for_filetypes(language_server_name, filetyp
 end
 
 M.on_attach = function(
-	_, -- client
+	_, -- client,
 	bufnr
 )
 	lspsignature.on_attach({
